@@ -1,0 +1,110 @@
+<div class="diagnostik_scores_tools_apgar row">
+<h2>Rechner zur Beurteilung Neugeborener</h2>
+<hr>
+<div class="col col-lg-6">
+  <p class="mt-3 mb-0"><b>A</b>ppearence (Hautfarbe)</p>
+  <div class="form-check">
+    <input class="form-check-input apgar_input_radio" type="radio" name="apgar_appearance" id="apgar_appearance_0" value="0">
+    <label class="form-check-label" for="apgar_appearance_0">
+      [0 P] blass / blau
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input apgar_input_radio" type="radio" name="apgar_appearance" id="apgar_appearance_1" value="1">
+    <label class="form-check-label" for="apgar_appearance_1">
+      [1 P] Stamm rosig, Extremitäten blau
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input apgar_input_radio" type="radio" name="apgar_appearance" id="apgar_appearance_2" value="2">
+    <label class="form-check-label" for="apgar_appearance_2">
+      [2 P] rosig
+    </label>
+  </div>
+  <p class="mt-3 mb-0"><b>P</b>ulse (Herzaktion)</p>
+  <div class="form-check">
+    <input class="form-check-input apgar_input_radio" type="radio" name="apgar_pulse" id="apgar_pulse_0" value="0">
+    <label class="form-check-label" for="apgar_pulse_0">
+      [0 P] kein Puls
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input apgar_input_radio" type="radio" name="apgar_pulse" id="apgar_pulse_1" value="1">
+    <label class="form-check-label" for="apgar_pulse_1">
+      [1 P] < 100 / min
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input apgar_input_radio" type="radio" name="apgar_pulse" id="apgar_pulse_2" value="2">
+    <label class="form-check-label" for="apgar_pulse_2">
+      [2 P] >= 100 / min
+    </label>
+  </div>
+  <p class="mt-3 mb-0"><b>G</b>rimace (Gesichtsbewegung, Reaktion aufs Absaugen)</p>
+  <div class="form-check">
+    <input class="form-check-input apgar_input_radio" type="radio" name="apgar_grimace" id="apgar_grimace_0" value="0">
+    <label class="form-check-label" for="apgar_grimace_0">
+      [0 P] keine
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input apgar_input_radio" type="radio" name="apgar_grimace" id="apgar_grimace_1" value="1">
+    <label class="form-check-label" for="apgar_grimace_1">
+      [1 P] Grimassieren
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input apgar_input_radio" type="radio" name="apgar_grimace" id="apgar_grimace_2" value="2">
+    <label class="form-check-label" for="apgar_grimace_2">
+      [2 P] Schreien
+    </label>
+  </div>
+</div>
+<div class="col col-lg-6">
+  <p class="mt-3 mb-0"><b>A</b>ctivity (Muskeltonus)</p>
+  <div class="form-check">
+    <input class="form-check-input apgar_input_radio" type="radio" name="apgar_activity" id="apgar_activity_0" value="0">
+    <label class="form-check-label" for="apgar_activity_0">
+      [0 P] schlaff
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input apgar_input_radio" type="radio" name="apgar_activity" id="apgar_activity_1" value="1">
+    <label class="form-check-label" for="apgar_activity_1">
+      [1 P] träge Flexionsbewegungen
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input apgar_input_radio" type="radio" name="apgar_activity" id="apgar_activity_2" value="2">
+    <label class="form-check-label" for="apgar_activity_2">
+      [2 P] spontan gute Eigenbewegungen
+    </label>
+  </div>
+  <p class="mt-3 mb-0"><b>R</b>espiration (Atmung)</p>
+  <div class="form-check">
+    <input class="form-check-input apgar_input_radio" type="radio" name="apgar_respiration" id="apgar_respiration_0" value="0">
+    <label class="form-check-label" for="apgar_respiration_0">
+      [0 P] keine
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input apgar_input_radio" type="radio" name="apgar_respiration" id="apgar_respiration_1" value="1">
+    <label class="form-check-label" for="apgar_respiration_1">
+      [1 P] unregelmäßig / langsam
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input apgar_input_radio" type="radio" name="apgar_respiration" id="apgar_respiration_2" value="2">
+    <label class="form-check-label" for="apgar_respiration_2">
+      [2 P] gut & regelmäßig
+    </label>
+  </div>
+</div>
+<hr class="mt-3">
+<h3>Ergebnis</h3>
+<div class="input-group input-group">
+  <span class="input-group-text bg-primary text-white">Punkte</span>
+  <input type="text" class="form-control" id="apgar_result" readonly>
+</div>
+<p id="apgar_result_interpretation" class="mb-2 mt-2"></p>
+</div>

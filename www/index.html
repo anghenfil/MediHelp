@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, viewport-fit=cover">
+        <meta name="color-scheme" content="light dark">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/index.css">
+        <title>MediHelp</title>
+    </head>
+    <body>
+        <div class="app">
+
+        </div>
+        <div class="cnavbar">
+            <div class="cnavbar-icons">
+                <div class="cnavbar-icon" id="cnavbar-icon-home">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke="currentColor" height="48"
+                        viewBox="0 -960 960 960" width="48">
+                        <path
+                            d="M220-180h150v-250h220v250h150v-390L480-765 220-570v390Zm-60 60v-480l320-240 320 240v480H530v-250H430v250H160Zm320-353Z" />
+                    </svg>
+                    <span>Home</span>
+                </div>
+                <div class="cnavbar-icon" id="cnavbar-icon-norm">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke="currentColor" height="48"
+                        viewBox="0 -960 960 960" width="48">
+                        <path
+                            d="M284-277h60v-275h-60v275Zm166 0h60v-406h-60v406Zm166 0h60v-148h-60v148ZM180-120q-24 0-42-18t-18-42v-600q0-24 18-42t42-18h600q24 0 42 18t18 42v600q0 24-18 42t-42 18H180Zm0-60h600v-600H180v600Zm0-600v600-600Z" />
+                    </svg>
+                    <span>Diagn.</span>
+                </div>
+                <div class="cnavbar-icon" id="cnavbar-icon-medis">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke="currentColor" height="48" viewBox="0 -960 960 960" width="48"><path d="m310-60-60-45v-185h-60q-24 0-42-18t-18-42v-320h-10q-12.75 0-21.375-8.675Q90-687.351 90-700.175 90-713 98.625-721.5T120-730h130v-90h-30q-12.75 0-21.375-8.675-8.625-8.676-8.625-21.5 0-12.825 8.625-21.325T220-880h120q12.75 0 21.375 8.675 8.625 8.676 8.625 21.5 0 12.825-8.625 21.325T340-820h-30v90h130q12.75 0 21.375 8.675 8.625 8.676 8.625 21.5 0 12.825-8.625 21.325T440-670h-10v320q0 24-18 42t-42 18h-60v230ZM190-350h180v-80h-80q-8 0-14-6t-6-14q0-8 6-14t14-6h80v-80h-80q-8 0-14-6t-6-14q0-8 6-14t14-6h80v-80H190v320ZM600-80q-24 0-42-18t-18-42v-266q0-32 8-48.5t21-30.5q19-20 25-31t6-24v-30h-10q-12.75 0-21.375-8.675-8.625-8.676-8.625-21.5 0-12.825 9-21.325t21-8.5h200q12.75 0 21.375 8.675 8.625 8.676 8.625 21.5 0 12.825-8.625 21.325T790-570h-10v30q0 12 7.5 25t26.5 33q13 14 19.5 29t6.5 47v266q0 24-18 42t-42 18H600Zm0-300h180v-26q0-18-10-32t-22-29q-15-19-21.5-35t-6.5-38v-30h-60v30q0 21-6 37t-21 35q-12 15-22.5 29.5T600-406v26Zm0 120h180v-80H600v80Zm0 120h180v-80H600v80Zm0-120h180-180Z"/></svg>
+                    <span>Medis</span>
+                </div>
+                <svg id="cnavbar-icon-patient-data" style="height: 50px;" height="4.9078mm" version="1.1" viewBox="0 0 7.9209 4.9078" xml:space="preserve"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <g transform="translate(-100.73 -144.99)" >
+                        <path d="m102.71 144.99-1.9802 4.9018 3e-3 6e-3h7.9149l3e-3 -6e-3 -1.9802-4.9018z" fill="#f2f2f2"
+                            stroke-width=".37205" />
+                        <path
+                            d="m104.34 147.71q-0.29783 0-0.50992-0.21209-0.2121-0.21209-0.2121-0.50993 0-0.29783 0.2121-0.50991 0.21209-0.2121 0.50992-0.2121t0.50992 0.2121q0.2121 0.21208 0.2121 0.50991 0 0.29784-0.2121 0.50993-0.21209 0.21209-0.50992 0.21209zm-1.444 1.444v-0.50541q0-0.14891 0.0767-0.27978t0.21208-0.19855q0.23015-0.11733 0.51896-0.19856 0.2888-0.0812 0.63627-0.0812h0.0632q0.0271 0 0.0542 9e-3 -0.0361 0.0812-0.0609 0.16923-0.0248 0.088-0.0383 0.18276h-0.018q-0.32039 0-0.57535 0.0812-0.25497 0.0812-0.41742 0.16246-0.0406 0.0226-0.0654 0.0632t-0.0248 0.0902v0.14441h1.1372q0.0271 0.0948 0.0722 0.18727 0.0451 0.0925 0.0993 0.17373zm2.5271 0.18051-0.0542-0.27076q-0.0542-0.0226-0.10153-0.0473-0.0474-0.0248-0.097-0.0609l-0.26174 0.0812-0.1805-0.30686 0.20758-0.1805q-9e-3 -0.0632-9e-3 -0.11733 0-0.0542 9e-3 -0.11733l-0.20758-0.1805 0.1805-0.30685 0.26174 0.0812q0.0497-0.0361 0.097-0.0609 0.0474-0.0248 0.10153-0.0473l0.0542-0.27076h0.361l0.0542 0.27076q0.0542 0.0226 0.10153 0.0497 0.0474 0.0271 0.097 0.0677l0.26173-0.0903 0.18051 0.31589-0.20758 0.1805q9e-3 0.0542 9e-3 0.11282 0 0.0587-9e-3 0.11281l0.20758 0.1805-0.18051 0.30686-0.26173-0.0812q-0.0497 0.0361-0.097 0.0609-0.0474 0.0248-0.10153 0.0473l-0.0542 0.27076zm0.1805-0.54151q0.14892 0 0.25496-0.10605 0.10605-0.10605 0.10605-0.25496 0-0.14892-0.10605-0.25496-0.10604-0.10605-0.25496-0.10605-0.14891 0-0.25497 0.10605-0.10604 0.10604-0.10604 0.25496 0 0.14891 0.10604 0.25496 0.10606 0.10605 0.25497 0.10605zm-1.2635-1.444q0.14892 0 0.25496-0.10604 0.10605-0.10604 0.10605-0.25497 0-0.14891-0.10605-0.25496-0.10604-0.10604-0.25496-0.10604t-0.25496 0.10604q-0.10605 0.10605-0.10605 0.25496 0 0.14893 0.10605 0.25497 0.10604 0.10604 0.25496 0.10604z"
+                            fill="currentColor" stroke-width=".0045126" />
+                    </g>
+                </svg>
+                <div class="cnavbar-icon" id="cnavbar-icon-sop">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke="currentColor" height="48"
+                        viewBox="0 -960 960 960" width="48">
+                        <path
+                            d="M604-120v-125H450v-410h-93v130H80v-315h277v125h247v-125h276v315H604v-130h-94v350h94v-130h276v315H604ZM140-780v195-195Zm524 405v195-195Zm0-405v195-195Zm0 195h156v-195H664v195Zm0 405h156v-195H664v195ZM140-585h157v-195H140v195Z" />
+                    </svg>
+                    <span>SOP</span>
+                </div>
+                <div class="cnavbar-icon" id="cnavbar-icon-lexikon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke="currentColor" height="48"
+                        viewBox="0 -960 960 960" width="48">
+                        <path
+                            d="M160-391h45l23-66h104l24 66h44l-97-258h-46l-97 258Zm81-103 38-107h2l38 107h-78Zm319-80v-48q33-14 67.5-21t72.5-7q26 0 51 4t49 10v44q-24-9-48.5-13.5T700-610q-38 0-73 9.5T560-574Zm0 220v-49q33-13.5 67.5-20.25T700-430q26 0 51 4t49 10v44q-24-9-48.5-13.5T700-390q-38 0-73 9t-67 27Zm0-110v-48q33-14 67.5-21t72.5-7q26 0 51 4t49 10v44q-24-9-48.5-13.5T700-500q-38 0-73 9.5T560-464ZM248-300q53.566 0 104.283 12.5T452-250v-427q-45-30-97.619-46.5Q301.763-740 248-740q-38 0-74.5 9.5T100-707v434q31-14 70.5-20.5T248-300Zm264 50q50-25 98-37.5T712-300q38 0 78.5 6t69.5 16v-429q-34-17-71.822-25-37.823-8-76.178-8-54 0-104.5 16.5T512-677v427Zm-30 90q-51-38-111-58.5T248-239q-36.537 0-71.768 9Q141-221 106-208q-23.1 11-44.55-3Q40-225 40-251v-463q0-15 7-27.5T68-761q42-20 87.395-29.5Q200.789-800 248-800q63 0 122.5 17T482-731q51-35 109.5-52T712-800q46.868 0 91.934 9.5Q849-781 891-761q14 7 21.5 19.5T920-714v463q0 27.894-22.5 42.447Q875-194 853-208q-34-14-69.232-22.5Q748.537-239 712-239q-63 0-121 21t-109 58ZM276-495Z" />
+                    </svg>
+                    <span>Lexikon</span>
+                </div>
+                <div class="cnavbar-icon" id="cnavbar-icon-search">
+                    <svg fill="currentColor" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M796-121 533-384q-30 26-69.959 40.5T378-329q-108.162 0-183.081-75Q120-479 120-585t75-181q75-75 181.5-75t181 75Q632-691 632-584.85 632-542 618-502q-14 40-42 75l264 262-44 44ZM377-389q81.25 0 138.125-57.5T572-585q0-81-56.875-138.5T377-781q-82.083 0-139.542 57.5Q180-666 180-585t57.458 138.5Q294.917-389 377-389Z"/></svg>
+                    <span>Suche</span>
+                </div>
+            </div>
+        </div>
+        <script src="cordova.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/handlebars.js"></script>
+        <script src="js/minisearch.js"></script>
+        <script src="js/precompiled_templates.js"></script>
+        <script src="js/precompiled_partials.js"></script>
+        <script src="js/app.js"></script>
+    </body>
+</html>

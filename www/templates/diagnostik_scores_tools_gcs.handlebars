@@ -1,0 +1,111 @@
+<h2>Glascow-Coma-Scale</h2>
+<span class="fs-6">Skala zur Abschätzung von Bewusstseinsstörungen, insb. nach Schädel-Hirn-Traumata.</span>
+<hr>
+<div class="row mt-3 b">
+    <div class="col col-12 col-lg-4 mb-3">
+        <h3 class="bb-grey fw-bold">Öffnung der Augen</h3>
+        <div class="form-check">
+            <input class="form-check-input gcs_input_radio" type="radio" name="gcs_eyes" id="gcs_eyes_4" value="4">
+            <label class="form-check-label" for="gcs_eyes_4">
+            [4 P] spontan
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input gcs_input_radio" type="radio" name="gcs_eyes" id="gcs_eyes_3" value="3">
+            <label class="form-check-label" for="gcs_eyes_3">
+            [3 P] auf Aufforderung
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input gcs_input_radio" type="radio" name="gcs_eyes" id="gcs_eyes_2" value="2">
+            <label class="form-check-label" for="gcs_eyes_2">
+            [2 P] auf Schmerzreiz
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input gcs_input_radio" type="radio" name="gcs_eyes" id="gcs_eyes_1" value="1">
+            <label class="form-check-label" for="gcs_eyes_1">
+            [1 P] keine Reaktion
+            </label>
+        </div>
+    </div>
+    <div class="col col-12 col-lg-4 mb-3">
+        <h3 class="bb-grey fw-bold">beste verbale Antwort</h3>
+        <div class="form-check">
+            <input class="form-check-input gcs_input_radio" type="radio" name="gcs_verbal" id="gcs_verbal_5" value="5">
+            <label class="form-check-label" for="gcs_verbal_5">
+            [5 P] konversationsfähig, orientiert
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input gcs_input_radio" type="radio" name="gcs_verbal" id="gcs_verbal_4" value="4">
+            <label class="form-check-label" for="gcs_verbal_4">
+            [4 P] konversationsfähig, desorientiert
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input gcs_input_radio" type="radio" name="gcs_verbal" id="gcs_verbal_3" value="3">
+            <label class="form-check-label" for="gcs_verbal_3">
+            [3 P] Einzelworte ("Wortsalat")
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input gcs_input_radio" type="radio" name="gcs_verbal" id="gcs_verbal_2" value="2">
+            <label class="form-check-label" for="gcs_verbal_2">
+            [2 P] sinnlose Laute
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input gcs_input_radio" type="radio" name="gcs_verbal" id="gcs_verbal_1" value="1">
+            <label class="form-check-label" for="gcs_verbal_1">
+            [1 P] keine verbale Antwort
+            </label>
+        </div>
+    </div>
+    <div class="col col-12 col-lg-4 mb-3">
+        <h3 class="bb-grey fw-bold">beste motorische Antwort</h3>
+        <div class="form-check">
+            <input class="form-check-input gcs_input_radio" type="radio" name="gcs_motoric" id="gcs_motoric_6" value="6">
+            <label class="form-check-label" for="gcs_motoric_6">
+            [6 P] bei Aufforderung
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input gcs_input_radio" type="radio" name="gcs_motoric" id="gcs_motoric_5" value="5">
+            <label class="form-check-label" for="gcs_motoric_5">
+            [5 P] gezielte Bewegung bei Schmerzreiz
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input gcs_input_radio" type="radio" name="gcs_motoric" id="gcs_motoric_4" value="4">
+            <label class="form-check-label" for="gcs_motoric_4">
+            [4 P] ungezielte Bewegung auf Schmerzreiz
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input gcs_input_radio" type="radio" name="gcs_motoric" id="gcs_motoric_3" value="3">
+            <label class="form-check-label" for="gcs_motoric_3">
+            [3 P] Beugesynergismen
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input gcs_input_radio" type="radio" name="gcs_motoric" id="gcs_motoric_2" value="2">
+            <label class="form-check-label" for="gcs_motoric_2">
+            [2 P] Strecksynergismen
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input gcs_input_radio" type="radio" name="gcs_motoric" id="gcs_motoric_1" value="1">
+            <label class="form-check-label" for="gcs_motoric_1">
+            [1 P] keine motorische Reaktion
+            </label>
+        </div>
+    </div>
+    <hr>
+    <h3>Ergebnis:</h3>
+    <div class="input-group input-group">
+        <span class="input-group-text bg-primary text-white">Punkte</span>
+        <input type="text" class="form-control" id="gcs_result" readonly>
+    </div>
+    <p id="gcs_result_interpretation" class="mb-2 mt-2"></p>
+</div>

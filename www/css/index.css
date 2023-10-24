@@ -1,0 +1,230 @@
+:root{
+    --colour-black: black;
+    --colour-blue: #08B2E3;
+    --colour-light-blue: #e6f7fc;
+    --colour-green: #5cc856;
+    --colour-red: #EF767A;
+    --colour-violet: #cf24c9;
+    --colour-grey: grey;
+    --colour-light-grey: rgb(240, 240, 240);
+}
+
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: text;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    user-select: text;
+    font-family: system-ui, -apple-system, -apple-system-font, 'Segoe UI', 'Roboto', sans-serif;
+    font-size:12pt;
+    margin:0px;
+    padding:0px;
+    /* Padding to avoid the "unsafe" areas behind notches in the screen */
+    padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+    width:100%;
+    background-color: white;
+    color: black;
+}
+
+h1{
+    font-size: 16pt;
+}
+h2{
+    font-size: 15pt;
+}
+h3{
+    font-size: 14pt;
+}
+h4{
+    font-size: 13pt;
+}
+h5{
+    font-size: 12.5pt;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+}
+/* Portrait layout (default) */
+.app {
+}
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+    
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    
+}
+
+.cnavbar{
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    border-top: 1px solid grey;
+    z-index: 1;
+    background-color: white;
+}
+
+.cnavbar-icon{
+    height: 45px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    cursor:pointer;
+}
+
+.cnavbar-icon > svg{
+    height: 30px;
+    width: 30px;
+    align-self: center;
+    display: block;
+}
+.cnavbar-icons{
+    margin-left: 20px;
+    margin-right: 20px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    color: var(--colour-grey);
+}
+.topbar{
+    z-index: 1;
+    top: 0px;
+    left:0px;
+    right:0px;
+    height:50px;
+    display: flex;
+    align-items: center;
+}
+.bg-light-blue{
+    background-color: var(--colour-light-blue)
+}
+.bg-light-grey{
+    background-color: var(--colour-light-grey);
+}
+.topbar > .title{
+    font-size: 16pt;
+    margin-left: 13px;
+}
+#subtitle{
+    font-size: 16pt;
+    margin-left: 10px;
+}
+.content{
+    position: relative;
+    margin-bottom: 55px;
+    overflow: auto;
+    height: 100%;
+}
+.light-box{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid lightgray;
+    cursor: pointer;
+}
+.box-label{
+    font-size: 10pt;
+}
+.accordion-button:not(.collapsed) {
+    background-color: var(--colour-light-blue);
+    color: black;
+}
+#cnavbar-icon-patient-data{
+    cursor: pointer;
+    color: var(--colour-grey);
+}
+.pointer{
+    cursor: pointer;
+}
+.disabled{
+    color: var(--colour-grey);
+}
+.selected{
+    border-color: 1px solid var(--colour-light-blue);
+}
+#patientsettings_weight_input{
+    font-size: 20pt;
+}
+#patientsettings_adult_age_input{
+    font-size: 20pt;
+}
+.hide{
+    display: none;
+}
+.norm_all_references{
+    font-size: 10pt;
+}
+#patientsettings_child_age_input_label{
+    text-align: center;
+    display: block;
+}
+.norm_box_title{
+    position: relative;
+    border: 1px solid var(--colour-grey);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18pt;
+    font-family: monospace;
+}
+.norm_box_long_title{
+    font-weight: bold;
+}
+.norm_box{
+    display: flex;
+    align-items: center;
+    border-top: 1px solid var(--colour-light-grey);
+    padding: 10px;
+    font-size: 12pt;
+    line-height: 1.3;
+}
+.norm_extended_values{
+    font-size: 10pt;
+    color:var(--colour-grey);
+}
+#nav_back_btn{
+    margin-left: 10px;
+}
+.search_bar_entry_norm{
+    color: var(--colour-blue);
+}
+.search_bar_entry_scores-tools{
+    color: var(--colour-blue);
+}
+.search_bar_entry_sop{
+    color: var(--colour-red);
+}
+.scores_tools_icon{
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--colour-light-grey);
+    cursor: pointer;
+}
+.diagnostik_scores_tools_apgar > * > .form-check-label{
+    font-size: 10pt;
+}
+.apgar_input_radio{
+    font-size: 10pt;
+    margin-top: 0.7em;
+}
+#apgar_result{
+    text-align: center;
+    font-weight: bold;
+}
+.bb-grey{
+    border-bottom: 1px solid var(--colour-light-grey);
+}
+.btn-not-selected{
+    opacity: 0.5;
+}

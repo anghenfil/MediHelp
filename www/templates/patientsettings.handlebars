@@ -1,0 +1,109 @@
+<div class="topbar bg-light-grey">
+    <span class="title">Patienteneinstellungen</span> <span id="subtitle"></span>
+</div>
+<div class="content container-fluid">
+    <div class="row justify-content-center">
+        <div class="col col-sm-5 col-lg-3">
+            <div class="light-box pointer d-flex flex-column" id="patientsettings_child">
+                <svg class="align-self-center" fill="currentColor" stroke="currentColor"
+                    xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48">
+                    <path
+                        d="M584-502q-19 0-32-13t-13-32q0-19 13-32t32-13q19 0 32 13t13 32q0 19-13 32t-32 13Zm-209 0q-19 0-32-13t-13-32q0-19 13-32t32-13q19 0 32 13t13 32q0 19-13 32t-32 13Zm105 216q-56 0-102-30t-72-79h348q-26 49-72 79t-102 30Zm0 166q-74 0-139.5-28.5T226-226q-49-49-77.5-114.5T120-480q0-74 28.5-139.5T226-734q49-49 114.5-77.5T480-840q74 0 139.5 28.5T734-734q49 49 77.5 114.5T840-480q0 74-28.5 139.5T734-226q-49 49-114.5 77.5T480-120Zm0-60q123 0 211.5-87.5T780-478q0-123-87-215t-215-92h-18q-7 0-18 1-2 8-3.5 19t-1.5 19q0 25 16.5 41.5T495-688q12 0 20-1.5t15-1.5q10 0 17 5t7 15q0 16-15 24.5t-44 8.5q-46 0-77-31t-31-77q0-5 .5-13t2.5-13q-91 33-150.5 110T180-482q0 123 88.5 212.5T480-180Zm0-302Z" />
+                </svg>
+                <span class="text-center fw-bold">Kind</span>
+            </div>
+        </div>
+        <div class="col col-sm-5 col-lg-3">
+            <div class="light-box pointer d-flex flex-column" id="patientsettings_adult">
+                <svg class="align-self-center" fill="currentColor" stroke="currentColor"
+                    xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48">
+                    <path
+                        d="M353.775-383Q331-383 315.5-398.725q-15.5-15.726-15.5-38.5Q300-460 315.725-475.5q15.726-15.5 38.5-15.5Q377-491 392.5-475.275q15.5 15.726 15.5 38.5Q408-414 392.275-398.5q-15.726 15.5-38.5 15.5Zm253 0Q584-383 568.5-398.725q-15.5-15.726-15.5-38.5Q553-460 568.725-475.5q15.726-15.5 38.5-15.5Q630-491 645.5-475.275q15.5 15.726 15.5 38.5Q661-414 645.275-398.5q-15.726 15.5-38.5 15.5ZM480-140q142.375 0 241.188-98.948Q820-337.895 820-480.465 820-506 816-531q-4-25-10-46-20 5-43.262 7-23.261 2-48.738 2-97.115 0-183.557-40Q444-648 383-722q-34 81-97.5 141.5T140-487v7q0 142.375 98.812 241.188Q337.625-140 480-140Zm0 60q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm-92-727q88 103 162.5 141T714-628q24 0 38-1t31-6q-45-81-122.5-133T480-820q-27 0-51 4t-41 9ZM149-558q48-18 109.5-81.5T346-793q-87 39-131.5 99.5T149-558Zm239-249Zm-42 14Z" />
+                </svg>
+                <span class="text-center fw-bold">Erwachsen</span>
+            </div>
+        </div>
+    </div>
+    <div class="hide" id="patientsettings_adult_age">
+        <hr>
+        <div class="row justify-content-center">
+            <h1 class="text-center">Alter:</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col col-sm-5 col-lg-2">
+                    <div class="input-group">
+                    <input type="number" class="form-control" min="18" step="1" id="patientsettings_adult_age_input">
+                    <span class="input-group-text">Jahre</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hide" id="patientsettings_child_age">
+        <hr>
+        <div class="row justify-content-center">
+            <h1 class="text-center">Alter:</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col col-sm-5 col-lg-3">
+                    <input type="range" class="form-range" min="1" max="41" value="1" id="patientsettings_child_age_input">
+                    <span id="patientsettings_child_age_input_label">Neugeborenes</span>
+            </div>
+        </div>
+    </div>
+    <div class="hide" id="patientsettings_weight">
+        <hr>
+        <div class="row justify-content-center">
+            <h1 class="text-center">Gewicht:</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col col-sm-5 col-lg-2">
+                <div class="input-group">
+                    <input type="number" class="form-control" step="0.1" id="patientsettings_weight_input">
+                    <span class="input-group-text">kg</span>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div id="patientsettings_estimation" class="hide">
+        <div class="row mt-3 mb-3">
+            <h2 class="text-center">Gewicht schätzen:</h2>
+        </div>
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <button type="button" class="btn btn-outline-primary active me-4" id="patientsettings_estimation_select_pawper">Längenbasiert</button>
+                <button type="button" class="btn btn-outline-primary" id="patientsettings_estimation_select_age">Altersbasiert</button>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <div class="card" id="patientsettings_estimation_pawper_card">
+                    <h3 class="card-header">längenbasierte Schätzung</h3>
+                    <div class="card-body">
+                        <p class="card-text">Die Schätzung erfolgt anhand der PAWPER XL-MAC Methode.</p>
+                        <div class="input-group">
+                            <span class="input-group-text">Körperhöhe in cm</span>
+                            <input type="number" class="form-control" id="patientsettings_estimation_pawper_height">
+                        </div>
+                        <div class="input-group mt-1">
+                            <span class="input-group-text">Armumfang in cm</span>
+                            <input type="number" class="form-control" id="patientsettings_estimation_pawper_mac">
+                        </div>
+                        <button type="button" class="btn btn-outline-primary mt-3 float-end"
+                            id="patientsettings_estimation_pawper_estimate">Gewicht schätzen</a>
+                    </div>
+                </div>
+                <div class="card hide" id="patientsettings_estimation_age_card">
+                    <h3 class="card-header">altersbasierte Schätzung</h3>
+                    <div class="card-body">
+                        <p class="card-text text-danger fw-bold">Achtung: Altersbasierte Schätzungen sollen laut der S2k – Leitlinie 027/07 nur durchgeführt werden, wenn keine anderen Methoden zur Verfügung stehen!</p>
+                        <p class="card-text">Die Schätzung erfolgt unter einem Jahr mit der APLS-2011 Formel, ab einem Jahr mit der Best Guess Formel.</p>
+                        
+                        <button type="button" class="btn btn-outline-primary mt-3 float-end"
+                            id="patientsettings_estimation_age_estimate">Gewicht schätzen</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
