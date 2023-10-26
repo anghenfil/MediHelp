@@ -1,1 +1,32 @@
-<h1>MEEEEEDIS</h1>
+<div class="topbar bg-light-violet">
+    <svg id="nav_back_btn" xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 -960 960 960" width="26"><path d="M655-80 255-480l400-400 56 57-343 343 343 343-56 57Z"/></svg>
+    <span class="title">Medikamente</span> <span id="subtitle"></span>
+</div>
+<div class="content container-fluid mt-3">
+    <!-- Searchbar -->
+    <div class="row">
+        <div class="col">
+            <div class="input-group">
+                <input type="text" class="form-control" id="medis_searchbar" placeholder="Suche nach Medikamenten...">
+            </div>
+        </div>
+    </div>
+    <h2 class="mt-4">Medikamente auflisten:</h2>
+    <div class="row d-flex">
+        <div class="col col-6 col-lg-2">
+            <div class="light-box d-flex align-items-center text-center justify-content-center" data-link-document="medis_list_by_indications" style="aspect-ratio: 1/1">
+                <span>Nach Notfällen (Indikation)</span>
+            </div>
+        </div>
+        <div class="col col-6 col-lg-2">
+            <div class="light-box d-flex align-items-center text-center justify-content-center" style="aspect-ratio: 1/1">
+                <span>Nach Wirkstoffgruppe</span>
+            </div>
+        </div>
+        <div class="col col-6 col-lg-2">
+            <div class="light-box d-flex align-items-center text-center justify-content-center" style="aspect-ratio: 1/1">
+                <span>Alphabetisch</span>
+            </div>
+        </div>
+    </div>
+</div>

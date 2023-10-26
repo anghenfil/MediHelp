@@ -404,6 +404,8 @@ let patient_settings = (function () {
 
 let miniSearch;
 
+let clock_interval_id = null;
+
 let show_document = function (slug) {
     if(window.localStorage.getItem("active_document")){
         navi.previous_document = window.localStorage.getItem("active_document");
@@ -417,12 +419,13 @@ let show_document = function (slug) {
         return false;
     } else {
         let entry = search_res[0];
-        console.log(entry);
         if(entry.template){
             document.getElementsByClassName("content")[0].innerHTML = entry.template();
         }
         document.getElementById("subtitle").innerHTML = "—   " + entry.name;
-        entry.search_callback();
+        if(entry.search_callback) {
+            entry.search_callback();
+        }
     }
 }
 
@@ -447,6 +450,16 @@ async function startup() {
 
     let active_page = window.localStorage.getItem("active_page");
     let active_document = window.localStorage.getItem("active_document");
+
+    document.body.addEventListener('click', function (evt) {
+        let target = evt.target.closest("[data-link-document]");
+
+        if(target){
+            show_document(target.getAttribute("data-link-document"));
+        }
+
+    }, false);
+
     if (active_page) {
         navi.set_active(active_page);
         if (active_document) {
@@ -456,6 +469,54 @@ async function startup() {
         navi.set_active("home");
     }
 }
+
+let module_clock = (function () {
+    let update_clock = function(){
+        //Clock update every second
+        let hours = document.getElementById("clock_hours");
+        let minutes = document.getElementById("clock_minutes");
+        let seconds = document.getElementById("clock_seconds");
+
+        if(!hours || !minutes || !seconds){
+            return;
+        }
+
+        let date = new Date();
+        //append leading zero
+        if(date.getHours() < 10){
+            hours.innerHTML = "0"+date.getHours();
+        }else{
+            hours.innerHTML = date.getHours();
+        }
+        if(date.getMinutes() < 10){
+            minutes.innerHTML = "0"+date.getMinutes();
+        }else{
+            minutes.innerHTML = date.getMinutes();
+        }
+        if(date.getSeconds() < 10){
+            seconds.innerHTML = "0"+date.getSeconds();
+        }else{
+            seconds.innerHTML = date.getSeconds();
+        }
+    };
+    let start_clock = function(){
+        if(!clock_interval_id){
+            update_clock();
+            clock_interval_id = setInterval(update_clock, 500);
+        }
+    };
+
+    let stop_clock = function(){
+        if(clock_interval_id){
+            clearInterval(clock_interval_id);
+            clock_interval_id = null;
+        }
+    };
+
+    return{
+        start_clock, stop_clock
+    }
+})();
 
 let module_home = (function () {
     let load = function () {
@@ -498,7 +559,16 @@ let module_diagnostik = (function () {
         });
         document.getElementById("scores_tools_mad_btn").addEventListener("click", function(){
             show_document("diagnostik_scores_tools_mad");
-        })
+        });
+        document.getElementById("scores_tools_qsofa_btn").addEventListener("click", function(){
+            show_document("diagnostik_scores_tools_qsofa");
+        });
+        document.getElementById("scores_tools_qtc_btn").addEventListener("click", function(){
+            show_document("diagnostik_scores_tools_qtc");
+        });
+        document.getElementById("scores_tools_frequenzbestimmung_btn").addEventListener("click", function(){
+            show_document("diagnostik_scores_tools_frequenzbestimmung");
+        });
     };
     let calc_apgar_score = function(){
         let appearance = document.querySelector('input[name="apgar_appearance"]:checked');
@@ -703,6 +773,89 @@ let module_diagnostik = (function () {
         input_sys.addEventListener("input", calc_mad);
         input_dias.addEventListener("input", calc_mad);
     };
+    let calc_qsofa = function(){
+        let qsofa_af = document.getElementById("qsofa_af");
+        let qsofa_rr = document.getElementById("qsofa_rr");
+        let qsofa_gcs = document.getElementById("qsofa_gcs");
+        let qsofa_res = document.getElementById("qsofa_res");
+
+        if(qsofa_af && qsofa_rr && qsofa_gcs){
+            let res = 0;
+            if(qsofa_af.checked){
+                res += 1;
+            }
+            if(qsofa_rr.checked){
+                res += 1;
+            }
+            if(qsofa_gcs.checked){
+                res += 1;
+            }
+            qsofa_res.value = res;
+        }
+    };
+    let scores_tools_qsofa_callback = function(){
+        document.getElementsByClassName("content")[0].innerHTML = Handlebars.templates.diagnostik_scores_tools_qsofa();
+        let qsofa_af = document.getElementById("qsofa_af");
+        let qsofa_rr = document.getElementById("qsofa_rr");
+        let qsofa_gcs = document.getElementById("qsofa_gcs");
+
+        qsofa_af.addEventListener("change", calc_qsofa);
+        qsofa_rr.addEventListener("change", calc_qsofa);
+        qsofa_gcs.addEventListener("change", calc_qsofa);
+    };
+    let calc_qtc = function(){
+        let qtc_qt = document.getElementById("qtc_qt");
+        let qtc_hf = document.getElementById("qtc_hf");
+        let qtc_res = document.getElementById("qtc_res");
+    
+        if(qtc_qt.value && qtc_hf.value){
+            let res = parseInt(qtc_qt.value) + 1.75*(parseInt(qtc_hf.value)-60);
+            qtc_res.value = res +" ms";
+        }
+    };
+    let scores_tools_qtc_callback = function(){
+        document.getElementsByClassName("content")[0].innerHTML = Handlebars.templates.diagnostik_scores_tools_qtc();
+        let qtc_qt = document.getElementById("qtc_qt");
+        let qtc_hf = document.getElementById("qtc_hf");
+        let qtc_rr = document.getElementById("qtc_rr");
+
+        qtc_qt.addEventListener("input", calc_qtc);
+        qtc_hf.addEventListener("input", calc_qtc);
+        qtc_rr.addEventListener("input", calc_qtc);
+    };
+    let scores_tools_frequenzbestimmung_callback = function(){
+        document.getElementsByClassName("content")[0].innerHTML = Handlebars.templates.diagnostik_scores_tools_frequenzbestimmung();
+        //start clock
+        module_clock.start_clock();
+
+        let btn_start = document.getElementById("frequenzbestimmung_tap_counter_btn");
+        let time_since_last_tap = null;
+        let previous_tap_durations = [];
+
+        btn_start.addEventListener("click", function(){
+            if(time_since_last_tap){
+                let duration = new Date().getTime() - time_since_last_tap;
+
+                if(previous_tap_durations.length >= 5){
+                    previous_tap_durations.shift();
+                }
+                previous_tap_durations.push(duration);
+                let average_duration = previous_tap_durations.reduce((a,b) => a+b, 0)/previous_tap_durations.length;
+
+                if(Math.abs(average_duration-duration) > 400){
+                    previous_tap_durations = [];
+                    previous_tap_durations.push(duration);
+                    average_duration = duration;
+                }
+
+                console.log(previous_tap_durations);
+                let bpm = 60000/average_duration;
+                document.getElementById("frequenzbestimmung_res").value = Math.round(bpm);
+            }
+            time_since_last_tap = new Date().getTime();
+        });
+
+    }
     let norm_startup = function(){
         document.getElementById("norm_show_all_values_checkbox").addEventListener("change", function(){
             if(document.getElementById("norm_show_all_values_checkbox").checked){
@@ -949,12 +1102,15 @@ let module_diagnostik = (function () {
         document.getElementsByClassName("content")[0].innerHTML = Handlebars.templates.diagnostik_norm_e(parameters);
         norm_startup();
     }
-    return { load , scores_tools_mad_callback, scores_tools_lagetyp_callback, scores_tools_gcs_callback, scores_tools_befast_callback, norm_startup, norm_ab_callback, norm_c_callback, norm_d_callback, norm_e_callback, scores_tools_apgar: scores_tools_apgar_callback};
+    return { load , scores_tools_frequenzbestimmung_callback, scores_tools_qtc_callback, scores_tools_qsofa_callback, scores_tools_mad_callback, scores_tools_lagetyp_callback, scores_tools_gcs_callback, scores_tools_befast_callback, norm_startup, norm_ab_callback, norm_c_callback, norm_d_callback, norm_e_callback, scores_tools_apgar: scores_tools_apgar_callback};
 })();
 
 let module_medis = (function () {
     let load = function () {
         document.getElementsByClassName("app")[0].innerHTML = Handlebars.templates.medis();
+        document.getElementById("nav_back_btn").addEventListener("click", function(){
+            navi.return_to_previous();
+        });
     }
 
     return { load };
@@ -1801,9 +1957,41 @@ let search_documents = [
     {
         id: 10,
         type: "scores-tools",
-        name: "MAD Berechnung",
+        name: "MAD-Rechner",
         alt_names: "mittlerer aterieller Druck Blutdruck",
         slug: "diagnostik_scores_tools_mad",
         search_callback: module_diagnostik.scores_tools_mad_callback,
+    },
+    {
+        id: 11,
+        type: "scores-tools",
+        name: "qSOFA",
+        alt_names: "quick SOFA",
+        slug: "diagnostik_scores_tools_qsofa",
+        search_callback: module_diagnostik.scores_tools_qsofa_callback,
+    },
+    {
+        id: 12,
+        type: "scores-tools",
+        name: "QTc-Rechner",
+        alt_names: "QTc-Zeit",
+        slug: "diagnostik_scores_tools_qtc",
+        search_callback: module_diagnostik.scores_tools_qtc_callback,
+    },
+    {
+        id: 13,
+        type: "scores-tools",
+        name: "Frequenz-Auszählung",
+        alt_names: "Herzfrequenz Atemfrequenz",
+        slug: "diagnostik_scores_tools_frequenzbestimmung",
+        search_callback: module_diagnostik.scores_tools_frequenzbestimmung_callback,
+    },
+    {
+        id: 14,
+        type: "medis",
+        name: "Nach Indikation",
+        alt_names: "",
+        slug: "medis_list_by_indications",
+        template: Handlebars.templates.medis_list_by_indications,
     }
 ]
