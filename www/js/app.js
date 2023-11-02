@@ -332,7 +332,7 @@ let patient_settings = (function () {
         if (!data) {
             load_data();
         }
-        return data["weight"];
+        return parseInt(data["weight"]);
     };
     let set_adult_or_child = function (adult_or_child) {
         if (!data) {
@@ -394,7 +394,7 @@ let patient_settings = (function () {
             }
             return res;
         }else{
-            return "Keine Patientendaten angegeben.";
+            return "Keine Patientendaten angegeben";
         }
     }
     return {
@@ -1111,9 +1111,46 @@ let module_medis = (function () {
         document.getElementById("nav_back_btn").addEventListener("click", function(){
             navi.return_to_previous();
         });
+    };
+    let details_medis = function(){
+        let alle_dosierungen_checkbox = document.getElementById("medis_show_all_values_checkbox");
+        console.log(alle_dosierungen_checkbox);
+        if(alle_dosierungen_checkbox){
+            alle_dosierungen_checkbox.addEventListener("change", function(){
+                if(alle_dosierungen_checkbox.checked){
+                    let hidden = document.getElementsByClassName("medis_extended_values");
+                    for(let x of hidden){
+                        x.classList.remove("hide");
+                    }
+                }else{
+                    let values = document.getElementsByClassName("medis_extended_values");
+                    for(let x of values){
+                        x.classList.add("hide");
+                    }
+                }
+            });
+        }
     }
+    let details_esketamin = function(){
+        let parameters = {
+            patientsettings_summary: patient_settings.print_summary(),
+        };
 
-    return { load };
+        if(patient_settings.get_weight()){
+            parameters["notfallanalgesie_iV"] = parseInt(0.125*patient_settings.get_weight()) + " - " + parseInt(0.25*patient_settings.get_weight()) + " mg";
+            parameters["notfallanalgesie_iM"] = parseInt(0.25*patient_settings.get_weight()) + " - " + parseInt(0.5*patient_settings.get_weight()) + " mg";
+            parameters["allgemeinanaesthesie_iV_einleitung"] = parseInt(0.5*patient_settings.get_weight()) + " - " + parseInt(1*patient_settings.get_weight()) + " mg";
+            parameters["allgemeinanaesthesie_iV_aufrechterhaltung"] = parseInt(0.25*patient_settings.get_weight()) + " - " + parseInt(0.5*patient_settings.get_weight()) + " mg";
+            parameters["allgemeinanaesthesie_iM_einleitung"] = parseInt(2*patient_settings.get_weight()) + " - " + parseInt(4*patient_settings.get_weight()) + " mg";
+            parameters["allgemeinanaesthesie_iM_aufrechterhaltung"] = parseInt(1*patient_settings.get_weight()) + " - " + parseInt(2*patient_settings.get_weight()) + " mg";
+
+        }
+        document.getElementsByClassName("content")[0].innerHTML = Handlebars.templates.medis_esketamin(parameters);
+
+        details_medis();
+    };
+
+    return { load , details_esketamin};
 })();
 
 let module_sop = (function () {
@@ -1993,5 +2030,13 @@ let search_documents = [
         alt_names: "",
         slug: "medis_list_by_indications",
         template: Handlebars.templates.medis_list_by_indications,
+    },
+    {
+        id: 20,
+        type: "medis",
+        name: "Esketamin",
+        alt_names: "Ketanest Spravato",
+        slug: "medis_esketamin",
+        search_callback: module_medis.details_esketamin,
     }
 ]

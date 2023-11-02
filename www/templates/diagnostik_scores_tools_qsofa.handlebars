@@ -1,0 +1,26 @@
+<h2>qSOFA-Score</h2>
+<span>Score zur Erkennung von Patient*innen mit hohem Sepsis-Risiko</span>
+<div class="form-check mt-3">
+  <input class="form-check-input big_checkbox" type="checkbox" id="qsofa_af">
+  <label class="form-check-label" for="qsofa_af">
+    Atemfrequenz ≥ 22/min
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input big_checkbox" type="checkbox" id="qsofa_gcs">
+  <label class="form-check-label" for="qsofa_gcs">
+    verändertes Bewusstsein (GCS < 15)
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input big_checkbox" type="checkbox" id="qsofa_rr">
+  <label class="form-check-label" for="qsofa_rr">
+    systolischer Blutdruck ≤ 100 mmHg
+  </label>
+</div>
+</div>
+<h3 class="mt-3">Ergebnis:</h3>
+<div class="input-group mb-3">
+  <span class="input-group-text bg-primary text-white">qSOFA</span>
+  <input type="text" class="form-control" readonly id="qsofa_res">
+</div>

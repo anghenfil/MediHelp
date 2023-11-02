@@ -1,23 +1,15 @@
-<h2>Medikamente nach Indikation</h2>
-<div class="medi_list mt-3">
-    <div class="row medi_list_indication d-flex justify-content-center align-items-center">
-        <div class="col col-2">
-            <img src="img/app_icon.jpg">
-        </div>
-        <div class="col col-10">
-            <span class="fw-bold">Schmerzen</span>
-        </div>
+<div class="medi_list">
+    <div class="medi_list_indication d-flex align-items-center">
+        <img src="img/app_icon.jpg">
+        <span class="fw-bold">Schmerzen</span>
     </div>
-    <div class="medi_list_medi d-flex align-items-center">
-        <img src="img/esketamin_temp.jpg">
-        <span class="medi_list_medi_name">Esketamin</span>
-    </div>
-    <div class="row medi_list_indication d-flex justify-content-center align-items-center">
-        <div class="col col-2">
+    {{> medi_list_fentanyl}}
+    {{> medi_list_esketamin}}
+    {{> medi_list_ketamin}}
+    {{> medi_list_morphin}}
+    {{> medi_list_piritramid}}
+    <div class="medi_list_indication d-flex align-items-center mt-2">
             <img src="img/app_icon.jpg">
-        </div>
-        <div class="col col-10">
-            <span class="fw-bold">Fieber</span>
-        </div>
+            <span class="fw-bold">Sedierung</span>
     </div>
 </div>

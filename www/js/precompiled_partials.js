@@ -30,4 +30,19 @@ Handlebars.partials['diagnostik_norm_c_ekg_years5'] = template({"compiler":[8,">
 Handlebars.partials['diagnostik_norm_c_ekg_years8'] = template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     return "P-Welle: männlich 78 - 117 ms, weiblich 75 - 114 ms<br>\nPR-Strecke: männlich 105 - 174 ms, weiblich 103 - 163 ms<br>\nQRS-Komplex: männlich 67 - 103 ms, weiblich 66 - 99 ms<br>\nQTc-Zeit: männlich: 373 - 440 ms, weiblich 365 - 447 ms<br>";
 },"useData":true});
+Handlebars.partials['medi_list_esketamin'] = template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<div class=\"medi_list_medi d-flex align-items-center clickable\" data-link-document=\"medis_esketamin\">\n    <span class=\"medi_list_medi_name medi_label_anaesthetika\">esKETAmin</span>\n    <span class=\"medi_list_medi_handlesnamen\">Ketanest S®, Spravato®</span>\n</div>";
+},"useData":true});
+Handlebars.partials['medi_list_fentanyl'] = template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<div class=\"medi_list_medi d-flex align-items-center\">\n    <span class=\"medi_list_medi_name medi_label_opioide\">fentaNYL</span>\n    <span class=\"medi_list_medi_handlesnamen\"></span>\n</div>";
+},"useData":true});
+Handlebars.partials['medi_list_ketamin'] = template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<div class=\"medi_list_medi d-flex align-items-center\">\n    <span class=\"medi_list_medi_name medi_label_anaesthetika\">KETAmin</span>\n    <span class=\"medi_list_medi_handlesnamen\">Ketamin-hameln, Ketamin Inresa</span>\n</div>";
+},"useData":true});
+Handlebars.partials['medi_list_morphin'] = template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<div class=\"medi_list_medi d-flex align-items-center\">\n    <span class=\"medi_list_medi_name medi_label_opioide\">Morphin</span>\n    <span class=\"medi_list_medi_handlesnamen\">MSI®, Vendal®</span>\n</div>";
+},"useData":true});
+Handlebars.partials['medi_list_piritramid'] = template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<div class=\"medi_list_medi d-flex align-items-center\">\n    <span class=\"medi_list_medi_name medi_label_opioide text-white\">PIRItramid</span> <!-- DIVI Sonderregelung weiße Schrift -->\n    <span class=\"medi_list_medi_handlesnamen\">Dipidolor®</span>\n</div>";
+},"useData":true});
 })();
