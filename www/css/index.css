@@ -95,6 +95,10 @@ html {
     cursor:pointer;
 }
 
+.cnavbar-icon.active{
+    color: var(--colour-blue);
+}
+
 .cnavbar-icon > svg{
     height: 30px;
     width: 30px;
@@ -178,10 +182,7 @@ html {
 .selected{
     border-color: 1px solid var(--colour-light-blue);
 }
-#patientsettings_weight_input{
-    font-size: 20pt;
-}
-#patientsettings_adult_age_input{
+.big-input{
     font-size: 20pt;
 }
 .hide{
@@ -324,4 +325,8 @@ html {
 }
 .medis_kontraindikationen{
     font-size: 10pt;
+}
+#nav-back{
+    margin-left: 5px;
+    cursor: pointer;
 }

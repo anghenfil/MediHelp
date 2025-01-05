@@ -1,0 +1,104 @@
+{{> topbar this.topbar}}
+<div class="content container-fluid mt-2">
+    <p class="mt-2">Normwerte für: {{> patient_summary this}}</p>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="norm_show_all_values_checkbox">
+        <label class="form-check-label" for="norm_show_all_values_checkbox">alle Normwerte anzeigen</label>
+    </div>
+    <div class="norm_values mt-4">
+        <div class="row norm_box">
+            <div class="col col-3 col-lg-1 norm_box_title"><span>HF</span></div>
+            <div class="col col-9 col-lg-11">
+                <span class="norm_box_long_title">Herzfrequenz</span><br>
+                <span>
+                    TODO: updaten nach https://edoc.rki.de/bitstream/handle/176904/3254/28jWMa04ZjppM.pdf
+                {{#if patient_settings.patient.ChildPatient}}
+                    {{#if patient_settings.patient.ChildPatient.age}}
+                        {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:YEARS1'}}
+                            110 - 180 / min
+                        {{/comp}}
+                        {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:YEARS1' 'ChildAge:YEARS2'}}
+                            100 - 170 / min
+                        {{/comp}}
+                        {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:YEARS2' 'ChildAge:YEARS5'}}
+                            90 - 160 / min
+                        {{/comp}}
+                        {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:YEARS5' 'ChildAge:YEARS10'}}
+                            70 - 140 / min
+                        {{/comp}}
+                        {{#comp patient_settings.patient.ChildPatient.age 'between_inclusive' 'ChildAge:YEARS10' 'ChildAge:YEARS17'}}
+                            60 - 120 / min
+                        {{/comp}}
+                    {{else}}
+                        Für Berechnung bitte Alter angeben.
+                    {{/if}}
+                {{/if}}
+                {{#if patient_settings.patient.AdultPatient}}
+                    50 - 100 / min
+                {{/if}}
+                </span><br>
+                <span class="norm_extended_values hide"><!-- Source: https://cprguidelines.eu/assets/guidelines/European-Resuscitation-Council-Guidelines-2021-Pa.pdf -->
+            <hr>
+            Erwachsene: 50 - 100 / min<br>
+            ab Neugeborenem: 110 - 180 / min<br>
+            ab 1 Jahr: 100 - 170 / min<br>
+            ab 2 Jahren: 90 - 160 / min<br>
+            ab 5 Jahren: 70 - 140 / min<br>
+            ab 10 Jahren: 60 - 120 / min
+      </span>
+            </div>
+        </div>
+        <div class="row norm_box">
+            <div class="col col-3 col-lg-1 norm_box_title"><span>RR</span></div>
+            <div class="col col-9 col-lg-11">
+                <span class="norm_box_long_title">Blutdruck</span><br>
+                <span>
+                    {{#if patient_settings.patient.AdultPatient}}
+                        Norm: 120 / 80 mmHg <br>Hypertonie: >= 140 / 90 mmHg <br>hypertensive Krise/Notfall: Systole >= 180 mmHg <br>MAD: >= 60 mmHg
+                    {{/if}}
+                    {{#if patient_settings.patient.ChildPatient}}
+                        {{#if patient_settings.patient.ChildPatient.age}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:MONTHS2'}}
+                                74 / 51 mmHg, MAD: >= 40 mmHg
+                            {{/comp}}
+                            TODO
+
+                        {{else}}
+                            Für Berechnung bitte Alter angeben.
+                        {{/if}}
+                    {{/if}}
+                </span><br>
+                <span class="norm_extended_values hide"> <!--
+        RR Source: Gortner, Duale Reihe Pädiatrie
+        MAD Source: https://cprguidelines.eu/assets/guidelines/European-Resuscitation-Council-Guidelines-2021-Pa.pdf -->
+            <hr>
+            TODO
+      </span>
+                <br><span class="text-info">Achtung: Die Blutdruckangaben für Kinder variieren in der Literatur stark. Bitte nur als Anhaltspunkt verwenden.</span>
+            </div>
+        </div>
+        <div class="row norm_box">
+            <div class="col col-3 col-lg-1 norm_box_title"><span>Re-<br>kap</span></div>
+            <div class="col col-9 col-lg-11">
+                <span class="norm_box_long_title">Rekapilarisierungszeit</span><br>
+                <span>< 3 Sekunden</span><br>
+                <span class="norm_extended_values hide">
+        <!-- Source: Gies, C., & Hoppen, T. (2017). Zur raschen Einschätzung des kritisch kranken Kindes. Pädiatrie, 29(3), 32–33. doi:10.1007/s15014-017-1052-4  -->
+            <hr>
+            < 3 Sekunden
+      </span>
+            </div>
+        </div>
+        <div class="row norm_box">
+            <div class="col col-3 col-lg-1 norm_box_title"><span>EKG</span></div>
+            <div class="col col-9 col-lg-11">
+                <span class="norm_box_long_title">EKG</span><br>
+                <span>{{{ekg_value}}}</span><br>
+                <span class="norm_extended_values hide">
+            <hr><!-- Quellen: https://pubmed.ncbi.nlm.nih.gov/11286528/ für Kinder, EKG für Isabell für Erwachsene -->
+
+      </span>
+            </div>
+        </div>
+    </div>
+</div>

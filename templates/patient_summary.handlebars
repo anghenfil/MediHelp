@@ -1,0 +1,10 @@
+{{#if patient_settings.patient}}
+    {{#if patient_settings.patient.AdultPatient}}
+        Erwachsene Person{{#if patient_settings.patient.AdultPatient.weight}}, {{patient_settings.patient.AdultPatient.weight}} kg{{/if}}{{#if patient_settings.patient.AdultPatient.age}}, {{patient_settings.patient.AdultPatient.age}} Jahre{{/if}}
+    {{/if}}
+    {{#if patient_settings.patient.ChildPatient}}
+        Kind{{#if patient_settings.patient.ChildPatient.weight}}, {{patient_settings.patient.ChildPatient.weight}} kg{{/if}}{{#if patient_settings.patient.ChildPatient.age}}, {{> patient_settings_child_age}}{{/if}}
+    {{/if}}
+{{else}}
+    Keine Patientendaten angegeben.
+{{/if}}
