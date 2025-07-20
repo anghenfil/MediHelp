@@ -54,6 +54,7 @@
             {{#if age_via_birth_date_selected}}
             <div class="col col-sm-5 col-lg-3">
                 <input id="patientsettings_child_age_birth_date" type="date" class="form-control" value="{{patient_settings.patient.ChildPatient.birthdate}}">
+                <span id="patientsettings_child_age_birth_date_calculated_age">{{> patient_settings_child_age}}</span>
             </div>
             {{else}}
             <div class="col col-sm-5 col-lg-3">

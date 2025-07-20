@@ -306,7 +306,7 @@ export default function show_patient_settings(){
 
     // Add event listeners
     document.getElementById("patientsettings_adult").addEventListener("click", function(){
-        if(app_settings.patient_settings.patient.AdultPatient){ // return if adult already selected
+        if(app_settings.patient_settings.patient?.AdultPatient != null){ // return if adult already selected
             return;
         }
         app_settings.patient_settings.patient =  {
@@ -319,7 +319,7 @@ export default function show_patient_settings(){
         show_patient_settings();
     });
     document.getElementById("patientsettings_child").addEventListener("click", function(){
-        if(app_settings.patient_settings.patient.ChildPatient){
+        if(app_settings.patient_settings.patient?.ChildPatient != null){
             return;
         }
         app_settings.patient_settings.patient =  {
@@ -349,7 +349,7 @@ export default function show_patient_settings(){
         })
     }
 
-    if(app_settings.patient_settings.patient.ChildPatient) {
+    if(app_settings.patient_settings.patient?.ChildPatient != null) {
 
         // Child specific listeners
         let child_age_input = document.getElementById("patientsettings_child_age_input") as HTMLInputElement;
@@ -371,8 +371,14 @@ export default function show_patient_settings(){
 
         if (app_settings.age_via_birth_date_selected) {
             child_birthdate_input.addEventListener("input", function () {
-                app_settings.patient_settings.patient.ChildPatient.age = calculate_age(child_birthdate_input.value);
-                app_settings.patient_settings.patient.ChildPatient.birthdate = child_birthdate_input.value;
+                try{
+                    app_settings.patient_settings.patient.ChildPatient.age = calculate_age(child_birthdate_input.value);
+                    app_settings.patient_settings.patient.ChildPatient.birthdate = child_birthdate_input.value;
+                    show_patient_settings(); //refresh view to show calculated age
+                }catch(e){
+                    console.error(e);
+                    alert(e);
+                }
             });
         }
         if (child_age_input) {
