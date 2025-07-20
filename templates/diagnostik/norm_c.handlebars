@@ -14,13 +14,13 @@
                     TODO: updaten nach https://edoc.rki.de/bitstream/handle/176904/3254/28jWMa04ZjppM.pdf
                 {{#if patient_settings.patient.ChildPatient}}
                     {{#if patient_settings.patient.ChildPatient.age}}
-                        {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:YEARS1'}}
+                        {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:MONTHS12'}}
                             110 - 180 / min
                         {{/comp}}
-                        {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:YEARS1' 'ChildAge:YEARS2'}}
+                        {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:MONTHS12' 'ChildAge:MONTHS24'}}
                             100 - 170 / min
                         {{/comp}}
-                        {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:YEARS2' 'ChildAge:YEARS5'}}
+                        {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:MONTHS24' 'ChildAge:YEARS5'}}
                             90 - 160 / min
                         {{/comp}}
                         {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:YEARS5' 'ChildAge:YEARS10'}}
@@ -58,7 +58,7 @@
                     {{/if}}
                     {{#if patient_settings.patient.ChildPatient}}
                         {{#if patient_settings.patient.ChildPatient.age}}
-                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:MONTHS2'}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:MONTHS12'}}
                                 74 / 51 mmHg, MAD: >= 40 mmHg
                             {{/comp}}
                             TODO

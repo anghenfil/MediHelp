@@ -1,6 +1,6 @@
 import './patient_settings';
 import show_patient_settings, {PatientSettings} from "./patient_settings";
-import * as Diagnose from "./diagnose";
+import * as Diagnose from "./diagnostic/diagnose";
 import * as Home from "./home";
 import * as Handlebars from "handlebars/runtime";
 import {calcnum, compare_if} from "./helpers";
@@ -20,6 +20,7 @@ interface AppSettings{
     current_page: string,
     nav_history: string[],
     age_based_estimation_method_selected: boolean,
+    age_via_birth_date_selected: boolean,
 }
 
 export let main_container = document.getElementById("app");

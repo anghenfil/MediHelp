@@ -45,10 +45,22 @@
             <h1 class="text-center">Alter:</h1>
         </div>
         <div class="row justify-content-center">
+            <div class="col d-flex justify-content-center">
+            <button id="patientsettings_age_via_slider" class="btn btn-outline-primary me-4 {{#unless age_via_birth_date_selected}}active{{/unless}}">via Slider</button>
+            <button id="patientsettings_age_via_date" class="btn btn-outline-primary {{#if age_via_birth_date_selected}}active{{/if}}">Aus Geburtsdatum</button>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            {{#if age_via_birth_date_selected}}
             <div class="col col-sm-5 col-lg-3">
-                <input type="range" class="form-range" min="1" max="41" value="{{patient_settings.patient.ChildPatient.age}}" id="patientsettings_child_age_input">
+                <input id="patientsettings_child_age_birth_date" type="date" class="form-control" value="{{patient_settings.patient.ChildPatient.birthdate}}">
+            </div>
+            {{else}}
+            <div class="col col-sm-5 col-lg-3">
+                <input type="range" class="form-range" min="1" max="57" value="{{patient_settings.patient.ChildPatient.age}}" id="patientsettings_child_age_input">
                 <span id="patientsettings_child_age_input_label">{{> patient_settings_child_age}}</span>
             </div>
+            {{/if}}
         </div>
     </div>
     <div id="patientsettings_child_length">

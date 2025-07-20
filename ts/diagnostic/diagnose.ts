@@ -1,7 +1,6 @@
-import {app_settings, main_container, register_nav_handlers, TopbarTemplate} from "./app";
+import {app_settings, main_container, register_nav_handlers, TopbarTemplate} from "../app";
 import * as Handlebars from 'handlebars/runtime';
-import {PatientSettings} from "./patient_settings";
-import {get_percentile} from "../templates/age_percentiles";
+import {PatientSettings} from "../patient_settings";
 
 interface DiagnoseTemplate{
     topbar: TopbarTemplate,
@@ -15,9 +14,6 @@ export function show(dest: string){
         },
         patient_settings: app_settings.patient_settings,
     }
-
-    //TODO remove and impoement in c for blood pressure
-    console.log(get_percentile(app_settings.patient_settings.patient.ChildPatient.age, app_settings.patient_settings.patient.ChildPatient.length));
 
     switch (dest) {
         case "diagnostik":

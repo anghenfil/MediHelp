@@ -10,6 +10,7 @@ interface PatientSettingsTemplate{
     topbar: TopbarTemplate,
     patient_settings: PatientSettings,
     age_based_estimation_selected: boolean,
+    age_via_birth_date_selected: boolean,
 }
 
 interface AdultPatient{
@@ -19,11 +20,13 @@ interface AdultPatient{
 
 interface ChildPatient{
     age?: ChildAge,
+    birthdate?: string,
     /// Weight in kg
     weight?: number,
     /// Length in cm
     length?: number
 }
+
 
 export enum ChildAge{
     NEWBORN = 1,
@@ -215,14 +218,86 @@ export interface PatientSettings{
     patient: Patient | null,
 }
 
+export function calculateExactAge(birthdateStr: string): { years: number; months: number; days: number } {
+    const birth = new Date(birthdateStr);
+    const today = new Date();
+
+    let years = today.getFullYear() - birth.getFullYear();
+    let months = today.getMonth() - birth.getMonth();
+    let days = today.getDate() - birth.getDate();
+
+    if (days < 0) {
+        // Hole Tage des Vormonats
+        const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+        days += prevMonth.getDate();
+        months--;
+    }
+
+    if (months < 0) {
+        months += 12;
+        years--;
+    }
+
+    return { years, months, days };
+}
+
+export function calculate_age(birthdate_str: string): ChildAge{
+    let {years, months, days} = calculateExactAge(birthdate_str);
+
+    if(years < 1 && months < 1 && days < 1){
+        return ChildAge.NEWBORN;
+    }
+    if(years < 1 && months < 1){
+        if(days <= 14){
+            return ChildAge[`DAYS${days}` as keyof typeof ChildAge];
+        }else{
+            return ChildAge.MONTHS1
+        }
+    }
+    if(years < 1){
+        if(days <= 15){ // e.g. 10 months + 10 days -> return 10
+            return ChildAge[`MONTHS${months}` as keyof typeof ChildAge];
+        }else { // e.g. 10 months + 29 days -> return 11
+            return ChildAge[`MONTHS${months+1}` as keyof typeof ChildAge];
+        }
+    }
+    if(years < 3){ // 1 <= years < 3
+        let sum_months = months+(12*years) // add months from previous years
+        console.log("sum month:"+sum_months);
+        if(sum_months < 24){
+            console.log("days:"+days);
+            if(days <= 15){
+                return ChildAge[`MONTHS${sum_months}` as keyof typeof ChildAge];
+            }else{
+                return ChildAge[`MONTHS${sum_months+1}` as keyof typeof ChildAge];
+            }
+        }else if(sum_months < 30){
+            return ChildAge.MONTHS24;
+        }else{
+            return ChildAge.YEARS3;
+        }
+    }
+    if(years <= 17){
+        if(months <= 6){
+            return ChildAge[`YEARS${years}` as keyof typeof ChildAge];
+        }else{
+            return ChildAge[`YEARS${years+1}` as keyof typeof ChildAge];
+        }
+    }else{
+        throw new Error("Alter ist über 18, bitte Erwachsenenmodus benutzen.");
+    }
+}
+
+
 export default function show_patient_settings(){
     last_scroll_top = window.scrollY;
     template = {
+        age_via_birth_date_selected: app_settings.age_via_birth_date_selected,
         topbar: {
             title: "Referenzpatient*in"
         },
         patient_settings: app_settings.patient_settings,
-        age_based_estimation_selected: app_settings.age_based_estimation_method_selected,
+        age_based_estimation_selected: app_settings.age_based_estimation_method_selected
     }
     main_container.innerHTML = Handlebars.templates["patient_settings"](template);
 
@@ -231,6 +306,9 @@ export default function show_patient_settings(){
 
     // Add event listeners
     document.getElementById("patientsettings_adult").addEventListener("click", function(){
+        if(app_settings.patient_settings.patient.AdultPatient){ // return if adult already selected
+            return;
+        }
         app_settings.patient_settings.patient =  {
             AdultPatient: {
                 age: null,
@@ -241,6 +319,9 @@ export default function show_patient_settings(){
         show_patient_settings();
     });
     document.getElementById("patientsettings_child").addEventListener("click", function(){
+        if(app_settings.patient_settings.patient.ChildPatient){
+            return;
+        }
         app_settings.patient_settings.patient =  {
             ChildPatient: {
                 age: ChildAge.NEWBORN,
@@ -268,37 +349,63 @@ export default function show_patient_settings(){
         })
     }
 
-    // Child specific listeners
-    let child_age_input = document.getElementById("patientsettings_child_age_input") as HTMLInputElement;
-    let child_length_input = document.getElementById("patientsettings_child_length_input") as HTMLInputElement;
+    if(app_settings.patient_settings.patient.ChildPatient) {
 
-    if(child_age_input){
-        child_age_input.addEventListener("input", function () {
-            app_settings.patient_settings.patient.ChildPatient.age = parseInt(child_age_input.value); //TODO handle NaN
-            // Refresh the label
-            document.getElementById("patientsettings_child_age_input_label").innerHTML = Handlebars.templates["patient_settings_child_age"](template);
+        // Child specific listeners
+        let child_age_input = document.getElementById("patientsettings_child_age_input") as HTMLInputElement;
+        let child_length_input = document.getElementById("patientsettings_child_length_input") as HTMLInputElement;
+        let child_birthdate_input = document.getElementById("patientsettings_child_age_birth_date") as HTMLInputElement;
+        let age_via_slider = document.getElementById("patientsettings_age_via_slider") as HTMLButtonElement;
+        let age_via_birth_date = document.getElementById("patientsettings_age_via_date") as HTMLButtonElement;
+
+
+        age_via_slider.addEventListener("click", function () {
+            app_settings.age_via_birth_date_selected = false;
+            show_patient_settings();
         });
+        age_via_birth_date.addEventListener("click", function () {
+            app_settings.age_via_birth_date_selected = true;
+            show_patient_settings();
+        });
+
+
+        if (app_settings.age_via_birth_date_selected) {
+            child_birthdate_input.addEventListener("input", function () {
+                app_settings.patient_settings.patient.ChildPatient.age = calculate_age(child_birthdate_input.value);
+                app_settings.patient_settings.patient.ChildPatient.birthdate = child_birthdate_input.value;
+            });
+        }
+        if (child_age_input) {
+            child_age_input.addEventListener("input", function () {
+                app_settings.patient_settings.patient.ChildPatient.age = parseInt(child_age_input.value); //TODO handle NaN
+                app_settings.patient_settings.patient.ChildPatient.birthdate = null;
+                // Refresh the label
+                document.getElementById("patientsettings_child_age_input_label").innerHTML = Handlebars.templates["patient_settings_child_age"](template);
+            });
+        }
+
         // Estimation method switcher:
-        document.getElementById("patientsettings_estimation_select_pawper").addEventListener("click", function(){
+        document.getElementById("patientsettings_estimation_select_pawper").addEventListener("click", function () {
             app_settings.age_based_estimation_method_selected = false;
             show_patient_settings();
         });
-        document.getElementById("patientsettings_estimation_select_age").addEventListener("click", function(){
+        document.getElementById("patientsettings_estimation_select_age").addEventListener("click", function () {
             app_settings.age_based_estimation_method_selected = true;
             show_patient_settings();
         });
-    }
-    if(child_length_input){
-        child_length_input.addEventListener("input", function () {
-            app_settings.patient_settings.patient.ChildPatient.length = parseInt(child_length_input.value); //TODO handle NaN
-        })
-    }
 
-    let pawper_estimate_button = document.getElementById("patientsettings_estimation_pawper_estimate");
-    if(pawper_estimate_button) pawper_estimate_button.addEventListener("click", estimate_pawper);
+        if (child_length_input) {
+            child_length_input.addEventListener("input", function () {
+                app_settings.patient_settings.patient.ChildPatient.length = parseInt(child_length_input.value); //TODO handle NaN
+            })
+        }
 
-    let age_estimate_button = document.getElementById("patientsettings_estimation_age_estimate");
-    if(age_estimate_button) age_estimate_button.addEventListener("click", estimate_age);
+        let pawper_estimate_button = document.getElementById("patientsettings_estimation_pawper_estimate");
+        if (pawper_estimate_button) pawper_estimate_button.addEventListener("click", estimate_pawper);
+
+        let age_estimate_button = document.getElementById("patientsettings_estimation_age_estimate");
+        if (age_estimate_button) age_estimate_button.addEventListener("click", estimate_age);
+    }
 }
 
 function estimate_pawper(){
