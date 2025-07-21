@@ -1,4 +1,5 @@
-import {parse_child_age_from_str} from "./patient_settings";
+import {ChildAge, parse_child_age_from_str} from "./patient_settings";
+import {calculate_child_bp} from "./diagnostic/BloodPressure";
 
 export function compare_if (v1: any, operator: string, v2: any, v3: any, options: any) {
     if (!options){
@@ -62,4 +63,23 @@ export function calcnum(v1: number, operator: string, v2: number) {
         case '/':
             return Math.round(v1 / v2);
     }
+}
+
+export function rr_percentiles(height: number, age_or_birthdate: number|string, sex: boolean, percentiles: string){
+    let age : ChildAge | string;
+
+    console.log("Parameters: height="+height+" age_or_birthdate="+age_or_birthdate+" sex="+sex+" percentiles="+percentiles);
+
+    if (typeof age_or_birthdate === 'number') {
+        age = age_or_birthdate as ChildAge;
+    }else{
+        age = age_or_birthdate;
+    }
+
+    let percentiles_res: number[] = [];
+    percentiles.split(",").forEach(function(percentile){
+        percentiles_res.push(parseFloat(percentile.trim()));
+    });
+
+    return calculate_child_bp(sex, percentiles_res, height, age)
 }

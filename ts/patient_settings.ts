@@ -88,6 +88,129 @@ export enum ChildAge{
     YEARS17 = 57,
 }
 
+/**
+ * Returns the age as years with floating point (3 years + 6 months -> 3.5 years)
+ * @param age
+ */
+export function child_age_to_float_years(age: ChildAge): number{
+    switch (age) {
+        case ChildAge.NEWBORN:
+            return 0;
+        case ChildAge.MINUTES5:
+            return 5 / (24 * 60 * 365);
+        case ChildAge.MINUTES30:
+            return 30 / (24 * 60 * 365);
+        case ChildAge.HOURS1:
+            return 1 / (24 * 365);
+        case ChildAge.DAYS1:
+            return 1 / 365;
+        case ChildAge.DAYS2:
+            return 2 / 365;
+        case ChildAge.DAYS3:
+            return 3 / 365;
+        case ChildAge.DAYS4:
+            return 4 / 365;
+        case ChildAge.DAYS5:
+            return 5 / 365;
+        case ChildAge.DAYS6:
+            return 6 / 365;
+        case ChildAge.DAYS7:
+            return 7 / 365;
+        case ChildAge.DAYS8:
+            return 8 / 365;
+        case ChildAge.DAYS9:
+            return 9 / 365;
+        case ChildAge.DAYS10:
+            return 10 / 365;
+        case ChildAge.DAYS11:
+            return 11 / 365;
+        case ChildAge.DAYS12:
+            return 12 / 365;
+        case ChildAge.DAYS13:
+            return 13 / 365;
+        case ChildAge.DAYS14:
+            return 14 / 365;
+        case ChildAge.MONTHS1:
+            return 1 / 12;
+        case ChildAge.MONTHS2:
+            return 2 / 12;
+        case ChildAge.MONTHS3:
+            return 3 / 12;
+        case ChildAge.MONTHS4:
+            return 4 / 12;
+        case ChildAge.MONTHS5:
+            return 5 / 12;
+        case ChildAge.MONTHS6:
+            return 6 / 12;
+        case ChildAge.MONTHS7:
+            return 7 / 12;
+        case ChildAge.MONTHS8:
+            return 8 / 12;
+        case ChildAge.MONTHS9:
+            return 9 / 12;
+        case ChildAge.MONTHS10:
+            return 10 / 12;
+        case ChildAge.MONTHS11:
+            return 11 / 12;
+        case ChildAge.MONTHS12:
+            return 1;
+        case ChildAge.MONTHS13:
+            return 13 / 12;
+        case ChildAge.MONTHS14:
+            return 14 / 12;
+        case ChildAge.MONTHS15:
+            return 15 / 12;
+        case ChildAge.MONTHS16:
+            return 16 / 12;
+        case ChildAge.MONTHS17:
+            return 17 / 12;
+        case ChildAge.MONTHS18:
+            return 18 / 12;
+        case ChildAge.MONTHS19:
+            return 19 / 12;
+        case ChildAge.MONTHS20:
+            return 20 / 12;
+        case ChildAge.MONTHS21:
+            return 21 / 12;
+        case ChildAge.MONTHS22:
+            return 22 / 12;
+        case ChildAge.MONTHS23:
+            return 23 / 12;
+        case ChildAge.MONTHS24:
+            return 2;
+        case ChildAge.YEARS3:
+            return 3;
+        case ChildAge.YEARS4:
+            return 4;
+        case ChildAge.YEARS5:
+            return 5;
+        case ChildAge.YEARS6:
+            return 6;
+        case ChildAge.YEARS7:
+            return 7;
+        case ChildAge.YEARS8:
+            return 8;
+        case ChildAge.YEARS9:
+            return 9;
+        case ChildAge.YEARS10:
+            return 10;
+        case ChildAge.YEARS11:
+            return 11;
+        case ChildAge.YEARS12:
+            return 12;
+        case ChildAge.YEARS13:
+            return 13;
+        case ChildAge.YEARS14:
+            return 14;
+        case ChildAge.YEARS15:
+            return 15;
+        case ChildAge.YEARS16:
+            return 16;
+        case ChildAge.YEARS17:
+            return 17;
+    }
+}
+
 export function parse_child_age_from_str(age: string) : ChildAge{
     switch (age) {
         case "NEWBORN":
@@ -241,7 +364,28 @@ export function calculateExactAge(birthdateStr: string): { years: number; months
     return { years, months, days };
 }
 
-export function calculate_age(birthdate_str: string): ChildAge{
+/**
+ * Takes the birthdate as Date string and returns the age as years as a floating number
+ * e.g. 5 years + 6 months -> returns 5.5 years
+ * This isn't 100 % exact since we ignore months != 30 days and leap years but exact enough
+ *
+ * @param birthdate_str
+ *
+ * @return age as floating number
+ */
+export function get_age_as_years_float_from_birthday(birthdate_str: string): number{
+    let {years, months, days} = calculateExactAge(birthdate_str);
+
+    if(days > 0){
+        months = months + (days/30)
+    }
+    if(months > 0){
+        years = years + (months/12)
+    }
+    return years;
+}
+
+export function convert_birthdate_to_childage(birthdate_str: string): ChildAge{
     let {years, months, days} = calculateExactAge(birthdate_str);
 
     if(years < 1 && months < 1 && days < 1){
@@ -372,7 +516,7 @@ export default function show_patient_settings(){
         if (app_settings.age_via_birth_date_selected) {
             child_birthdate_input.addEventListener("input", function () {
                 try{
-                    app_settings.patient_settings.patient.ChildPatient.age = calculate_age(child_birthdate_input.value);
+                    app_settings.patient_settings.patient.ChildPatient.age = convert_birthdate_to_childage(child_birthdate_input.value);
                     app_settings.patient_settings.patient.ChildPatient.birthdate = child_birthdate_input.value;
                     show_patient_settings(); //refresh view to show calculated age
                 }catch(e){

@@ -1,0 +1,54 @@
+<div class="row ms-0">
+<table class="col-3 table table-sm me-2 table-striped-columns" style="max-width: 300px">
+    <tr>
+        <th colspan="3" class="text-center text-secondary">KiGGS Perzentile "Jungen"</th>
+    </tr>
+    <tr>
+        <th>Perzentile</th>
+        <th>Systole</th>
+        <th>Diastole</th>
+    </tr>
+    <tbody>
+{{#each jungen}}
+   <tr>
+       <td>P{{percentile}}</td>
+       <td>{{systolic}}</td>
+       <td>{{diastolic}}</td>
+   </tr>
+{{#comp percentile "===" 99}}<!-- Add P99+5 -->
+    <tr>
+        <td>P99+5</td>
+        <td>{{calcnum systolic "+" 5}}</td>
+        <td>{{calcnum diastolic "+" 5}}</td>
+    </tr>
+{{/comp}}
+{{/each}}
+    </tbody>
+</table>
+<table class="col-3 table table-sm table-striped-columns" style="width: 300px">
+    <tr>
+        <th colspan="3" class="text-center text-secondary">KiGGS Perzentile "Mädchen"</th>
+    </tr>
+    <tr>
+        <th>Perzentile</th>
+        <th>Systole</th>
+        <th>Diastole</th>
+    </tr>
+    <tbody>
+{{#each maedchen}}
+    <tr>
+        <td>P{{percentile}}</td>
+        <td>{{systolic}}</td>
+        <td>{{diastolic}}</td>
+    </tr>
+    {{#comp percentile "===" 99}}<!-- Add P99+5 -->
+        <tr>
+            <td>P99+5</td>
+            <td>{{calcnum systolic "+" 5}}</td>
+            <td>{{calcnum diastolic "+" 5}}</td>
+        </tr>
+    {{/comp}}
+{{/each}}
+    </tbody>
+</table>
+</div>

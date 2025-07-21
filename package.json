@@ -35,6 +35,7 @@
     }
   },
   "dependencies": {
+    "@stdlib/stats-base-dists-normal-quantile": "^0.2.2",
     "@types/cordova": "^11.0.3",
     "handlebars": "^4.7.8",
     "handlebars-loader": "^1.7.3"

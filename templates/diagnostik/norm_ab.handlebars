@@ -58,16 +58,14 @@
                 <span>
           {{#if patient_settings.patient.ChildPatient}}
               {{#if patient_settings.patient.ChildPatient.weight}}
-                  {{calcnum patient_settings.patient.ChildPatient.weight "*" 6}} - {{calcnum
-                      patient_settings.patient.ChildPatient.weight "*" 8}} ml
+                  {{calcnum patient_settings.patient.ChildPatient.weight "*" 6}} - {{calcnum patient_settings.patient.ChildPatient.weight "*" 8}} ml
               {{else}}
                   Für Berechnung bitte Gewicht angeben.
               {{/if}}
           {{/if}}
                     {{#if patient_settings.patient.AdultPatient}}
                         {{#if patient_settings.patient.AdultPatient.weight}}
-                            {{calcnum patient_settings.patient.AdultPatient.weight "*" 6}} - {{calcnum
-                                patient_settings.patient.AdultPatient.weight "*" 8}} ml
+                            {{calcnum patient_settings.patient.AdultPatient.weight "*" 6}} - {{calcnum patient_settings.patient.AdultPatient.weight "*" 8}} ml
                         {{else}}
                             Für Berechnung bitte Gewicht angeben.
                         {{/if}}

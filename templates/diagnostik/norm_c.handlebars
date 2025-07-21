@@ -11,7 +11,6 @@
             <div class="col col-9 col-lg-11">
                 <span class="norm_box_long_title">Herzfrequenz</span><br>
                 <span>
-                    TODO: updaten nach https://edoc.rki.de/bitstream/handle/176904/3254/28jWMa04ZjppM.pdf
                 {{#if patient_settings.patient.ChildPatient}}
                     {{#if patient_settings.patient.ChildPatient.age}}
                         {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:MONTHS12'}}
@@ -34,12 +33,12 @@
                     {{/if}}
                 {{/if}}
                 {{#if patient_settings.patient.AdultPatient}}
-                    50 - 100 / min
+                    in Ruhe: 60 - 100 / min
                 {{/if}}
                 </span><br>
-                <span class="norm_extended_values hide"><!-- Source: https://cprguidelines.eu/assets/guidelines/European-Resuscitation-Council-Guidelines-2021-Pa.pdf -->
+                <span class="norm_extended_values hide">
             <hr>
-            Erwachsene: 50 - 100 / min<br>
+            Erwachsene (in Ruhe): 60 - 100 / min<br>
             ab Neugeborenem: 110 - 180 / min<br>
             ab 1 Jahr: 100 - 170 / min<br>
             ab 2 Jahren: 90 - 160 / min<br>
@@ -58,11 +57,19 @@
                     {{/if}}
                     {{#if patient_settings.patient.ChildPatient}}
                         {{#if patient_settings.patient.ChildPatient.age}}
-                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:MONTHS12'}}
-                                74 / 51 mmHg, MAD: >= 40 mmHg
+                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:YEARS3'}}
+                                N/A (Leider noch keine Referenzwerte für dieses Alter.)
+                            {{else}}
+                                {{#if patient_settings.patient.ChildPatient.length}}
+                                    {{#if patient_settings.patient.ChildPatient.birthdate}}
+                                        {{> diagnostik/formatted_rr_percentiles jungen=(rr_percentiles patient_settings.patient.ChildPatient.length patient_settings.patient.ChildPatient.birthdate false "0.05,0.5,0.9,0.95,0.99") maedchen=(rr_percentiles patient_settings.patient.ChildPatient.length patient_settings.patient.ChildPatient.age false "0.05,0.5,0.9,0.95,0.99")}}
+                                    {{else}}
+                                        {{> diagnostik/formatted_rr_percentiles jungen=(rr_percentiles patient_settings.patient.ChildPatient.length patient_settings.patient.ChildPatient.age false "0.05,0.5,0.9,0.95,0.99") maedchen=(rr_percentiles patient_settings.patient.ChildPatient.length patient_settings.patient.ChildPatient.age true "0.05,0.5,0.9,0.95,0.99")}}
+                                    {{/if}}
+                                {{else}}
+                                    Für Berechnung bitte Größe angeben.
+                                {{/if}}
                             {{/comp}}
-                            TODO
-
                         {{else}}
                             Für Berechnung bitte Alter angeben.
                         {{/if}}
