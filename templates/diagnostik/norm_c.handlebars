@@ -11,8 +11,8 @@
             <div class="col col-9 col-lg-11">
                 <span class="norm_box_long_title">Herzfrequenz</span><br>
                 <span>
+                {{#require_patient_data patient_settings "age" ""}}
                 {{#if patient_settings.patient.ChildPatient}}
-                    {{#if patient_settings.patient.ChildPatient.age}}
                         {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:MONTHS12'}}
                             110 - 180 / min
                         {{/comp}}
@@ -28,13 +28,11 @@
                         {{#comp patient_settings.patient.ChildPatient.age 'between_inclusive' 'ChildAge:YEARS10' 'ChildAge:YEARS17'}}
                             60 - 120 / min
                         {{/comp}}
-                    {{else}}
-                        Für Berechnung bitte Alter angeben.
-                    {{/if}}
                 {{/if}}
                 {{#if patient_settings.patient.AdultPatient}}
                     in Ruhe: 60 - 100 / min
                 {{/if}}
+                {{/require_patient_data}}
                 </span><br>
                 <span class="norm_extended_values hide">
             <hr>
@@ -44,7 +42,7 @@
             ab 2 Jahren: 90 - 160 / min<br>
             ab 5 Jahren: 70 - 140 / min<br>
             ab 10 Jahren: 60 - 120 / min
-      </span>
+            </span>
             </div>
         </div>
         <div class="row norm_box">
@@ -52,28 +50,22 @@
             <div class="col col-9 col-lg-11">
                 <span class="norm_box_long_title">Blutdruck</span><br>
                 <span>
-                    {{#if patient_settings.patient.AdultPatient}}
-                        Norm: 120 / 80 mmHg <br>Hypertonie: >= 140 / 90 mmHg <br>hypertensive Krise/Notfall: Systole >= 180 mmHg <br>MAD: >= 60 mmHg
-                    {{/if}}
-                    {{#if patient_settings.patient.ChildPatient}}
-                        {{#if patient_settings.patient.ChildPatient.age}}
-                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:YEARS3'}}
-                                N/A (Leider noch keine Referenzwerte für dieses Alter.)
-                            {{else}}
-                                {{#if patient_settings.patient.ChildPatient.length}}
-                                    {{#if patient_settings.patient.ChildPatient.birthdate}}
-                                        {{> diagnostik/formatted_rr_percentiles jungen=(rr_percentiles patient_settings.patient.ChildPatient.length patient_settings.patient.ChildPatient.birthdate false "0.05,0.5,0.9,0.95,0.99") maedchen=(rr_percentiles patient_settings.patient.ChildPatient.length patient_settings.patient.ChildPatient.age false "0.05,0.5,0.9,0.95,0.99")}}
-                                    {{else}}
-                                        {{> diagnostik/formatted_rr_percentiles jungen=(rr_percentiles patient_settings.patient.ChildPatient.length patient_settings.patient.ChildPatient.age false "0.05,0.5,0.9,0.95,0.99") maedchen=(rr_percentiles patient_settings.patient.ChildPatient.length patient_settings.patient.ChildPatient.age true "0.05,0.5,0.9,0.95,0.99")}}
-                                    {{/if}}
-                                {{else}}
-                                    Für Berechnung bitte Größe angeben.
-                                {{/if}}
-                            {{/comp}}
-                        {{else}}
-                            Für Berechnung bitte Alter angeben.
+                    {{#require_patient_data patient_settings "age,length" ""}}
+                        {{#if patient_settings.patient.AdultPatient}}
+                            Norm: 120 / 80 mmHg <br>Hypertonie: >= 140 / 90 mmHg <br>hypertensive Krise/Notfall: Systole >= 180 mmHg <br>MAD: >= 60 mmHg
                         {{/if}}
-                    {{/if}}
+                        {{#if patient_settings.patient.ChildPatient}}
+                                {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:YEARS3'}}
+                                    N/A (Leider noch keine Referenzwerte für dieses Alter.)
+                                {{else}}
+                                        {{#if patient_settings.patient.ChildPatient.birthdate}}
+                                            {{> diagnostik/formatted_rr_percentiles jungen=(rr_percentiles patient_settings.patient.ChildPatient.length patient_settings.patient.ChildPatient.birthdate false "0.05,0.5,0.9,0.95,0.99") maedchen=(rr_percentiles patient_settings.patient.ChildPatient.length patient_settings.patient.ChildPatient.age false "0.05,0.5,0.9,0.95,0.99")}}
+                                        {{else}}
+                                            {{> diagnostik/formatted_rr_percentiles jungen=(rr_percentiles patient_settings.patient.ChildPatient.length patient_settings.patient.ChildPatient.age false "0.05,0.5,0.9,0.95,0.99") maedchen=(rr_percentiles patient_settings.patient.ChildPatient.length patient_settings.patient.ChildPatient.age true "0.05,0.5,0.9,0.95,0.99")}}
+                                        {{/if}}
+                                {{/comp}}
+                        {{/if}}
+                    {{/require_patient_data}}
                 </span><br>
                 <span class="norm_extended_values hide"> <!--
         RR Source: Gortner, Duale Reihe Pädiatrie
@@ -81,7 +73,6 @@
             <hr>
             TODO
       </span>
-                <br><span class="text-info">Achtung: Die Blutdruckangaben für Kinder variieren in der Literatur stark. Bitte nur als Anhaltspunkt verwenden.</span>
             </div>
         </div>
         <div class="row norm_box">

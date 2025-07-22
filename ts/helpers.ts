@@ -1,4 +1,4 @@
-import {ChildAge, parse_child_age_from_str} from "./patient_settings";
+import {ChildAge, parse_child_age_from_str, PatientSettings} from "./patient_settings";
 import {calculate_child_bp} from "./diagnostic/BloodPressure";
 
 export function compare_if (v1: any, operator: string, v2: any, v3: any, options: any) {
@@ -62,6 +62,77 @@ export function calcnum(v1: number, operator: string, v2: number) {
             return Math.round(v1 * v2);
         case '/':
             return Math.round(v1 / v2);
+    }
+}
+
+/**
+ * Only render block if all parameters aren't null, otherweise return notice
+ */
+export function requirePatientData(patientSettings: PatientSettings, requiredFieldsChildren: string, requiredFieldsAdults: string, options: any) {
+    if (!patientSettings?.patient) {
+        return "Zur Berechnung bitte Patientendaten angeben.";
+    }
+
+    const adult = patientSettings.patient.AdultPatient;
+    const child = patientSettings.patient.ChildPatient;
+
+    const missing_fields: string[] = [];
+    
+    if(adult){
+        const fields_adults = requiredFieldsAdults.split(',').map(f => f.trim());
+
+        fields_adults.forEach(field => {
+            const value = (adult as Record<string, any>)[field];
+            if (value === null || value === undefined) {
+                if(field === "age"){
+                    missing_fields.push("Alter");
+                }else if(field === "birthdate"){
+                    missing_fields.push("Geburtsdatum");
+                }else if(field === "weight"){
+                    missing_fields.push("Gewicht");
+                }else if(field === "length"){
+                    missing_fields.push("Körpergröße");
+                }else if(field !== ""){
+                    missing_fields.push(field);
+                }
+            }
+        });
+    }else if(child){
+        const fields_children = requiredFieldsChildren.split(',').map(f => f.trim());
+        console.log("Required fields_children:")
+        console.log(fields_children);
+        fields_children.forEach(field => {
+            const value = (child as Record<string, any>)[field];
+            if (value === null || value === undefined) {
+                if(field === "age"){
+                    missing_fields.push("Alter");
+                }else if(field === "birthdate"){
+                    missing_fields.push("Geburtsdatum");
+                }else if(field === "weight"){
+                    missing_fields.push("Gewicht");
+                }else if(field === "length"){
+                    missing_fields.push("Körpergröße");
+                }else if(field !== ""){
+                    missing_fields.push(field);
+                }
+            }
+        });
+    }else{
+        return "Zur Berechnung bitte Patientendaten angeben.";
+    }
+
+    console.log("Missing fields: ");
+    console.log(missing_fields);
+
+    if(missing_fields.length === 0){
+        return options.fn(this);
+    }else if(missing_fields.length === 1){
+        return "Zur Berechnung bitte "+missing_fields[0]+" angeben.";
+    }else if(missing_fields.length === 2){
+        return "Zur Berechnung bitte "+missing_fields[0]+" und "+missing_fields[1]+" angeben.";
+    }else{
+        let last = missing_fields.pop();
+        return "Zur Berechnung bitte "+missing_fields.join(", ")+" und "+last+" angeben.";
     }
 }
 

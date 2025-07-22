@@ -11,32 +11,34 @@
             <div class="col col-9 col-lg-11">
                 <span class="norm_box_long_title">Atemfrequenz</span><br>
                 <span>
-        {{#if patient_settings.patient.ChildPatient}}
-            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:DAYS10'}}
-                25 - 60 / min
-            {{/comp}}
-            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:DAYS10' 'ChildAge:MONTHS2'}}
-                36 - 42 / min
-            {{/comp}}
-            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:MONTHS2' 'ChildAge:MONTHS6'}}
-                24 - 34 / min
-            {{/comp}}
-            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:MONTHS6' 'ChildAge:MONTHS12'}}
-                23 - 29 / min
-            {{/comp}}
-            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:MONTHS12' 'ChildAge:YEARS7'}}
-                19 - 26 / min
-            {{/comp}}
-            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:YEARS7' 'ChildAge:YEARS13'}}
-                18 - 22 / min
-            {{/comp}}
-            {{#comp patient_settings.patient.ChildPatient.age '>=' 'ChildAge:YEARS13'}}
-                16 - 20 / min
-            {{/comp}}
-        {{/if}}
-                    {{#if patient_settings.patient.AdultPatient}}
-                        12 - 16 / min
-                    {{/if}}
+                    {{#require_patient_data patient_settings "age" ""}}
+                        {{#if patient_settings.patient.ChildPatient}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:DAYS10'}}
+                                25 - 60 / min
+                            {{/comp}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:DAYS10' 'ChildAge:MONTHS2'}}
+                                36 - 42 / min
+                            {{/comp}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:MONTHS2' 'ChildAge:MONTHS6'}}
+                                24 - 34 / min
+                            {{/comp}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:MONTHS6' 'ChildAge:MONTHS12'}}
+                                23 - 29 / min
+                            {{/comp}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:MONTHS12' 'ChildAge:YEARS7'}}
+                                19 - 26 / min
+                            {{/comp}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:YEARS7' 'ChildAge:YEARS13'}}
+                                18 - 22 / min
+                            {{/comp}}
+                            {{#comp patient_settings.patient.ChildPatient.age '>=' 'ChildAge:YEARS13'}}
+                                16 - 20 / min
+                            {{/comp}}
+                         {{/if}}
+                        {{#if patient_settings.patient.AdultPatient}}
+                            12 - 16 / min
+                        {{/if}}
+                    {{/require_patient_data}}
       </span><br>
                 <span class="norm_extended_values hide">
             <hr>
@@ -56,21 +58,13 @@
             <div class="col col-9 col-lg-11">
                 <span class="norm_box_long_title">Atemzugvolumen</span><br>
                 <span>
-          {{#if patient_settings.patient.ChildPatient}}
-              {{#if patient_settings.patient.ChildPatient.weight}}
-                  {{calcnum patient_settings.patient.ChildPatient.weight "*" 6}} - {{calcnum patient_settings.patient.ChildPatient.weight "*" 8}} ml
-              {{else}}
-                  Für Berechnung bitte Gewicht angeben.
-              {{/if}}
-          {{/if}}
-                    {{#if patient_settings.patient.AdultPatient}}
-                        {{#if patient_settings.patient.AdultPatient.weight}}
-                            {{calcnum patient_settings.patient.AdultPatient.weight "*" 6}} - {{calcnum patient_settings.patient.AdultPatient.weight "*" 8}} ml
+                    {{#require_patient_data patient_settings "weight" "weight"}}
+                        {{#if patient_settings.patient.ChildPatient}}
+                            {{calcnum patient_settings.patient.ChildPatient.weight "*" 6}} - {{calcnum patient_settings.patient.ChildPatient.weight "*" 8}} ml
                         {{else}}
-                            Für Berechnung bitte Gewicht angeben.
+                            {{calcnum patient_settings.patient.AdultPatient.weight "*" 6}} - {{calcnum patient_settings.patient.AdultPatient.weight "*" 8}} ml
                         {{/if}}
-                    {{/if}}
-
+                    {{/require_patient_data}}
       </span><br>
                 <span class="norm_extended_values hide">
             <hr>
@@ -94,25 +88,18 @@
             <div class="col col-9 col-lg-11">
                 <span class="norm_box_long_title">Funktionelle Residualkapazität</span><br>
                 <span>
-          {{#if patient_settings.patient.ChildPatient}}
-              {{#if patient_settings.patient.ChildPatient.weight}}
-                  {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:YEARS4'}}
-                      {{calcnum patient_settings.patient.ChildPatient.weight "*" 30}} ml
-                  {{else}}
-                      {{calcnum patient_settings.patient.ChildPatient.weight "*" 34}} ml
-                  {{/comp}}
-              {{else}}
-                  Für Berechnung bitte Gewicht angeben.
-              {{/if}}
-          {{/if}}
-                    {{#if patient_settings.patient.AdultPatient}}
-                        {{#if patient_settings.patient.AdultPatient.weight}}
-                            {{calcnum patient_settings.patient.AdultPatient.weight "*" 30}} ml
+                    {{#require_patient_data patient_settings "weight,age" "weight"}}
+                        {{#if patient_settings.patient.ChildPatient}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:YEARS4'}}
+                                {{calcnum patient_settings.patient.ChildPatient.weight "*" 30}} ml
+                            {{else}}
+                                {{calcnum patient_settings.patient.ChildPatient.weight "*" 34}} ml
+                            {{/comp}}
                         {{else}}
-                            Für Berechnung bitte Gewicht angeben.
+                            {{calcnum patient_settings.patient.AdultPatient.weight "*" 34}} ml
                         {{/if}}
-                    {{/if}}
-      </span><br>
+                    {{/require_patient_data}}
+                </span><br>
                 <span class="norm_extended_values hide">
             <hr>
             Erwachsene: 34 ml / kg<br>
@@ -125,31 +112,24 @@
             <div class="col col-9 col-lg-11">
                 <span class="norm_box_long_title">Vitalkapazität</span><br>
                 <span>
-          {{#if patient_settings.patient.ChildPatient}}
-              {{#if patient_settings.patient.ChildPatient.weight}}
-                  {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:YEARS4'}}
-                      {{calcnum patient_settings.patient.ChildPatient.weight "*" 33}} - {{calcnum
-                          patient_settings.patient.ChildPatient.weight "*" 40}} ml
-                  {{else}}
-                      {{calcnum patient_settings.patient.ChildPatient.weight "*" 52}} ml
-                  {{/comp}}
-              {{else}}
-                  Für Berechnung bitte Gewicht angeben.
-              {{/if}}
-          {{/if}}
-                    {{#if patient_settings.patient.AdultPatient}}
-                        {{#if patient_settings.patient.AdultPatient.weight}}
-                            {{calcnum patient_settings.patient.AdultPatient.weight "*" 52}} ml
+                {{#require_patient_data patient_settings "weight,age" "weight"}}
+                    {{#if patient_settings.patient.ChildPatient}}
+                        {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:YEARS4'}}
+                            {{calcnum patient_settings.patient.ChildPatient.weight "*" 33}} - {{calcnum
+                                patient_settings.patient.ChildPatient.weight "*" 40}} ml
                         {{else}}
-                            Für Berechnung bitte Gewicht angeben.
-                        {{/if}}
+                            {{calcnum patient_settings.patient.ChildPatient.weight "*" 52}} ml
+                        {{/comp}}
+                    {{else}}
+                        {{calcnum patient_settings.patient.AdultPatient.weight "*" 52}} ml
                     {{/if}}
-      </span><br>
+                {{/require_patient_data}}
+                </span><br>
                 <span class="norm_extended_values hide">
-            <hr>
-            Erwachsene: 52 ml / kg<br>
-            Kleinkind: 33 - 40 ml / kg<br>
-      </span>
+                    <hr>
+                    Erwachsene: 52 ml / kg<br>
+                    Kleinkind: 33 - 40 ml / kg<br>
+                </span>
             </div>
         </div>
         <div class="row norm_box">
@@ -157,30 +137,23 @@
             <div class="col col-9 col-lg-11">
                 <span class="norm_box_long_title">Totalkapazität</span><br>
                 <span>
-          {{#if patient_settings.patient.ChildPatient}}
-              {{#if patient_settings.patient.ChildPatient.weight}}
-                  {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:YEARS4'}}
-                      {{calcnum patient_settings.patient.ChildPatient.weight "*" 63}} ml
-                  {{else}}
-                      {{calcnum patient_settings.patient.ChildPatient.weight "*" 86}} ml
-                  {{/comp}}
-              {{else}}
-                  Für Berechnung bitte Gewicht angeben.
-              {{/if}}
-          {{/if}}
-                    {{#if patient_settings.patient.AdultPatient}}
-                        {{#if patient_settings.patient.AdultPatient.weight}}
-                            {{calcnum patient_settings.patient.AdultPatient.weight "*" 63}} ml
+                {{#require_patient_data patient_settings "weight,age" "weight"}}
+                    {{#if patient_settings.patient.ChildPatient}}
+                        {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:YEARS4'}}
+                            {{calcnum patient_settings.patient.ChildPatient.weight "*" 63}} ml
                         {{else}}
-                            Für Berechnung bitte Gewicht angeben.
-                        {{/if}}
+                            {{calcnum patient_settings.patient.ChildPatient.weight "*" 86}} ml
+                        {{/comp}}
+                    {{else}}
+                        {{calcnum patient_settings.patient.AdultPatient.weight "*" 63}} ml
                     {{/if}}
-      </span><br>
+                {{/require_patient_data}}
+                </span><br>
                 <span class="norm_extended_values hide">
-            <hr>
-            Erwachsene: 86 ml / kg<br>
-            Kleinkind: 63 ml / kg<br>
-      </span>
+                <hr>
+                Erwachsene: 86 ml / kg<br>
+                Kleinkind: 63 ml / kg<br>
+                </span>
             </div>
         </div>
 

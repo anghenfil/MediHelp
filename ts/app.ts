@@ -3,7 +3,7 @@ import show_patient_settings, {PatientSettings} from "./patient_settings";
 import * as Diagnose from "./diagnostic/diagnose";
 import * as Home from "./home";
 import * as Handlebars from "handlebars/runtime";
-import {calcnum, compare_if, rr_percentiles} from "./helpers";
+import {calcnum, compare_if, requirePatientData, rr_percentiles} from "./helpers";
 
 enum Page{
     HOME,
@@ -74,6 +74,7 @@ export default function show_app(){
     Handlebars.registerHelper("comp", compare_if);
     Handlebars.registerHelper("calcnum", calcnum);
     Handlebars.registerHelper("rr_percentiles", rr_percentiles);
+    Handlebars.registerHelper("require_patient_data", requirePatientData);
     build_navigation();
 
     // Show the current page
