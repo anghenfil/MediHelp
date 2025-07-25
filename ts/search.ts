@@ -149,4 +149,9 @@ const search_index_diagnostic = [
         synonyms: ["EKG", "QT-Zeit", "QTc-Zeit", "P-Welle", "QRS-Komplex"],
         destination: "diagnostik.norm_c.ekg"
     },
+    {
+        title: "Blutzucker",
+        synonyms: ["BZ", "Glutcose", "Glukose"],
+        destination: "diagnostik.norm_d.bz"
+    },
 ]
