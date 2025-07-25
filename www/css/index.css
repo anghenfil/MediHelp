@@ -228,6 +228,20 @@ html {
 #nav_back_btn{
     margin-left: 10px;
 }
+.search_bar{
+    border-radius: 0;
+}
+.search_bar_entries{
+    list-style: none;
+}
+.search_bar_entries > li{
+    border: 1px solid var(--bs-border-color);
+    height: 38px;
+    padding: 5px;
+    border-top: none;
+    margin-left: 20px;
+    cursor: pointer;
+}
 .search_bar_entry_norm{
     color: var(--colour-blue);
 }
@@ -329,4 +343,14 @@ html {
 #nav-back{
     margin-left: 5px;
     cursor: pointer;
+}
+.normwert-tabelle{
+    margin-top: 5px;
+    font-size: 9pt;
+}
+.normwert-tabelle td:nth-child(n+2){
+    text-align: center;
+}
+.normwert-tabelle th:nth-child(n+2){
+    text-align: center;
 }

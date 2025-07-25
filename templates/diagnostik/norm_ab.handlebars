@@ -6,7 +6,7 @@
         <label class="form-check-label" for="norm_show_all_values_checkbox">alle Normwerte anzeigen</label>
     </div>
     <div class="norm_values mt-4">
-        <div class="row norm_box">
+        <div class="row norm_box" id="af">
             <div class="col col-3 col-lg-1 norm_box_title"><span>AF</span></div>
             <div class="col col-9 col-lg-11">
                 <span class="norm_box_long_title">Atemfrequenz</span><br>
@@ -53,7 +53,7 @@
       </span>
             </div>
         </div>
-        <div class="row norm_box">
+        <div class="row norm_box" id="azv">
             <div class="col col-3 col-lg-1 norm_box_title"><span>AZV</span></div>
             <div class="col col-9 col-lg-11">
                 <span class="norm_box_long_title">Atemzugvolumen</span><br>
@@ -72,7 +72,7 @@
       </span>
             </div>
         </div>
-        <div class="row norm_box">
+        <div class="row norm_box" id="spo2">
             <div class="col col-3 col-lg-1 norm_box_title"><span>S<sub>p</sub>O<sub>2</sub></span></div>
             <div class="col col-9 col-lg-11">
                 <span class="norm_box_long_title">Sauerstoffsättigung (pulsoxymetrisch)</span><br>
@@ -83,7 +83,7 @@
       </span>
             </div>
         </div>
-        <div class="row norm_box">
+        <div class="row norm_box" id="frc">
             <div class="col col-3 col-lg-1 norm_box_title"><span>FRC</span></div>
             <div class="col col-9 col-lg-11">
                 <span class="norm_box_long_title">Funktionelle Residualkapazität</span><br>
@@ -107,7 +107,7 @@
       </span>
             </div>
         </div>
-        <div class="row norm_box">
+        <div class="row norm_box" id="vk">
             <div class="col col-3 col-lg-1 norm_box_title"><span>VK</span></div>
             <div class="col col-9 col-lg-11">
                 <span class="norm_box_long_title">Vitalkapazität</span><br>
@@ -132,7 +132,7 @@
                 </span>
             </div>
         </div>
-        <div class="row norm_box">
+        <div class="row norm_box" id="tk">
             <div class="col col-3 col-lg-1 norm_box_title"><span>TK</span></div>
             <div class="col col-9 col-lg-11">
                 <span class="norm_box_long_title">Totalkapazität</span><br>
@@ -156,6 +156,88 @@
                 </span>
             </div>
         </div>
-
+        <div class="row norm_box" id="po2">
+            <div class="col col-3 col-lg-1 norm_box_title"><span>pO2</span></div>
+            <div class="col col-9 col-lg-11">
+                <span class="norm_box_long_title">O2-Partialdruck</span><br>
+                <span>
+                    {{#require_patient_data patient_settings "age" ""}}
+                        {{#if patient_settings.patient.AdultPatient}}
+                            arteriell: 90 mmHg<br>
+                            gemischt-venös: 40 mmHg<br>
+                        {{else}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:MINUTES5'}}
+                                Kapillarblut: 8 – 24 mmHg
+                            {{/comp}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:MINUTES5' 'ChildAge:MINUTES30'}}
+                                Kapillarblut: 33 – 75 mmHg
+                            {{/comp}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:MINUTES30' 'ChildAge:HOURS1'}}
+                                Kapillarblut: 31 – 85 mmHg
+                            {{/comp}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:HOURS1' 'ChildAge:DAYS1'}}
+                                Kapillarblut: 55 – 80 mmHg
+                            {{/comp}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:DAYS1' 'ChildAge:MONTHS24'}}
+                                Kapillarblut: 54 – 95 mmHg
+                            {{/comp}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between_inclusive' 'ChildAge:MONTHS24' 'ChildAge:YEARS17'}}
+                                Kapillarblut: 83 – 108 mmHg
+                            {{/comp}}
+                        {{/if}}
+                    {{/require_patient_data}}
+                </span><br>
+                <span class="norm_extended_values hide">
+                <hr>
+                <b>Erwachsene:</b><br>
+                arteriell: 90 mmHg<br>
+                gemischt-venös: 40 mmHg<br>
+                <b>Kinder (Kapillarblut):</b><br>
+                Neugeborene: 8 - 24 mmHg<br>
+                5 - 10 Minuten: 33 - 75 mmHg<br>
+                30 Minuten: 31 - 85 mmHg<br>
+                1h: 55 - 80 mmHg<br>
+                1 Tag: 54 - 95 mmHg<br>
+                Kinder: 83 - 108 mmHg<br>
+                </span>
+            </div>
+        </div>
+        <div class="row norm_box" id="pco2">
+            <div class="col col-3 col-lg-1 norm_box_title"><span>pCO2</span></div>
+            <div class="col col-9 col-lg-11">
+                <span class="norm_box_long_title">CO2-Partialdruck</span><br>
+                <span>
+                    {{#require_patient_data patient_settings "age" ""}}
+                        {{#if patient_settings.patient.AdultPatient}}
+                        arteriell: 40 mmHg<br>
+                        gemischt-venös: 46 mmHg<br>
+                        {{else}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:MONTHS1'}}
+                                Kapillarblut: 27 - 40 mmHg
+                            {{/comp}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:MONTHS1' 'ChildAge:MONTHS12'}}
+                                Kapillarblut: 27 - 41 mmHg
+                            {{/comp}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between_inclusive' 'ChildAge:MONTHS12' 'ChildAge:YEARS17'}}
+                                keine gesonderten Daten.<br>
+                                Werte Erwachsene:<br>
+                                arteriell: 40 mmHg<br>
+                                gemischt-venös: 46 mmHg<br>
+                            {{/comp}}
+                        {{/if}}
+                        {{/require_patient_data}}
+                </span><br>
+                <span class="norm_extended_values hide">
+                <hr>
+                <b>Erwachsene:</b><br>
+                arteriell: 40 mmHg<br>
+                gemischt-venös: 46 mmHg<br>
+                <b>Kinder (Kapillarblut):</b><br>
+                Neugeborene: 27 – 40 mmHG<br>
+                Säuglinge: 27 – 41 mmHG<br>
+                Kinder: keine Daten
+                </span>
+            </div>
+        </div>
     </div>
 </div>

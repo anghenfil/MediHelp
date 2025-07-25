@@ -1,0 +1,84 @@
+{{> topbar this.topbar}}
+<div class="content container-fluid mt-2">
+    <p class="mt-2">Normwerte für: {{> patient_summary this}}</p>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="norm_show_all_values_checkbox">
+        <label class="form-check-label" for="norm_show_all_values_checkbox">alle Normwerte anzeigen</label>
+    </div>
+    <div class="norm_values mt-4">
+        <div class="row norm_box" id="bz">
+            <div class="col col-3 col-lg-1 norm_box_title"><span>BZ</span></div>
+            <div class="col col-9 col-lg-11">
+                <span class="norm_box_long_title">Blutzucker</span><br>
+                <span>
+                    {{#require_patient_data patient_settings "age" ""}}
+                        {{#if patient_settings.patient.AdultPatient}}
+                    <table class="table table-sm table-bordered ms-0 normwert-tabelle">
+                        <tr>
+                            <th>Wert</th>
+                            <th>mmol/l</th>
+                            <th>mg/dl</th>
+                        </tr>
+                        <tr>
+                            <td>Venenblut</td>
+                            <td>3,9 – 5,5</td>
+                            <td>{{convert_to_unit 3.9 "mmol/l" "mg/dl"}} – {{convert_to_unit 5.5 "mmol/l" "mg/dl"}}</td>
+                        </tr>
+                        <tr>
+                            <td>Kapillarblut</td>
+                            <td>4,4 – 6,1</td>
+                            <td>{{convert_to_unit 4.4 "mmol/l" "mg/dl"}} – {{convert_to_unit 6.1 "mmol/l" "mg/dl"}}</td>
+                        </tr>
+                        <tr>
+                            <td>Plasma</td>
+                            <td>4,2 – 6,4</td>
+                            <td>{{convert_to_unit 4.2 "mmol/l" "mg/dl"}} – {{convert_to_unit 6.4 "mmol/l" "mg/dl"}}</td>
+                        </tr>
+                        <tr>
+                            <td>Grenzwert Diabetes Mellitus</td>
+                            <td>> 7,8</td>
+                            <td>{{convert_to_unit 7.8 "mmol/l" "mg/dl"}}</td>
+                        </tr>
+                    </table>
+                        {{else}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:DAYS1'}}
+                            Nabelschnurblut: {{convert_to_unit 63 "mg/dl" "mmol/l"}} - {{convert_to_unit 150 "mg/dl" "mmol/l"}} mmol/l (63 - 150 mg/dl)
+                            {{/comp}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:DAYS1' 'ChildAge:DAYS3'}}
+                            Vollblut: {{convert_to_unit 45 "mg/dl" "mmol/l"}} - {{convert_to_unit 65 "mg/dl" "mmol/l"}} mmol/l (45 - 65 mg/dl)
+                            {{/comp}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:DAYS3' 'ChildAge:DAYS5'}}
+                                Vollblut: {{convert_to_unit 60 "mg/dl" "mmol/l"}} - {{convert_to_unit 85 "mg/dl" "mmol/l"}} mmol/l (60 - 85 mg/dl)
+                            {{/comp}}
+                            {{#comp patient_settings.patient.ChildPatient.age 'between_inclusive' 'ChildAge:DAYS5' 'ChildAge:YEARS17'}}
+                                Vollblut: {{convert_to_unit 60 "mg/dl" "mmol/l"}} - {{convert_to_unit 105 "mg/dl" "mmol/l"}} mmol/l (60 - 105 mg/dl)
+                            {{/comp}}
+                        {{/if}}
+                    {{/require_patient_data}}
+                </span>
+                <span class="norm_extended_values hide">
+                <hr>
+                <b>Erwachsene:</b><br>
+                Venenblut: 3,9 - 5,5 mmol/l ({{convert_to_unit 3.9 "mmol/l" "mg/dl"}} - {{convert_to_unit 5.5 "mmol/l"
+                                                                                                          "mg/dl"}}
+                    mg/dl)<br>
+                Kapillarblut: 4,4 - 6,1 mmol/l ({{convert_to_unit 4.4 "mmol/l" "mg/dl"}} - {{convert_to_unit 6.1
+                                                                                                             "mmol/l"
+                                                                                                             "mg/dl"}}
+                    mg/dl)<br>
+                Plasma: 4,2 - 6,4 mmol/l ({{convert_to_unit 4.2 "mmol/l" "mg/dl"}} - {{convert_to_unit 6.4 "mmol/l"
+                                                                                                       "mg/dl"}}
+                    mg/dl)<br>
+                Grenzwert Diabetes Mellitus: > 7,8 mmol/l (> {{convert_to_unit 7.8 "mmol/l" "mg/dl"}} mg/dl)<br>
+                <br>
+                <b>Kinder:</b><br>
+                Nabelschnurblut: {{convert_to_unit 63 "mg/dl" "mmol/l"}} - {{convert_to_unit 150 "mg/dl" "mmol/l"}} mmol/l (63 - 150 mg/dl)<br>
+                Neugeborene 1. Tag (Vollblut): {{convert_to_unit 45 "mg/dl" "mmol/l"}} - {{convert_to_unit 65 "mg/dl" "mmol/l"}} mmol/l (45 - 65 mg/dl)<br>
+                Neugeborene 3. Tag: (Vollblut) {{convert_to_unit 60 "mg/dl" "mmol/l"}} - {{convert_to_unit 85 "mg/dl" "mmol/l"}} mmol/l (60 - 85 mg/dl)<br>
+                später (Vollblut): {{convert_to_unit 60 "mg/dl" "mmol/l"}} - {{convert_to_unit 105 "mg/dl" "mmol/l"}}
+                    mmol/l (60 - 105 mg/dl)
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

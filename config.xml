@@ -5,6 +5,7 @@
     <author email="dev@cordova.apache.org" href="https://cordova.apache.org">
         Apache Cordova Team
     </author>
+    <access origin="https://info.medihelp.app"/>
     <icon src="www/img/app_icon.jpg" />
     <content src="index.html" />
     <preference name="webviewbounce" value="false"/>

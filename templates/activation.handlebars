@@ -1,0 +1,19 @@
+{{> topbar this.topbar}}
+<div class="content container-fluid mt-2">
+    {{#if this.activation_details.activated}}
+        <p>✓ MediHelp Pro ist aktiviert</p>
+        <p>Ablaufdatum: {{activated_until}}</p>
+    {{else}}
+        <p>Du benutzt die kostenlose Version von MediHelp.</p>
+        <p>MediHelp Pro aktivieren:</p>
+        {{#if activation_error}}
+            <p class="text-danger">{{activation_error}}</p>
+        {{/if}}
+        <div class="d-flex">
+            <input type="text" class="form-control me-1" placeholder="ABCD-EFGH" id="license_code">
+            <button class="btn btn-primary" style="min-width: 150px" id="activate_btn">Jetzt aktivieren</button>
+        </div>
+        <hr>
+        <p>Noch keinen Lizenzcode?</p>
+    {{/if}}
+</div>

@@ -6,7 +6,7 @@
         <label class="form-check-label" for="norm_show_all_values_checkbox">alle Normwerte anzeigen</label>
     </div>
     <div class="norm_values mt-4">
-        <div class="row norm_box">
+        <div class="row norm_box" id="hf">
             <div class="col col-3 col-lg-1 norm_box_title"><span>HF</span></div>
             <div class="col col-9 col-lg-11">
                 <span class="norm_box_long_title">Herzfrequenz</span><br>
@@ -14,38 +14,38 @@
                 {{#require_patient_data patient_settings "age" ""}}
                 {{#if patient_settings.patient.ChildPatient}}
                         {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:MONTHS12'}}
-                            110 - 180 / min
+                            110 – 180 / min
                         {{/comp}}
                         {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:MONTHS12' 'ChildAge:MONTHS24'}}
-                            100 - 170 / min
+                            100 – 170 / min
                         {{/comp}}
                         {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:MONTHS24' 'ChildAge:YEARS5'}}
-                            90 - 160 / min
+                            90 – 160 / min
                         {{/comp}}
                         {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:YEARS5' 'ChildAge:YEARS10'}}
-                            70 - 140 / min
+                            70 – 140 / min
                         {{/comp}}
                         {{#comp patient_settings.patient.ChildPatient.age 'between_inclusive' 'ChildAge:YEARS10' 'ChildAge:YEARS17'}}
-                            60 - 120 / min
+                            60 – 120 / min
                         {{/comp}}
                 {{/if}}
                 {{#if patient_settings.patient.AdultPatient}}
-                    in Ruhe: 60 - 100 / min
+                    in Ruhe: 60 – 100 / min
                 {{/if}}
                 {{/require_patient_data}}
                 </span><br>
                 <span class="norm_extended_values hide">
             <hr>
-            Erwachsene (in Ruhe): 60 - 100 / min<br>
-            ab Neugeborenem: 110 - 180 / min<br>
-            ab 1 Jahr: 100 - 170 / min<br>
-            ab 2 Jahren: 90 - 160 / min<br>
-            ab 5 Jahren: 70 - 140 / min<br>
-            ab 10 Jahren: 60 - 120 / min
+            Erwachsene (in Ruhe): 60–100 / min<br>
+            ab Neugeborenem: 110–180 / min<br>
+            ab 1 Jahr: 100–170 / min<br>
+            ab 2 Jahren: 90–160 / min<br>
+            ab 5 Jahren: 70–140 / min<br>
+            ab 10 Jahren: 60–120 / min
             </span>
             </div>
         </div>
-        <div class="row norm_box">
+        <div class="row norm_box" id="rr">
             <div class="col col-3 col-lg-1 norm_box_title"><span>RR</span></div>
             <div class="col col-9 col-lg-11">
                 <span class="norm_box_long_title">Blutdruck</span><br>
@@ -56,7 +56,7 @@
                         {{/if}}
                         {{#if patient_settings.patient.ChildPatient}}
                                 {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:YEARS3'}}
-                                    N/A (Leider noch keine Referenzwerte für dieses Alter.)
+                                    Leider gibt es noch keine Referenzwerte für Kinder unter drei Jahren.)
                                 {{else}}
                                         {{#if patient_settings.patient.ChildPatient.birthdate}}
                                             {{> diagnostik/formatted_rr_percentiles jungen=(rr_percentiles patient_settings.patient.ChildPatient.length patient_settings.patient.ChildPatient.birthdate false "0.05,0.5,0.9,0.95,0.99") maedchen=(rr_percentiles patient_settings.patient.ChildPatient.length patient_settings.patient.ChildPatient.age false "0.05,0.5,0.9,0.95,0.99")}}
@@ -71,11 +71,13 @@
         RR Source: Gortner, Duale Reihe Pädiatrie
         MAD Source: https://cprguidelines.eu/assets/guidelines/European-Resuscitation-Council-Guidelines-2021-Pa.pdf -->
             <hr>
-            TODO
+            <b>Erwachsene:</b><br>
+            Norm: 120 / 80 mmHg <br>Hypertonie: >= 140 / 90 mmHg <br>hypertensive Krise/Notfall: Systole >= 180 mmHg <br>MAD: >= 60 mmHg
+            <b>Kinder: Berechnung über KiGGS Blutdruckperzentilien</b>
       </span>
             </div>
         </div>
-        <div class="row norm_box">
+        <div class="row norm_box" id="rekap">
             <div class="col col-3 col-lg-1 norm_box_title"><span>Re-<br>kap</span></div>
             <div class="col col-9 col-lg-11">
                 <span class="norm_box_long_title">Rekapilarisierungszeit</span><br>
@@ -87,11 +89,450 @@
       </span>
             </div>
         </div>
-        <div class="row norm_box">
+        <div class="row norm_box" id="ekg">
             <div class="col col-3 col-lg-1 norm_box_title"><span>EKG</span></div>
             <div class="col col-9 col-lg-11">
                 <span class="norm_box_long_title">EKG</span><br>
-                <span>{{{ekg_value}}}</span><br>
+                <span>
+                {{#require_patient_data patient_settings "age" ""}}
+                    {{#if patient_settings.patient.AdultPatient}}
+                        <table class="table table-sm table-bordered ms-0 normwert-tabelle">
+                            <tr>
+                                <th>Wert</th>
+                                <th>"Männer"</th>
+                                <th>"Frauen"</th>
+                            </tr>
+                            <tr>
+                                <td>Dauer P-Welle</td>
+                                <td colspan="2">50–100 ms</td>
+                            </tr>
+                            <tr>
+                                <td>PQ-Zeit</td>
+                                <td colspan="2">120–200 ms</td>
+                            </tr>
+                            <tr>
+                                <td>Dauer QRS-Komplex</td>
+                                <td colspan="2">60–100 ms</td>
+                            </tr>
+                            <tr>
+                                <td>Amplitude T-Welle</td>
+                                <td colspan="2">1/6–2/3 R</td>
+                            </tr>
+                            <tr>
+                                <td>Dauer Q-Zacke</td>
+                                <td colspan="2">max. 30 ms</td>
+                            </tr>
+                            <tr>
+                                <td>Amplitude Q-Zacke</td>
+                                <td colspan="2">max. 1/4 der R-Zacke tief</td>
+                            </tr>
+                            <tr>
+                                <td>absolute QT-Zeit</td>
+                                <td colspan="2">max. 550 ms</td>
+                            </tr>
+                            <tr>
+                                <td>QTc-Zeit</td>
+                                <td>332–449 ms</td>
+                                <td>374–506 ms</td>
+                            </tr>
+                        </table>
+                    {{else}}
+                        {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:NEWBORN' 'ChildAge:MONTHS1'}}
+                            <table class="table table-sm table-bordered ms-0 normwert-tabelle">
+                                <tr>
+                                    <th>Wert</th>
+                                    <th>"Jungen"</th>
+                                    <th>"Mädchen"</th>
+                                </tr>
+                                <tr>
+                                    <td>P-Achse</td>
+                                    <td>13 – 99 °</td>
+                                    <td>24 – 80 °</td>
+                                </tr>
+                                <tr>
+                                    <td>Dauer P-Welle</td>
+                                    <td>64 – 85 ms</td>
+                                    <td>69 – 106 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>PR-Intervall</td>
+                                    <td>77 – 120 ms</td>
+                                    <td>91 – 121 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>QRS-Achse</td>
+                                    <td>75 – 140 °</td>
+                                    <td>63 – 155 °</td>
+                                </tr>
+                                <tr>
+                                    <td>Dauer QRS-Komplex</td>
+                                    <td>50 – 85 ms</td>
+                                    <td>54 – 79 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>QTc-Zeit</td>
+                                    <td>378 – 448 ms</td>
+                                    <td>379 – 462 ms</td>
+                                </tr>
+                            </table>
+                        {{/comp}}
+                        {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:MONTHS1' 'ChildAge:MONTHS3'}}
+                            <table class="table table-sm table-bordered ms-0 normwert-tabelle">
+                                <tr>
+                                    <th>Wert</th>
+                                    <th>"Jungen"</th>
+                                    <th>"Mädchen"</th>
+                                </tr>
+                                <tr>
+                                    <td>P-Achse</td>
+                                    <td>10 – 73 °</td>
+                                    <td>20 – 77 °</td>
+                                </tr>
+                                <tr>
+                                    <td>Dauer P-Welle</td>
+                                    <td>65 – 98 ms</td>
+                                    <td>62 – 105 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>PR-Intervall</td>
+                                    <td>85 – 120 ms</td>
+                                    <td>78 – 133 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>QRS-Achse</td>
+                                    <td>37 – 138 °</td>
+                                    <td>39 – 121 °</td>
+                                </tr>
+                                <tr>
+                                    <td>Dauer QRS-Komplex</td>
+                                    <td>52 – 77 ms</td>
+                                    <td>48 – 77 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>QTc-Zeit</td>
+                                    <td>396 – 458 ms</td>
+                                    <td>381 – 454 ms</td>
+                                </tr>
+                            </table>
+                        {{/comp}}
+                        {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:MONTHS3' 'ChildAge:MONTHS6'}}
+                            <table class="table table-sm table-bordered ms-0 normwert-tabelle">
+                                <tr>
+                                    <th>Wert</th>
+                                    <th>"Jungen"</th>
+                                    <th>"Mädchen"</th>
+                                </tr>
+                                <tr>
+                                    <td>P-Achse</td>
+                                    <td>-5 – 70 °</td>
+                                    <td>16 – 80 °</td>
+                                </tr>
+                                <tr>
+                                    <td>Dauer P-Welle</td>
+                                    <td>64 – 103 ms</td>
+                                    <td>63 – 106 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>PR-Intervall</td>
+                                    <td>87 – 134 ms</td>
+                                    <td>84 – 127 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>QRS-Achse</td>
+                                    <td>-6 – 107 °</td>
+                                    <td>17 – 108 °</td>
+                                </tr>
+                                <tr>
+                                    <td>Dauer QRS-Komplex</td>
+                                    <td>54 – 85 ms</td>
+                                    <td>50 – 78 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>QTc-Zeit</td>
+                                    <td>391 – 453 ms</td>
+                                    <td>386 – 448 ms</td>
+                                </tr>
+                            </table>
+                        {{/comp}}
+                        {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:MONTHS6' 'ChildAge:MONTHS12'}}
+                            <table class="table table-sm table-bordered ms-0 normwert-tabelle">
+                                <tr>
+                                    <th>Wert</th>
+                                    <th>"Jungen"</th>
+                                    <th>"Mädchen"</th>
+                                </tr>
+                                <tr>
+                                    <td>P-Achse</td>
+                                    <td>9 – 87 °</td>
+                                    <td>14 – 69 °</td>
+                                </tr>
+                                <tr>
+                                    <td>Dauer P-Welle</td>
+                                    <td>66 – 96 ms</td>
+                                    <td>64 – 107 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>PR-Intervall</td>
+                                    <td>82 – 141 ms</td>
+                                    <td>88 – 133 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>QRS-Achse</td>
+                                    <td>14 – 122 °</td>
+                                    <td>1 – 102 °</td>
+                                </tr>
+                                <tr>
+                                    <td>Dauer QRS-Komplex</td>
+                                    <td>52 – 86 ms</td>
+                                    <td>52 – 80 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>QTc-Zeit</td>
+                                    <td>379 – 449 ms</td>
+                                    <td>381 – 446 ms</td>
+                                </tr>
+                            </table>
+                        {{/comp}}
+                        {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:MONTHS12' 'ChildAge:YEARS3'}}
+                            <table class="table table-sm table-bordered ms-0 normwert-tabelle">
+                                <tr>
+                                    <th>Wert</th>
+                                    <th>"Jungen"</th>
+                                    <th>"Mädchen"</th>
+                                </tr>
+                                <tr>
+                                    <td>P-Achse</td>
+                                    <td>-12 – 78 °</td>
+                                    <td>1 – 90 °</td>
+                                </tr>
+                                <tr>
+                                    <td>Dauer P-Welle</td>
+                                    <td>63 – 113 ms</td>
+                                    <td>62 – 104 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>PR-Intervall</td>
+                                    <td>86 – 151 ms</td>
+                                    <td>78 – 147 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>QRS-Achse</td>
+                                    <td>-4 – 118 °</td>
+                                    <td>2 – 121 °</td>
+                                </tr>
+                                <tr>
+                                    <td>Dauer QRS-Komplex</td>
+                                    <td>54 – 88 ms</td>
+                                    <td>54 – 85 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>QTc-Zeit</td>
+                                    <td>383 – 455 ms</td>
+                                    <td>381 – 447 ms</td>
+                                </tr>
+                            </table>
+                        {{/comp}}
+                        {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:YEARS3' 'ChildAge:YEARS5'}}
+                            <table class="table table-sm table-bordered ms-0 normwert-tabelle">
+                                <tr>
+                                    <th>Wert</th>
+                                    <th>"Jungen"</th>
+                                    <th>"Mädchen"</th>
+                                </tr>
+                                <tr>
+                                    <td>P-Achse</td>
+                                    <td>-13 – 69 °</td>
+                                    <td>-6 – 90 °</td>
+                                </tr>
+                                <tr>
+                                    <td>Dauer P-Welle</td>
+                                    <td>67 – 102 ms</td>
+                                    <td>66 – 101 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>PR-Intervall</td>
+                                    <td>98 – 152 ms</td>
+                                    <td>99 – 153 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>QRS-Achse</td>
+                                    <td>7 – 112 °</td>
+                                    <td>3 – 106 °</td>
+                                </tr>
+                                <tr>
+                                    <td>Dauer QRS-Komplex</td>
+                                    <td>58 – 92 ms</td>
+                                    <td>58 – 88 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>QTc-Zeit</td>
+                                    <td>377 – 448 ms</td>
+                                    <td>388 – 442 ms</td>
+                                </tr>
+                            </table>
+                        {{/comp}}
+                        {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:YEARS5' 'ChildAge:YEARS8'}}
+                            <table class="table table-sm table-bordered ms-0 normwert-tabelle">
+                                <tr>
+                                    <th>Wert</th>
+                                    <th>"Jungen"</th>
+                                    <th>"Mädchen"</th>
+                                </tr>
+                                <tr>
+                                    <td>P-Achse</td>
+                                    <td>-54 – 72 °</td>
+                                    <td>-13 – 77 °</td>
+                                </tr>
+                                <tr>
+                                    <td>Dauer P-Welle</td>
+                                    <td>73 – 108 ms</td>
+                                    <td>71 – 107 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>PR-Intervall</td>
+                                    <td>99 – 160 ms</td>
+                                    <td>92 – 156 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>QRS-Achse</td>
+                                    <td>-10 – 112 °</td>
+                                    <td>27 – 117 °</td>
+                                </tr>
+                                <tr>
+                                    <td>Dauer QRS-Komplex</td>
+                                    <td>63 – 98 ms</td>
+                                    <td>59 – 95 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>QTc-Zeit</td>
+                                    <td>371 – 443 ms</td>
+                                    <td>375 – 449 ms</td>
+                                </tr>
+                            </table>
+                        {{/comp}}
+                        {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:YEARS8' 'ChildAge:YEARS12'}}
+                            <table class="table table-sm table-bordered ms-0 normwert-tabelle">
+                                <tr>
+                                    <th>Wert</th>
+                                    <th>"Jungen"</th>
+                                    <th>"Mädchen"</th>
+                                </tr>
+                                <tr>
+                                    <td>P-Achse</td>
+                                    <td>-17 – 76 °</td>
+                                    <td>-15 – 82 °</td>
+                                </tr>
+                                <tr>
+                                    <td>Dauer P-Welle</td>
+                                    <td>78 – 117 ms</td>
+                                    <td>75 – 114 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>PR-Intervall</td>
+                                    <td>105 – 174 ms</td>
+                                    <td>103 – 163 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>QRS-Achse</td>
+                                    <td>-21 – 114 °</td>
+                                    <td>5 – 117 °</td>
+                                </tr>
+                                <tr>
+                                    <td>Dauer QRS-Komplex</td>
+                                    <td>67 – 103 ms</td>
+                                    <td>66 – 99 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>QTc-Zeit</td>
+                                    <td>373 – 440 ms</td>
+                                    <td>365 – 447 ms</td>
+                                </tr>
+                            </table>
+                        {{/comp}}
+                        {{#comp patient_settings.patient.ChildPatient.age 'between' 'ChildAge:YEARS12' 'ChildAge:YEARS16'}}
+                            <table class="table table-sm table-bordered ms-0 normwert-tabelle">
+                                <tr>
+                                    <th>Wert</th>
+                                    <th>"Jungen"</th>
+                                    <th>"Mädchen"</th>
+                                </tr>
+                                <tr>
+                                    <td>P-Achse</td>
+                                    <td>-24 – 76 °</td>
+                                    <td>-18 – 77 °</td>
+                                </tr>
+                                <tr>
+                                    <td>Dauer P-Welle</td>
+                                    <td>82 – 118 ms</td>
+                                    <td>78 – 122 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>PR-Intervall</td>
+                                    <td>107 – 178 ms</td>
+                                    <td>106 – 176 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>QRS-Achse</td>
+                                    <td>-9 – 112 °</td>
+                                    <td>5 – 101 °</td>
+                                </tr>
+                                <tr>
+                                    <td>Dauer QRS-Komplex</td>
+                                    <td>78 – 111 ms</td>
+                                    <td>72 – 106 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>QTc-Zeit</td>
+                                    <td>362 – 449 ms</td>
+                                    <td>370 – 457 ms</td>
+                                </tr>
+                            </table>
+                        {{/comp}}
+                        {{#comp patient_settings.patient.ChildPatient.age 'between_inclusive' 'ChildAge:YEARS16' 'ChildAge:YEARS17'}}
+                        <table class="table table-sm table-bordered ms-0 normwert-tabelle">
+                            <tr>
+                                <th>Wert</th>
+                                <th>"Männer"</th>
+                                <th>"Frauen"</th>
+                            </tr>
+                            <tr>
+                                <td>Dauer P-Welle</td>
+                                <td colspan="2">50–100 ms</td>
+                            </tr>
+                            <tr>
+                                <td>PQ-Zeit</td>
+                                <td colspan="2">120–200 ms</td>
+                            </tr>
+                            <tr>
+                                <td>Dauer QRS-Komplex</td>
+                                <td colspan="2">60–100 ms</td>
+                            </tr>
+                            <tr>
+                                <td>Amplitude T-Welle</td>
+                                <td colspan="2">1/6–2/3 R</td>
+                            </tr>
+                            <tr>
+                                <td>Dauer Q-Zacke</td>
+                                <td colspan="2">max. 30 ms</td>
+                            </tr>
+                            <tr>
+                                <td>Amplitude Q-Zacke</td>
+                                <td colspan="2">max. 1/4 der R-Zacke tief</td>
+                            </tr>
+                            <tr>
+                                <td>absolute QT-Zeit</td>
+                                <td colspan="2">max. 550 ms</td>
+                            </tr>
+                            <tr>
+                                <td>QTc-Zeit</td>
+                                <td>332–449 ms</td>
+                                <td>374–506 ms</td>
+                            </tr>
+                        </table>
+                        {{/comp}}
+                    {{/if}}
+                {{/require_patient_data}}
+                </span><br>
                 <span class="norm_extended_values hide">
             <hr><!-- Quellen: https://pubmed.ncbi.nlm.nih.gov/11286528/ für Kinder, EKG für Isabell für Erwachsene -->
 

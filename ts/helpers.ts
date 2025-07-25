@@ -154,3 +154,17 @@ export function rr_percentiles(height: number, age_or_birthdate: number|string, 
 
     return calculate_child_bp(sex, percentiles_res, height, age)
 }
+
+export function convert_to_unit(value: number, unit_from: string, unit_to: string){
+    if(unit_from === "mmol/l" && unit_to === "mg/dl"){
+        return Math.round(value*18)
+    }else if(unit_from === "mg/dl" && unit_to === "mmol/l"){
+        let res = value*0.0555;
+
+        return  res.toLocaleString("de-DE", {
+            maximumFractionDigits: 2,
+        })
+    }else{
+        throw new Error("Unimplemented conversion!");
+    }
+}

@@ -1,9 +1,11 @@
 import './patient_settings';
 import show_patient_settings, {PatientSettings} from "./patient_settings";
 import * as Diagnose from "./diagnostic/diagnose";
+import * as Activation from "./activation";
 import * as Home from "./home";
+import * as Search from "./search";
 import * as Handlebars from "handlebars/runtime";
-import {calcnum, compare_if, requirePatientData, rr_percentiles} from "./helpers";
+import {calcnum, compare_if, convert_to_unit, requirePatientData, rr_percentiles} from "./helpers";
 
 enum Page{
     HOME,
@@ -15,12 +17,19 @@ enum Page{
     PATIENT_DATA
 }
 
+export interface ActivationDetails{
+    license_key: string,
+    activated_until: string,
+    activated: boolean
+}
+
 interface AppSettings{
     patient_settings: PatientSettings,
     current_page: string,
     nav_history: string[],
     age_based_estimation_method_selected: boolean,
     age_via_birth_date_selected: boolean,
+    activation: ActivationDetails|null;
 }
 
 export let main_container = document.getElementById("app");
@@ -64,17 +73,28 @@ function loadAppSettings(): AppSettings {
 
 export let app_settings: AppSettings = createNestedProxy(loadAppSettings())
 
-export default function show_app(){
-    loadAppSettings();
-
+export default function init_app(){
     // @ts-ignore
     Handlebars.partials = Handlebars.templates;
+    Search.build_search_index();
+    if(app_settings.activation) {
+        app_settings.activation.activated = Activation.is_activated(); // Check if license still valid
+    }
+
+    show_app();
+}
+
+export function show_app(){
+    loadAppSettings();
 
     // Add Handlebars helpers
     Handlebars.registerHelper("comp", compare_if);
     Handlebars.registerHelper("calcnum", calcnum);
     Handlebars.registerHelper("rr_percentiles", rr_percentiles);
     Handlebars.registerHelper("require_patient_data", requirePatientData);
+    Handlebars.registerHelper("convert_to_unit", convert_to_unit)
+
+    // Add listeners to navigation buttons
     build_navigation();
 
     // Show the current page
@@ -125,7 +145,7 @@ function link_to_handler(event: Event){
  * @param dest String with the destination page (e.g. "diagnose.norm.ab")
  *
  * */
-function navigate_to(dest: string){
+export function navigate_to(dest: string){
     console.log("Navigating to " + dest);
     if(dest === undefined){
         console.error("No destination specified");
@@ -172,6 +192,10 @@ function navigate_to(dest: string){
             break;
         case "search":
             mark_active_nav_button(Page.SEARCH);
+            break;
+        case "activation":
+            mark_active_nav_button(Page.HOME);
+            Activation.show_activation_screen();
             break;
         case "patient_data":
             mark_active_nav_button(Page.PATIENT_DATA);

@@ -12,8 +12,14 @@
             Über diese App - <small>MediHelp v0.2.0</small>
         </div>
         <div class="card-body">
-            <p class="card-text">Vielen Dank für die Nutzung dieser App. Fehler & Verbesserungsvorschläge bitte per E-Mail an <a href="mailto: medihelp@anghenfil.de">medihelp@anghenfil.de</a>.</p>
-            <p class="card-text">Die App ist auf deine Unterstützung angewiesen!</p>
+            <p class="card-text">Vielen Dank für die Nutzung dieser App. Fehler & Verbesserungsvorschläge bitte per E-Mail an <a href="mailto: medihelp@anghenfil.de">support@medihelp.app</a>.</p>
+            <p class="card-text"><b>Aktivierungsstatus:</b><br>
+            {{#if this.activation_details.activated}}
+                MediHelp Pro ist aktiv! <button class="btn btn-sm btn-outline-primary" data-link-to="activation">Info</button>
+            {{else}}
+                Du verwendest die kostenlose Version von MediHelp. <button class="btn btn-sm btn-outline-primary" data-link-to="activation">Pro Aktivieren</button>
+            {{/if}}
+            </p>
         </div>
     </div>
 </div>
