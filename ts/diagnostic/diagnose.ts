@@ -41,6 +41,10 @@ export function show(dest: string){
             data.topbar.subtitle = "APGAR";
             main_container.innerHTML = Handlebars.templates["diagnostik/apgar"](data);
             Scores.add_score(document.getElementsByClassName("score")[0] as HTMLElement);
+        }else if (dest_parts[1] === "gcs") {
+            data.topbar.subtitle = "Glasgow Coma Scale";
+            main_container.innerHTML = Handlebars.templates["diagnostik/gcs"](data);
+            Scores.add_score(document.getElementsByClassName("score")[0] as HTMLElement);
         }
     }
 

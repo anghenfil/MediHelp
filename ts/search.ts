@@ -179,4 +179,9 @@ const search_index_diagnostic = [
         synonyms: ["Apgar-Score"],
         destination: "diagnostik.apgar"
     },
+    {
+        title: "Glasgow Coma Scale",
+        synonyms: ["GCS", "Glasgow-Koma-Skala", "Glasgow-Skala", "SHT", "Schädel-Hirn-Trauma"],
+        destination: "diagnostik.gcs"
+    },
 ]
