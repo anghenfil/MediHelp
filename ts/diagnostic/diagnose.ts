@@ -1,6 +1,7 @@
 import {app_settings, main_container, register_nav_handlers, TopbarTemplate} from "../app";
 import * as Handlebars from 'handlebars/runtime';
 import {PatientSettings} from "../patient_settings";
+import * as Scores from "./scores";
 
 interface DiagnoseTemplate{
     topbar: TopbarTemplate,
@@ -36,6 +37,10 @@ export function show(dest: string){
         }else if (dest_parts[1] === "norm_e") {
             data.topbar.subtitle = "Normwerte E";
             main_container.innerHTML = Handlebars.templates["diagnostik/norm_e"](data);
+        }else if (dest_parts[1] === "apgar") {
+            data.topbar.subtitle = "APGAR";
+            main_container.innerHTML = Handlebars.templates["diagnostik/apgar"](data);
+            Scores.add_score(document.getElementsByClassName("score")[0] as HTMLElement);
         }
     }
 

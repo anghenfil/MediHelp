@@ -130,6 +130,11 @@ const search_index_diagnostic = [
         destination: "diagnostik.norm_ab.pco2"
     },
     {
+        title: "Normwerte C",
+        synonyms: ["Kreislauf", "Blutdruck", "Rekap", "EKG"],
+        destination: "diagnostik.norm_c"
+    },
+    {
         title: "Herzfrequenz",
         synonyms: ["HF", "Puls", "Pulsfrequenz", "Pulsrate"],
         destination: "diagnostik.norm_c.hf"
@@ -150,13 +155,28 @@ const search_index_diagnostic = [
         destination: "diagnostik.norm_c.ekg"
     },
     {
+        title: "Normwerte D",
+        synonyms: ["Neuro", "Blutzucker"],
+        destination: "diagnostik.norm_d"
+    },
+    {
         title: "Blutzucker",
         synonyms: ["BZ", "Glutcose", "Glukose"],
         destination: "diagnostik.norm_d.bz"
     },
     {
+        title: "Normwerte E",
+        synonyms: ["Körpertemperatur", "Körperkerntemperatur"],
+        destination: "diagnostik.norm_e"
+    },
+    {
         title: "Körperkerntemperatur",
         synonyms: ["Körpertemperatur", "Temp", "°C"],
         destination: "diagnostik.norm_e.temperatur"
+    },
+    {
+        title: "APGAR",
+        synonyms: ["Apgar-Score"],
+        destination: "diagnostik.apgar"
     },
 ]

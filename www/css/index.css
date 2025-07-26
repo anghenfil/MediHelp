@@ -357,3 +357,22 @@ html {
 .smaller{
     font-size: 9pt;
 }
+.score{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-rows: auto;
+    gap: 10px 10px;
+}
+.score-category-title{
+    padding: 5px;
+    width: 100%;
+    display: block;
+    background-color: var(--colour-light-grey);
+}
+.score-result-title{
+    padding: 5px;
+    width: 100%;
+    display: block;
+    background-color: var(--colour-light-blue);
+    font-weight: bold;
+}

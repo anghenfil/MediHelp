@@ -1,0 +1,90 @@
+{{> topbar this.topbar}}
+<div class="content container-fluid mt-2">
+<div class="score">
+    <div class="score-category">
+        <span class="score-category-title">Atemanstrengung</span>
+        <div class="score-radio">
+            <input type="radio" name="atem" id="atem-1" data-points="0" checked>
+            <label for="atem-1">keine</label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="atem" id="atem-2" data-points="1">
+            <label for="atem-2">flach, unregelmäßig, Schnappatmung</label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="atem" id="atem-3" data-points="2">
+            <label for="atem-3">regelmäßig, kräftiges Schreien</label>
+        </div>
+    </div>
+    <div class="score-category">
+        <span class="score-category-title">Pulse (Herzaktion)</span>
+        <div class="score-radio">
+            <input type="radio" name="pulse" id="pulse-1" data-points="0" checked>
+            <label for="pulse-1">keine</label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="pulse" id="pulse-2" data-points="1">
+            <label for="pulse-2">unter 100/min</label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="pulse" id="pulse-3" data-points="2">
+            <label for="pulse-3">über 100/min</label>
+        </div>
+    </div>
+    <div class="score-category">
+        <span class="score-category-title">Grundtonus (Muskeltonus)</span>
+        <div class="score-radio">
+            <input type="radio" name="grundtonus" id="grundtonus-1" data-points="0" checked>
+            <label for="grundtonus-1">schlaff, keine Bewegungen</label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="grundtonus" id="grundtonus-2" data-points="1">
+            <label for="grundtonus-2">gering, wenig Bewegungen</label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="grundtonus" id="grundtonus-3" data-points="2">
+            <label for="grundtonus-3">gut, aktive Bewegungen</label>
+        </div>
+    </div>
+    <div class="score-category">
+        <span class="score-category-title">Appearance (Hautfarbe)</span>
+        <div class="score-radio">
+            <input type="radio" name="appearance" id="appearance-1" data-points="0" checked>
+            <label for="appearance-1">Blau oder weiß</label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="appearance" id="appearance-2" data-points="1">
+            <label for="appearance-2">Akrozyanose</label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="appearance" id="appearance-3" data-points="2">
+            <label for="appearance-3">rosig</label>
+        </div>
+    </div>
+    <div class="score-category">
+        <span class="score-category-title">Reflexe</span>
+        <div class="score-radio">
+            <input type="radio" name="reflexe" id="reflexe-1" data-points="0" checked>
+            <label for="reflexe-1">keine</label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="reflexe" id="reflexe-2" data-points="1">
+            <label for="reflexe-2">Grimassieren, geringe Reaktion</label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="reflexe" id="reflexe-3" data-points="2">
+            <label for="reflexe-3">Schreien, Husten, Niesen</label>
+        </div>
+    </div>
+    <div class="score-result">
+        <span class="score-result-title">Ergebnis</span>
+        <div>
+            <span class="score-result-points">0</span> Punkt(e).<br>
+            <span class="score-result-interpretation" data-required-points="0-4">Reanimationsmaßnahmen einleiten!</span>
+            <span class="score-result-interpretation hide" data-required-points="5-6">Intervention (z. B.  Atemunterstützung, Stimulation) empfohlen</span>
+            <span class="score-result-interpretation hide" data-required-points="7-8">Beobachtung empfohlen</span>
+            <span class="score-result-interpretation hide" data-required-points="9-10">Kein Handlungsbedarf</span>
+        </div>
+    </div>
+</div>
+</div>
