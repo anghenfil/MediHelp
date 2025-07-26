@@ -154,4 +154,9 @@ const search_index_diagnostic = [
         synonyms: ["BZ", "Glutcose", "Glukose"],
         destination: "diagnostik.norm_d.bz"
     },
+    {
+        title: "Körperkerntemperatur",
+        synonyms: ["Körpertemperatur", "Temp", "°C"],
+        destination: "diagnostik.norm_e.temperatur"
+    },
 ]

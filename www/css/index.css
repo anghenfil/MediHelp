@@ -354,3 +354,6 @@ html {
 .normwert-tabelle th:nth-child(n+2){
     text-align: center;
 }
+.smaller{
+    font-size: 9pt;
+}

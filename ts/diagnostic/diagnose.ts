@@ -33,6 +33,9 @@ export function show(dest: string){
         } else if (dest_parts[1] === "norm_d") {
             data.topbar.subtitle = "Normwerte D";
             main_container.innerHTML = Handlebars.templates["diagnostik/norm_d"](data);
+        }else if (dest_parts[1] === "norm_e") {
+            data.topbar.subtitle = "Normwerte E";
+            main_container.innerHTML = Handlebars.templates["diagnostik/norm_e"](data);
         }
     }
 

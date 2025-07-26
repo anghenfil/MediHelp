@@ -1,0 +1,24 @@
+{{> topbar this.topbar}}
+<div class="content container-fluid mt-2">
+    <p class="mt-2">Normwerte für: {{> patient_summary this}}</p>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="norm_show_all_values_checkbox">
+        <label class="form-check-label" for="norm_show_all_values_checkbox">alle Normwerte anzeigen</label>
+    </div>
+    <div class="norm_values mt-4">
+        <div class="row norm_box" id="temperatur">
+            <div class="col col-3 col-lg-1 norm_box_title"><span>Temp</span></div>
+            <div class="col col-9 col-lg-11">
+                <span class="norm_box_long_title">Körperkerntemperatur</span><br>
+                <span>
+                    hypothermer Kreislaufstillstand: < 24 °C<br>
+                    schwere Hypothermie: 24 - 28 °C<br>
+                    moderate Hypothermie: 28 - 32 °C<br>
+                    milde Hypothermie: 32 - 35 °C<br>
+                    <span class="text-decoration-underline">Normothermie: 36 - 38°C</span><br>
+                    Fieber: > 38 °C<br>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
