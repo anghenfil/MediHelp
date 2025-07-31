@@ -1,0 +1,83 @@
+{{> topbar this.topbar}}
+<div class="content container-fluid mt-2">
+<div class="score">
+    <div class="score-category">
+        <span class="score-category-title">Öffnen der Augen</span>
+        <div class="score-radio">
+            <input type="radio" name="augen" id="augen-1" data-points="4" checked>
+            <label for="augen-1">spontan</label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="augen" id="augen-2" data-points="3">
+            <label for="augen-2">bei lauter Ansprache</label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="augen" id="augen-3" data-points="2">
+            <label for="augen-3">bei Schmerzreiz</label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="augen" id="augen-4" data-points="1">
+            <label for="augen-4">kein Öffnen</label>
+        </div>
+    </div>
+    <div class="score-category">
+        <span class="score-category-title">Beste verbale Antwort</span>
+        <div class="score-radio">
+            <input type="radio" name="verbal" id="verbal-1" data-points="5" checked>
+            <label for="verbal-1">Plappern, Brabbeln </label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="verbal" id="verbal-2" data-points="4">
+            <label for="verbal-2">Schreien, aber tröstbar</label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="verbal" id="verbal-3" data-points="3">
+            <label for="verbal-3">Schreien, untröstbar</label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="verbal" id="verbal-4" data-points="2">
+            <label for="verbal-4">Stöhnen / unverständliche Laute</label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="verbal" id="verbal-5" data-points="1">
+            <label for="verbal-5">keine verbale Reaktion</label>
+        </div>
+    </div>
+    <div class="score-category">
+        <span class="score-category-title">Beste motorische Antwort</span>
+        <div class="score-radio">
+            <input type="radio" name="motorik" id="motorik-1" data-points="6" checked>
+            <label for="motorik-1">spontane Bewegungen</label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="motorik" id="motorik-2" data-points="5">
+            <label for="motorik-2">auf Schmerzreiz, gezielt</label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="motorik" id="motorik-3" data-points="4">
+            <label for="motorik-3">auf Schmerzreiz, normale Beugeabwehr</label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="motorik" id="motorik-4" data-points="3">
+            <label for="motorik-4">auf Schmerzreiz, abnormale Abwehr</label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="motorik" id="motorik-5" data-points="2">
+            <label for="motorik-5">auf Schmerzreiz, Strecksynergismen</label>
+        </div>
+        <div class="score-radio">
+            <input type="radio" name="motorik" id="motorik-6" data-points="1">
+            <label for="motorik-6">keine motorische Antwort</label>
+        </div>
+    </div>
+    <div class="score-result">
+        <span class="score-result-title">Ergebnis</span>
+        <div>
+            <span class="score-result-points">15</span> Punkte.<br>
+            <span class="score-result-interpretation" data-required-points="13-15">Schweregrad bei SHT: leichtes SHT</span>
+            <span class="score-result-interpretation hide" data-required-points="9-12">Schweregrad bei SHT: mittelschweres SHT</span>
+            <span class="score-result-interpretation hide" data-required-points="3-8">Schweregrad bei SHT: schweres SHT. Intubation erwägen!</span>
+        </div>
+    </div>
+</div>
+</div>

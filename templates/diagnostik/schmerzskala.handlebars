@@ -1,0 +1,98 @@
+{{> topbar this.topbar}}
+<div class="content container-fluid mt-2">
+    <div class="subnavigation">
+        <div class="light-box active" data-show="#nrs">Numerische Rating-Skala (NRS)</div>
+        <div class="light-box" data-show="#vas">Visuelle Analogskala (VAS)</div>
+        <div class="light-box" data-show="#bps">Behavior Pain Scale (BPS, intubierte)</div>
+        <div class="light-box" data-show="#cpot">Critical Care Pain Observation Tool (CPOT)</div>
+    </div>
+    <div class="mt-3" style="overflow: auto;">
+        <div id="nrs" class="subnavigation-target">
+
+        </div>
+        <div id="vas" class="hide subnavigation-target">
+            <div id="vas-range">
+                <input id="vas-range-input" type="range" min="0" max="100" value="50" class="w-100">
+                <div class="d-flex justify-content-between">
+                    <span>Kein Schmerz</span>
+                    <span class="text-end">Stärkste vorstellbare Schmerzen</span>
+                </div>
+            </div>
+            <div class="mt-2 d-flex justify-content-center">
+                <button class="btn btn-primary" id="vas-auswertung-btn">Auswerten</button>
+            </div>
+            <div class="mt-2 d-flex justify-content-center">
+                <span id="vas-auswertung"></span>
+            </div>
+        </div>
+        <div id="bps" class="hide subnavigation-target">
+            <div class="score">
+                <div class="score-category">
+                    <span class="score-category-title">Gesichtsausdruck</span>
+                    <div class="score-radio">
+                        <input type="radio" name="gesicht" id="gesicht-1" data-points="1" checked>
+                        <label for="gesicht-1">entspannt</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="gesicht" id="gesicht-2" data-points="2">
+                        <label for="gesicht-2">etwas angespannt</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="gesicht" id="gesicht-3" data-points="3">
+                        <label for="gesicht-3">sehr angespannt</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="gesicht" id="gesicht-4" data-points="4">
+                        <label for="gesicht-4">Grimassieren</label>
+                    </div>
+                </div>
+                <div class="score-category">
+                    <span class="score-category-title">Bewegung der oberen Extremität</span>
+                    <div class="score-radio">
+                        <input type="radio" name="extraemitaeten" id="extraemitaeten-1" data-points="1" checked>
+                        <label for="extraemitaeten-1">keine Bewegung</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="extraemitaeten" id="extraemitaeten-2" data-points="2">
+                        <label for="extraemitaeten-2">leichtes Beugen</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="extraemitaeten" id="extraemitaeten-3" data-points="3">
+                        <label for="extraemitaeten-3">komplettes Beugen mit Flexion der Finger</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="extraemitaeten" id="extraemitaeten-4" data-points="4">
+                        <label for="extraemitaeten-4">angezogene Extremität, Abwehr behandelnder Maßnahmen</label>
+                    </div>
+                </div>
+                <div class="score-category">
+                    <span class="score-category-title">Adaptation an das Beatmungsgerät</span>
+                    <div class="score-radio">
+                        <input type="radio" name="adaption-beatmung" id="adaption-beatmung-1" data-points="1" checked>
+                        <label for="adaption-beatmung-1">Toleranz der Beatmung</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="adaption-beatmung" id="adaption-beatmung-2" data-points="2">
+                        <label for="adaption-beatmung-2">überwiegend Toleranz der Beatmung</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="adaption-beatmung" id="adaption-beatmung-3" data-points="3">
+                        <label for="adaption-beatmung-3">Beatmung nur zeitweise möglich</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="adaption-beatmung" id="adaption-beatmung-4" data-points="4">
+                        <label for="adaption-beatmung-4">kontrollierte Beatmung nicht möglich</label>
+                    </div>
+                </div>
+                <div class="score-result">
+                    <span class="score-result-title">Ergebnis</span>
+                    <div>
+                        <span class="score-result-points">3</span> Punkte.<br>
+                        <span class="score-result-interpretation" data-required-points="3-5">Ergebnis unter dem Zielwert (< 6). </span>
+                        <span class="score-result-interpretation hide" data-required-points="6-12">Ergebnis über dem Zielwert (< 6)! Analgesie prüfen.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -153,6 +153,9 @@ html {
     border: 1px solid lightgray;
     cursor: pointer;
 }
+.light-box.active{
+    border: 1px solid black;
+}
 .small-light-box{
     margin-top: 5px;
     margin-bottom: 5px;
@@ -359,7 +362,7 @@ html {
 }
 .score{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-template-rows: auto;
     gap: 10px 10px;
 }
@@ -375,4 +378,91 @@ html {
     display: block;
     background-color: var(--colour-light-blue);
     font-weight: bold;
+}
+.tap_area{
+    width: 100%;
+    height: 100px;
+    background-color: var(--colour-light-grey);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tap_area:active{
+    transform: translateY(2px);
+}
+.tap_result{
+    margin-top: 10px;
+    border: 5px solid var(--colour-light-grey);
+    width: 300px;
+    padding: 5px;
+}
+.scheme{
+    display: flex;
+    flex-direction: column;
+}
+
+.scheme-box {
+    font-size: 10pt;
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    align-items: stretch; /* sorgt dafür, dass beide Boxen gleich hoch sind */
+}
+.scheme-box:last-child {
+    border-bottom: none;
+}
+
+.scheme-box-left-image {
+    width: 100px;
+    margin: 10px 0 10px 0;
+    flex-shrink: 0;
+    display: flex;
+}
+.scheme-box-left{
+    width: 100px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+
+.scheme-box-left-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.scheme-box-right {
+    flex: 1;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.scheme-box-letter{
+    font-size: 45pt;
+    margin-left: 5px;
+}
+.subnavigation{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+@media screen and (max-width: 480px){
+    .subnavigation{
+        flex-direction: column;
+    }
+    .subnavigation > div{
+        margin-top: 5px;
+        margin-bottom: unset;
+    }
+    #vas-range > div > span{
+        max-width: 100px;
+    }
+}
+.score-radio{
+    display: flex;
+    align-items: baseline;
+}
+.score-radio > label{
+    margin-left: 5px;
 }

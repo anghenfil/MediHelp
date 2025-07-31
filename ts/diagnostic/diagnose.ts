@@ -1,7 +1,9 @@
 import {app_settings, main_container, register_nav_handlers, TopbarTemplate} from "../app";
 import * as Handlebars from 'handlebars/runtime';
 import {PatientSettings} from "../patient_settings";
-import * as Scores from "./scores";
+import * as Utils from "./utils";
+import * as FrequencyTapper from "./frequency_tapper";
+import * as Lagetypbestimmung from "./lagetypbestimmung";
 
 interface DiagnoseTemplate{
     topbar: TopbarTemplate,
@@ -40,11 +42,39 @@ export function show(dest: string){
         }else if (dest_parts[1] === "apgar") {
             data.topbar.subtitle = "APGAR";
             main_container.innerHTML = Handlebars.templates["diagnostik/apgar"](data);
-            Scores.add_score(document.getElementsByClassName("score")[0] as HTMLElement);
+            Utils.add_score(document.getElementsByClassName("score")[0] as HTMLElement);
         }else if (dest_parts[1] === "gcs") {
             data.topbar.subtitle = "Glasgow Coma Scale";
             main_container.innerHTML = Handlebars.templates["diagnostik/gcs"](data);
-            Scores.add_score(document.getElementsByClassName("score")[0] as HTMLElement);
+            Utils.add_score(document.getElementsByClassName("score")[0] as HTMLElement);
+        }else if (dest_parts[1] === "pgcs") {
+            data.topbar.subtitle = "Pediatric Glasgow Coma Scale";
+            main_container.innerHTML = Handlebars.templates["diagnostik/pgcs"](data);
+            Utils.add_score(document.getElementsByClassName("score")[0] as HTMLElement);
+        }else if (dest_parts[1] === "frequenzbestimmung") {
+            data.topbar.subtitle = "Frequenzbestimmung";
+            main_container.innerHTML = Handlebars.templates["diagnostik/frequenzbestimmung"](data);
+            FrequencyTapper.init();
+        }else if (dest_parts[1] === "sampler") {
+            data.topbar.subtitle = "SAMPLER";
+            main_container.innerHTML = Handlebars.templates["diagnostik/sampler"](data);
+        }else if (dest_parts[1] === "opqrst") {
+            data.topbar.subtitle = "OPQRST";
+            main_container.innerHTML = Handlebars.templates["diagnostik/opqrst"](data);
+        }else if (dest_parts[1] === "befast") {
+            data.topbar.subtitle = "BEFAST";
+            main_container.innerHTML = Handlebars.templates["diagnostik/befast"](data);
+        }else if (dest_parts[1] === "schmerzskala") {
+            data.topbar.subtitle = "Schmerzskalen";
+            main_container.innerHTML = Handlebars.templates["diagnostik/schmerzskala"](data);
+            Utils.add_subnavigation(document.getElementsByClassName("subnavigation")[0] as HTMLElement);
+            document.getElementById("vas-auswertung-btn").addEventListener("click", function(){
+                let range_input = document.getElementById("vas-range-input") as HTMLInputElement;
+                let val = parseInt(range_input.value);
+                let nrs = Math.round(val/10);
+                document.getElementById("vas-auswertung").innerText = val+" %, NRS "+nrs+"/10";
+            });
+            Utils.add_score(document.getElementsByClassName("score")[0] as HTMLElement);
         }
     }
 

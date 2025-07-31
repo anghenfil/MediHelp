@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="app.medihelp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>MediHelp</name>
-    <description>Sample Apache Cordova App</description>
-    <author email="dev@cordova.apache.org" href="https://cordova.apache.org">
-        Apache Cordova Team
+    <description>Das digitale Nachschlagwerk für Mediziner*innen</description>
+    <author email="info@medihelp.app" href="https://info.medihelp.app">
+        MediHelp Support
     </author>
     <access origin="https://info.medihelp.app"/>
     <icon src="www/img/app_icon.jpg" />

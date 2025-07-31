@@ -31,3 +31,30 @@ function calculate_score(event: Event){
         }
     }
 }
+
+export function add_subnavigation(html_element: HTMLElement){
+    let children = html_element.querySelectorAll("div");
+    for(let child of children){
+        child.addEventListener("click", subnavigation_click_listener);
+    }
+}
+
+function subnavigation_click_listener(e: Event){
+    let target = e.target as HTMLElement;
+    let data_show = target.getAttribute("data-show");
+    target.classList.add("active");
+
+    let all_divs = target.closest(".subnavigation").children;
+    for(let div of all_divs){
+        if(div !== target){
+            div.classList.remove("active");
+        }
+    }
+
+    let subnavigation_targets = document.getElementsByClassName("subnavigation-target");
+    for(let subnavigation_target of subnavigation_targets){
+        subnavigation_target.classList.add("hide");
+    }
+
+    document.querySelector(data_show).classList.remove("hide");
+}

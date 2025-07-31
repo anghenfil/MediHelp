@@ -184,4 +184,34 @@ const search_index_diagnostic = [
         synonyms: ["GCS", "Glasgow-Koma-Skala", "Glasgow-Skala", "SHT", "Schädel-Hirn-Trauma"],
         destination: "diagnostik.gcs"
     },
+    {
+        title: "Pediatric Glasgow Coma Scale",
+        synonyms: ["PGCS", "Kinder GCS", "GCS", "Pediatric-Glasgow-Koma-Skala", "Pediatric-Glasgow-Skala", "SHT", "Schädel-Hirn-Trauma"],
+        destination: "diagnostik.pgcs"
+    },
+    {
+        title: "Frequenzbestimmung",
+        synonyms: ["Herzfrequenz", "Atemfrequenz"],
+        destination: "diagnostik.frequenzbestimmung"
+    },
+    {
+        title: "SAMPLER-Schema",
+        synonyms: ["SAMPLER", "Anamnese"],
+        destination: "diagnostik.sampler"
+    },
+    {
+        title: "OPQRST-Schema",
+        synonyms: ["OPQRST", "Schmerzanamnese", "Anamnese", "Schmerzen"],
+        destination: "diagnostik.opqrst"
+    },
+    {
+        title: "BEFAST-Schema",
+        synonyms: ["BEFAST", "Schlaganfall", "Apoplex"],
+        destination: "diagnostik.befast"
+    },
+    {
+        title: "Schmerzskalen",
+        synonyms: ["NRS", "VAS", "BPS", "CPOT", "Numerische Rating-Skala", "Visuelle Analogskala", "Behavior Pain Scale", "Critical Care Pain Observation Tool"],
+        destination: "diagnostik.schmerzskala"
+    }
 ]
