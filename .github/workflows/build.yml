@@ -1,0 +1,19 @@
+name: app build workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Builds and test app
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Requirements
+        run: |
+          brew install cocoapods
+      - name: build
+        run: |
+          cordova build ios --debug
