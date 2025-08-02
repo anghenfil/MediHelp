@@ -1,0 +1,22 @@
+name: app build workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Builds and test app
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Requirements
+        run: |
+          brew install cocoapods
+          npm install -g cordova
+      - name: build
+        run: |
+          cordova platform add ios
+          cordova platform add android
+          cordova build ios --debug
