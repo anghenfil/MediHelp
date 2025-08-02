@@ -3,6 +3,7 @@ import * as Handlebars from 'handlebars/runtime';
 import {PatientSettings} from "../patient_settings";
 import * as Utils from "./utils";
 import * as FrequencyTapper from "./frequency_tapper";
+import * as Metronom from "./metronom";
 import * as Lagetypbestimmung from "./lagetypbestimmung";
 
 interface DiagnoseTemplate{
@@ -76,6 +77,10 @@ export function show(dest: string){
             });
             Utils.add_score(document.getElementsByClassName("score")[0] as HTMLElement);
             Utils.add_score(document.getElementsByClassName("score")[1] as HTMLElement);
+        }else if (dest_parts[1] === "metronom"){
+            data.topbar.subtitle = "Metronom";
+            main_container.innerHTML = Handlebars.templates["diagnostik/metronom"](data);
+            Metronom.init();
         }
     }
 
