@@ -7,10 +7,10 @@
         <div class="light-box" data-show="#cpot">Critical Care Pain Observation Tool (CPOT)</div>
     </div>
     <div class="mt-3" style="overflow: auto;">
-        <div id="nrs" class="subnavigation-target">
-
+        <div id="nrs" class="subnavigation-target d-flex justify-content-center">
+            <img src="img/NRS-Skala.png" alt="NRS-Skala">
         </div>
-        <div id="vas" class="hide subnavigation-target">
+        <div id="vas" class="hide subnavigation-target d-flex align-items-center flex-column">
             <div id="vas-range">
                 <input id="vas-range-input" type="range" min="0" max="100" value="50" class="w-100">
                 <div class="d-flex justify-content-between">
@@ -90,6 +90,82 @@
                         <span class="score-result-points">3</span> Punkte.<br>
                         <span class="score-result-interpretation" data-required-points="3-5">Ergebnis unter dem Zielwert (< 6). </span>
                         <span class="score-result-interpretation hide" data-required-points="6-12">Ergebnis über dem Zielwert (< 6)! Analgesie prüfen.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="cpot" class="hide subnavigation-target">
+            <div class="score">
+                <div class="score-category">
+                    <span class="score-category-title">Gesichtsausdruck</span>
+                    <div class="score-radio">
+                        <input type="radio" name="cpot-gesicht" id="cpot-gesicht-1" data-points="0" checked>
+                        <label for="cpot-gesicht-1"><b>entspannt, neutral:</b> keine muskuläre Anspannung zu beobachten</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="cpot-gesicht" id="cpot-gesicht-2" data-points="1">
+                        <label for="cpot-gesicht-2"><b>angespannt:</b> Anzeichen von Stirnrunzeln, gesenkte Augenbrauen, zusammengekniffene Lider und
+                            Kontraktion des Lidhebers</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="cpot-gesicht" id="cpot-gesicht-3" data-points="2">
+                        <label for="cpot-gesicht-3"><b>grimassierend:</b> alle oben genannten Bewegungen mit zusätzlich
+                            enggeschlossenen/zusammengekniffenen Lidern</label>
+                    </div>
+                </div>
+                <div class="score-category">
+                    <span class="score-category-title">Körperbewegung</span>
+                    <div class="score-radio">
+                        <input type="radio" name="cpot-koerperbewegung" id="cpot-koerperbewegung-1" data-points="0" checked>
+                        <label for="cpot-koerperbewegung-1"><b>bewegungslos:</b> bewegt sich überhaupt nicht</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="cpot-koerperbewegung" id="cpot-koerperbewegung-2" data-points="1">
+                        <label for="cpot-koerperbewegung-2"><b>schützende Bewegungen:</b> langsame, vorsichtige Bewegungen, berührt oder reibt die schmerzende
+                            Seite, versucht über Bewegung Aufmerksamkeit zu erlangen</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="cpot-koerperbewegung" id="cpot-koerperbewegung-3" data-points="2">
+                        <label for="cpot-koerperbewegung-3"><b>ruhelos:</b> versucht sich aufzusetzen, bewegt die Beine/rangelt, befolgt keine Anweisungen, schlägt
+                            nach dem Personal, versucht aus dem Bett zu klettern</label>
+                    </div>
+                </div>
+
+                <div class="score-category">
+                    <span class="score-category-title">Muskeltonus</span>
+                    <div class="score-radio">
+                        <input type="radio" name="cpot-muskeltonus" id="cpot-muskeltonus-1" data-points="0" checked>
+                        <label for="cpot-muskeltonus-1"><b>entspannt:</b> kein Widerstand gegen passive Bewegungen</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="cpot-muskeltonus" id="cpot-muskeltonus-2" data-points="1">
+                        <label for="cpot-muskeltonus-2"><b>angespannt, steif:</b> Widerstand gegen passive Bewegungen</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="cpot-muskeltonus" id="cpot-muskeltonus-3" data-points="2">
+                        <label for="cpot-muskeltonus-3"><b>sehr angespannt oder steif:</b> starker Widerstand gegen passive Bewegungen, können nicht vollständig ausgeführt werden</label>
+                    </div>
+                </div>
+
+                <div class="score-category">
+                    <span class="score-category-title">Sprache</span>
+                    <div class="score-radio">
+                        <input type="radio" name="cpot-sprache" id="cpot-sprache-1" data-points="0" checked>
+                        <label for="cpot-sprache-1">redet in normalem Ton oder macht keine Geräusche</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="cpot-sprache" id="cpot-sprache-2" data-points="1">
+                        <label for="cpot-sprache-2">seufzt, stöhnt</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="cpot-sprache" id="cpot-sprache-3" data-points="2">
+                        <label for="cpot-sprache-3">schreit auf, schluchzt</label>
+                    </div>
+                </div>
+                <div class="score-result">
+                    <span class="score-result-title">Ergebnis</span>
+                    <div>
+                        <span class="score-result-points">0</span> Punkte.<br>
                     </div>
                 </div>
             </div>

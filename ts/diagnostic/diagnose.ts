@@ -75,6 +75,7 @@ export function show(dest: string){
                 document.getElementById("vas-auswertung").innerText = val+" %, NRS "+nrs+"/10";
             });
             Utils.add_score(document.getElementsByClassName("score")[0] as HTMLElement);
+            Utils.add_score(document.getElementsByClassName("score")[1] as HTMLElement);
         }
     }
 

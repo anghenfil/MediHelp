@@ -189,7 +189,7 @@ html {
     font-size: 20pt;
 }
 .hide{
-    display: none;
+    display: none !important;
 }
 .norm_all_references{
     font-size: 10pt;
@@ -465,4 +465,9 @@ html {
 }
 .score-radio > label{
     margin-left: 5px;
+}
+#nrs > img,
+#vas-range{
+    width: 100%;
+    max-width: 1000px;
 }

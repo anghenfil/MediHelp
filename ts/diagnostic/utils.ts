@@ -3,6 +3,8 @@ export function add_score(html_element: HTMLElement){
     let radios = html_element.querySelectorAll("input[type=radio]");
     for(let radio of radios){
         radio.addEventListener("change", calculate_score);
+        let points = radio.getAttribute("data-points");
+        radio.closest(".score-radio").querySelector("label").innerHTML += " ("+points+")";
     }
 }
 
