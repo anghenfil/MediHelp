@@ -4,6 +4,7 @@ import {PatientSettings} from "../patient_settings";
 import * as Utils from "./utils";
 import * as FrequencyTapper from "./frequency_tapper";
 import * as Metronom from "./metronom";
+import * as Burns from "./burns";
 import * as Lagetypbestimmung from "./lagetypbestimmung";
 
 interface DiagnoseTemplate{
@@ -81,6 +82,11 @@ export function show(dest: string){
             data.topbar.subtitle = "Metronom";
             main_container.innerHTML = Handlebars.templates["diagnostik/metronom"](data);
             Metronom.init();
+        }else if (dest_parts[1] === "verbrennungen"){
+            data.topbar.subtitle = "Verbrennungen";
+            main_container.innerHTML = Handlebars.templates["diagnostik/verbrennungen"](data);
+            Utils.add_subnavigation(document.getElementsByClassName("subnavigation")[0] as HTMLElement);
+            Burns.init();
         }
     }
 

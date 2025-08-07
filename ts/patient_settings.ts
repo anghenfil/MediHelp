@@ -16,6 +16,7 @@ interface PatientSettingsTemplate{
 interface AdultPatient{
     age?: number,
     weight?: number,
+    burn_diagram_selected?: string[]
 }
 
 interface ChildPatient{

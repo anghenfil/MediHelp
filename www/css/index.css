@@ -471,3 +471,14 @@ html {
     width: 100%;
     max-width: 1000px;
 }
+#diagram{
+    display: flex;
+    flex-wrap: wrap;
+}
+#diagram > *{
+    min-width: 300px;
+    flex: 1 1 25%;
+}
+#burns-quickcontrol-left > button, #burns-quickcontrol-right > button{
+    margin-bottom: 2px;
+}
