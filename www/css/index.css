@@ -474,10 +474,12 @@ html {
 #diagram{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 #diagram > *{
     min-width: 300px;
     flex: 1 1 25%;
+    max-width: 450px;
 }
 #burns-quickcontrol-left > button, #burns-quickcontrol-right > button{
     margin-bottom: 2px;

@@ -1,4 +1,4 @@
-import {main_container, app_settings, TopbarTemplate, register_nav_handlers} from "./app";
+import {app_settings, main_container, register_nav_handlers, TopbarTemplate} from "./app";
 import * as Handlebars from 'handlebars/runtime';
 import '../templates/templates.js';
 import {estimate_weight_by_age, estimate_weight_pawper_xl_mac} from "./weight_estimation";
@@ -25,7 +25,8 @@ interface ChildPatient{
     /// Weight in kg
     weight?: number,
     /// Length in cm
-    length?: number
+    length?: number,
+    burn_diagram_selected?: string[]
 }
 
 
@@ -572,8 +573,7 @@ function estimate_pawper(){
     let mac = parseFloat(mac_input.value);
 
     try{
-        let weight = estimate_weight_pawper_xl_mac(height, mac);
-        app_settings.patient_settings.patient.ChildPatient.weight = weight;
+        app_settings.patient_settings.patient.ChildPatient.weight = estimate_weight_pawper_xl_mac(height, mac);
         show_patient_settings();
     }catch(e){
         navigator.notification.alert(e.message, null, "Schätzung nicht möglich!", "Ok");
@@ -586,8 +586,7 @@ function estimate_age(){
         return;
     }
     try{
-        let weight = estimate_weight_by_age(app_settings.patient_settings.patient.ChildPatient.age);
-        app_settings.patient_settings.patient.ChildPatient.weight = weight;
+        app_settings.patient_settings.patient.ChildPatient.weight = estimate_weight_by_age(app_settings.patient_settings.patient.ChildPatient.age);
         show_patient_settings();
     }catch(e){
         navigator.notification.alert(e.message, null, "Schätzung nicht möglich!", "Ok");
