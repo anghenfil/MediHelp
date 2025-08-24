@@ -1,0 +1,533 @@
+{{> topbar this.topbar}}
+<div class="content container-fluid mt-2">
+    <div class="subnavigation">
+        <div class="light-box active" data-show="#qsofa">quick Sequential Organ Failure Assessment (qSOFA)</div>
+        <div class="light-box" data-show="#sofa">Sequential Organ Failure Assessment (SOFA)</div>
+        <div class="light-box" data-show="#news">National Early Warning Score 2 (NEWS2)</div>
+        <div class="light-box" data-show="#mews">Modified Early Warning Score (MEWS)</div>
+    </div>
+    <div class="mt-3" style="overflow: auto;">
+        <div id="qsofa" class="subnavigation-target d-flex justify-content-center">
+            <div class="score w-100">
+                <div class="score-category">
+                    <span class="score-category-title">Atemfrequenz</span>
+                    <div class="score-radio">
+                        <input type="radio" name="qsofa-af" id="qsofa-af-1" data-points="0" checked>
+                        <label for="qsofa-af-1">Atemfrequenz < 22/min</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="qsofa-af" id="qsofa-af-2" data-points="1">
+                        <label for="qsofa-af-2">Atemfrequenz ≥ 22/min</label>
+                    </div>
+                </div>
+                <div class="score-category">
+                    <span class="score-category-title">Glascow Coma Score</span>
+                    <div class="score-radio">
+                        <input type="radio" name="qsofa-gcs" id="qsofa-gcs-1" data-points="0" checked>
+                        <label for="qsofa-gcs-1">GCS 15</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="qsofa-gcs" id="qsofa-gcs-2" data-points="1">
+                        <label for="qsofa-gcs-2">GCS unter 15</label>
+                    </div>
+                </div>
+                <div class="score-category">
+                    <span class="score-category-title">Blutdruck</span>
+                    <div class="score-radio">
+                        <input type="radio" name="qsofa-rr" id="qsofa-rr-1" data-points="0" checked>
+                        <label for="qsofa-rr-1">systolischer Blutdruck > 100 mmHg</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="qsofa-rr" id="qsofa-rr-2" data-points="1">
+                        <label for="qsofa-rr-2">systolischer Blutdruck ≤ 100 mmHg</label>
+                    </div>
+                </div>
+                <div class="score-result">
+                    <span class="score-result-title">Ergebnis</span>
+                    <div>
+                        <span class="score-result-points">0</span> Punkte.<br>
+                        <span class="score-result-interpretation" data-required-points="0-1">Kein erhöhtes Risiko.</span>
+                        <span class="score-result-interpretation hide" data-required-points="2-3">Erhöhtes Mortalitätsrisiko!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="sofa" class="subnavigation-target d-flex justify-content-center hide">
+            <div class="score w-100">
+                <div class="score-category">
+                    <span class="score-category-title">Atmung (PaO2/FiO2)</span>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-atmung" id="sofa-atmung1" data-points="0" checked>
+                        <label for="sofa-atmung1">PaO2 ≥ 400 mmHg ({{convert_to_unit 400 "mmHg" "kPa"}} kPa)</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-atmung" id="sofa-atmung2" data-points="1">
+                        <label for="sofa-atmung2">PaO2 < 400 mmHg ({{convert_to_unit 400 "mmHg" "kPa"}} kPa)</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-atmung" id="sofa-atmung3" data-points="2">
+                        <label for="sofa-atmung3">PaO2 < 300 mmHg ({{convert_to_unit 300 "mmHg" "kPa"}} kPa)</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-atmung" id="sofa-atmung4" data-points="3">
+                        <label for="sofa-atmung4">PaO2 < 200 mmHg ({{convert_to_unit 200 "mmHg" "kPa"}} kPa) und Beatmung</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-atmung" id="sofa-atmung5" data-points="4">
+                        <label for="sofa-atmung5">PaO2 < 100 mmHg ({{convert_to_unit 100 "mmHg" "kPa"}} kPa) und Beatmung</label>
+                    </div>
+                </div>
+                <div class="score-category">
+                    <span class="score-category-title">Zentrales Nervensystem</span>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-gcs" id="sofa-gcs1" data-points="0" checked>
+                        <label for="sofa-gcs1">GCS 15</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-gcs" id="sofa-gcs2" data-points="1">
+                        <label for="sofa-gcs2">GCS 13 - 14</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-gcs" id="sofa-gcs3" data-points="2">
+                        <label for="sofa-gcs3">GCS 10 - 12</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-gcs" id="sofa-gcs4" data-points="3">
+                        <label for="sofa-gcs4">GCS 6 - 9</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-gcs" id="sofa-gcs5" data-points="4">
+                        <label for="sofa-gcs5">GCS < 6</label>
+                    </div>
+                </div>
+                <div class="score-category">
+                    <span class="score-category-title">Herz-Kreislauf-System</span>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-kreislauf" id="sofa-kreislauf1" data-points="0" checked>
+                        <label for="sofa-kreislauf1">MAD ≥ 70 mmHg </label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-kreislauf" id="sofa-kreislauf2" data-points="1">
+                        <label for="sofa-kreislauf2">MAD < 70 mmHg</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-kreislauf" id="sofa-kreislauf3" data-points="2">
+                        <label for="sofa-kreislauf3">Dopamin ≤ 5 µg/kg/min oder Dobutamin</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-kreislauf" id="sofa-kreislauf4" data-points="3">
+                        <label for="sofa-kreislauf4">Dopamin > 5 µg/kg/min oder Adrenalin ≤ 0,1 µg/kg/min oder Noradrenalin ≤ 0,1 µg/kg/min </label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-kreislauf" id="sofa-kreislauf5" data-points="4">
+                        <label for="sofa-kreislauf5">Dopamin > 15 µg/kg/min oder Adrenalin > 0,1 µg/kg/min oder Noradrenalin > 0,1 µg/kg/min </label>
+                    </div>
+                </div>
+                <div class="score-category">
+                    <span class="score-category-title">Leberfunktion</span>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-leber" id="sofa-leber1" data-points="0" checked>
+                        <label for="sofa-leber1">Bilirubin < 1,2 mg/dl (20 μmol/l)</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-leber" id="sofa-leber2" data-points="1">
+                        <label for="sofa-leber2">Bilirubin 1,2 - 1,9 mg/dl (20 - 32 μmol/l)</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-leber" id="sofa-leber3" data-points="2">
+                        <label for="sofa-leber3">Bilirubin 2,0 - 5,9 mg/dl (33 - 101 μmol/l)</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-leber" id="sofa-leber4" data-points="3">
+                        <label for="sofa-leber4">Bilirubin 6,0 - 11,9 mg/dl (102 - 204 μmol/l)</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-leber" id="sofa-leber5" data-points="4">
+                        <label for="sofa-leber5">Bilirubin > 12 mg/dl (204 μmol/l)</label>
+                    </div>
+                </div>
+                <div class="score-category">
+                    <span class="score-category-title">Gerinnung</span>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-gerinnung" id="sofa-gerinnung1" data-points="0" checked>
+                        <label for="sofa-gerinnung1">Thrombozyten ≥ 150.000 / µl </label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-gerinnung" id="sofa-gerinnung2" data-points="1">
+                        <label for="sofa-gerinnung2">Thrombozyten < 150.000 / µl</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-gerinnung" id="sofa-gerinnung3" data-points="2">
+                        <label for="sofa-gerinnung3">Thrombozyten < 100.000 / µl</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-gerinnung" id="sofa-gerinnung4" data-points="3">
+                        <label for="sofa-gerinnung4">Thrombozyten < 50.000 / µl</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-gerinnung" id="sofa-gerinnung5" data-points="4">
+                        <label for="sofa-gerinnung5">Thrombozyten < 20.000 / µl</label>
+                    </div>
+                </div>
+                <div class="score-category">
+                    <span class="score-category-title">Nierenfunktion</span>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-niere" id="sofa-niere1" data-points="0" checked>
+                        <label for="sofa-niere1">Kreatinin < 1,2 mg/dl </label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-niere" id="sofa-niere2" data-points="1">
+                        <label for="sofa-niere2">Kreatinin 1,2 - 1,9 mg/dl </label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-niere" id="sofa-niere3" data-points="2">
+                        <label for="sofa-niere3">Kreatinin 2,0 - 3,4 mg/dl </label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-niere" id="sofa-niere4" data-points="3">
+                        <label for="sofa-niere4">Kreatinin 3,5 - 4,9 mg/dl </label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="sofa-niere" id="sofa-niere5" data-points="4">
+                        <label for="sofa-niere5">Kreatinin > 5 mg/dl</label>
+                    </div>
+                </div>
+                <div class="score-result">
+                    <span class="score-result-title">Ergebnis</span>
+                    <div>
+                        <span class="score-result-points">0</span> Punkte.<br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="mews" class="subnavigation-target d-flex justify-content-center hide">
+            <div class="score w-100">
+                <div class="score-category">
+                    <span class="score-category-title">Systolischer Blutdruck</span>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-rr" id="mews-rr1" data-points="3">
+                        <label for="mews-rr1">< 70 mmHg</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-rr" id="mews-rr2" data-points="2">
+                        <label for="mews-rr2">70 - 80 mmHg</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-rr" id="mews-rr3" data-points="1">
+                        <label for="mews-rr3">81 - 100 mmHg</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-rr" id="mews-rr4" data-points="0" checked>
+                        <label for="mews-rr4">101 - 199 mmHg</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-rr" id="mews-rr5" data-points="2">
+                        <label for="mews-rr5">≥ 200 mmHg</label>
+                    </div>
+                </div>
+                <div class="score-category">
+                    <span class="score-category-title">Herzfrequenz</span>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-hf" id="mews-hf1" data-points="2">
+                        <label for="mews-hf1">< 40 / min</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-hf" id="mews-hf2" data-points="1">
+                        <label for="mews-hf2">40 - 50 / min</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-hf" id="mews-hf3" data-points="0" checked>
+                        <label for="mews-hf3">51 - 100 / min</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-hf" id="mews-hf4" data-points="1">
+                        <label for="mews-hf4">101 - 110 / min</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-hf" id="mews-hf5" data-points="2">
+                        <label for="mews-hf5">111-129</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-hf" id="mews-hf6" data-points="3">
+                        <label for="mews-hf6">≥ 130 / min</label>
+                    </div>
+                </div>
+                <div class="score-category">
+                    <span class="score-category-title">Atemfrequenz</span>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-af" id="mews-af1" data-points="2">
+                        <label for="mews-af1">< 9 / min</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-af" id="mews-af2" data-points="1">
+                        <label for="mews-af2">9 / min</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-af" id="mews-af3" data-points="0" checked>
+                        <label for="mews-af3">10-18 / min</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-af" id="mews-af4" data-points="1">
+                        <label for="mews-af4">19 - 20/ min</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-af" id="mews-af5" data-points="2">
+                        <label for="mews-af5">21 - 29 / min</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-af" id="mews-af6" data-points="3">
+                        <label for="mews-af6">≥ 30 / min</label>
+                    </div>
+                </div>
+                <div class="score-category">
+                    <span class="score-category-title">Sauerstoffsättigung</span>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-spo2" id="mews-spo2-1" data-points="3">
+                        <label for="mews-spo2-1">< 92 %</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-spo2" id="mews-spo2-2" data-points="2">
+                        <label for="mews-spo2-2">92 - 93 %</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-spo2" id="mews-spo2-3" data-points="1">
+                        <label for="mews-spo2-3">94 - 95 %</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-spo2" id="mews-spo2-4" data-points="0" checked>
+                        <label for="mews-spo2-4">≥ 96 %</label>
+                    </div>
+                </div>
+                <div class="score-category">
+                    <span class="score-category-title">Temperatur</span>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-temp" id="mews-temp1" data-points="2">
+                        <label for="mews-temp1">≤ 35,0 °C</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-temp" id="mews-temp2" data-points="0" checked>
+                        <label for="mews-temp2">35,1 - 38,4 °C</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-temp" id="mews-temp3" data-points="2">
+                        <label for="mews-temp3">> 38,5 °C</label>
+                    </div>
+                </div>
+                <div class="score-category">
+                    <span class="score-category-title">Bewusstseinsstatus (WASB)</span>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-wasb" id="mews-wasb1" data-points="0" checked>
+                        <label for="mews-wasb1">wach & aufmerksam (GCS 14 - 15)</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-wasb" id="mews-wasb2" data-points="1">
+                        <label for="mews-wasb2">reagiert auf Ansprache (GCS 9 - 13)</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-wasb" id="mews-wasb3" data-points="2">
+                        <label for="mews-wasb3">reagiert auf Schmerzreiz (GCS 4 - 8)</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="mews-wasb" id="mews-wasb4" data-points="3">
+                        <label for="mews-wasb4">bewusstlos (GCS 3)</label>
+                    </div>
+                </div>
+                <div class="score-result">
+                    <span class="score-result-title">Ergebnis</span>
+                    <div>
+                        <span class="score-result-points">0</span> Punkte.<br>
+                        <span class="score-result-interpretation hide" data-required-points="5-17">Erhöhtes Mortalitätsrisiko!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="news" class="subnavigation-target d-flex justify-content-center hide">
+            <div class="score w-100">
+                <div class="score-category">
+                    <span class="score-category-title">Atemfrequenz</span>
+                    <div class="score-radio">
+                        <input type="radio" name="news-af" id="news-af1" data-points="3">
+                        <label for="news-af1">≤ 8 / min</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="news-af" id="news-af2" data-points="1">
+                        <label for="news-af2">9 - 11 / min</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="news-af" id="news-af3" data-points="0" checked>
+                        <label for="news-af3">12 - 20 / min</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="news-af" id="news-af4" data-points="2">
+                        <label for="news-af4">21 - 24 / min</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="news-af" id="news-af5" data-points="3">
+                        <label for="news-af5">≥ 25 / min</label>
+                    </div>
+                </div>
+                <div class="score-category">
+                    <span class="score-category-title">Sauerstoffsättigung</span>
+
+                    <div class="score-radio">
+                        <input type="checkbox" name="news-spo2-scales" id="news-spo2-scale2">
+                        <label for="news-spo2-scale2">Es liegt eine hyperkapnische respiratorische Insuffizienz (z.B. COPD) vor</label>
+                    </div>
+                    <div id="spo2-scale-1">
+                        <div class="score-radio">
+                            <input type="radio" name="news-spo2" id="news-spo21" data-points="3">
+                            <label for="news-spo21">≤ 91 %</label>
+                        </div>
+                        <div class="score-radio">
+                            <input type="radio" name="news-spo2" id="news-spo22" data-points="2">
+                            <label for="news-spo22">92 - 93 %</label>
+                        </div>
+                        <div class="score-radio">
+                            <input type="radio" name="news-spo2" id="news-spo23" data-points="1">
+                            <label for="news-spo23">94 - 95 %</label>
+                        </div>
+                        <div class="score-radio">
+                            <input type="radio" name="news-spo2" id="news-spo24" data-points="0" checked>
+                            <label for="news-spo24">> 96 %</label>
+                        </div>
+                    </div>
+                    <div id="spo2-scale-2" class="hide">
+                        <div class="score-radio">
+                            <input type="radio" name="news-spo2" id="news-spo25" data-points="3">
+                            <label for="news-spo25">≤ 83 %</label>
+                        </div>
+                        <div class="score-radio">
+                            <input type="radio" name="news-spo2" id="news-spo26" data-points="2">
+                            <label for="news-spo26">84 - 85 %</label>
+                        </div>
+                        <div class="score-radio">
+                            <input type="radio" name="news-spo2" id="news-spo27" data-points="1">
+                            <label for="news-spo27">86 - 87 %</label>
+                        </div>
+                        <div class="score-radio">
+                            <input type="radio" name="news-spo2" id="news-spo28" data-points="0">
+                            <label for="news-spo28">88 - 92 % ODER ≥ 93 % unter Luft</label>
+                        </div>
+                        <div class="score-radio">
+                            <input type="radio" name="news-spo2" id="news-spo29" data-points="1">
+                            <label for="news-spo29">93 - 94 % unter Sauerstoffgabe</label>
+                        </div>
+                        <div class="score-radio">
+                            <input type="radio" name="news-spo2" id="news-spo210" data-points="2">
+                            <label for="news-spo210">95 - 96 % unter Sauerstoffgabe</label>
+                        </div>
+                        <div class="score-radio">
+                            <input type="radio" name="news-spo2" id="news-spo211" data-points="3">
+                            <label for="news-spo211">≥ 97 % unter Sauerstoffgabe</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="score-category">
+                    <span class="score-category-title">Sauerstoffgabe?</span>
+                    <div class="score-radio">
+                        <input type="radio" name="news-o2" id="news-o21" data-points="2">
+                        <label for="news-o21">Sauerstoffgabe</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="news-o2" id="news-o22" data-points="0" checked>
+                        <label for="news-o22">keine Sauerstoffgabe</label>
+                    </div>
+                </div>
+                <div class="score-category">
+                    <span class="score-category-title">Systolischer Blutdruck</span>
+                    <div class="score-radio">
+                        <input type="radio" name="news-rr" id="news-rr1" data-points="3">
+                        <label for="news-rr1">≤ 90 mmHg</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="news-rr" id="news-rr2" data-points="2">
+                        <label for="news-rr2">91 - 100 mmHg</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="news-rr" id="news-rr3" data-points="1">
+                        <label for="news-rr3">101 - 110 mmHg</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="news-rr" id="news-rr4" data-points="0" checked>
+                        <label for="news-rr4">111 - 219 mmHg</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="news-rr" id="news-rr5" data-points="3">
+                        <label for="news-rr5">≥ 220 mmHg</label>
+                    </div>
+                </div>
+                <div class="score-category">
+                    <span class="score-category-title">Herzfrequenz</span>
+                    <div class="score-radio">
+                        <input type="radio" name="news-hf" id="news-hf1" data-points="3">
+                        <label for="news-hf1">≤ 40 / min</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="news-hf" id="news-hf2" data-points="1">
+                        <label for="news-hf2">41 - 50 / min</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="news-hf" id="news-hf3" data-points="0" checked>
+                        <label for="news-hf3">51 - 90 / min</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="news-hf" id="news-hf4" data-points="1">
+                        <label for="news-hf4">91 - 110 / min</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="news-hf" id="news-hf5" data-points="2">
+                        <label for="news-hf5">111 - 130 / min</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="news-hf" id="news-hf6" data-points="3">
+                        <label for="news-hf6">≥ 131 / min</label>
+                    </div>
+                </div>
+                <div class="score-category">
+                    <span class="score-category-title">Bewusstsein</span>
+                    <div class="score-radio">
+                        <input type="radio" name="news-acvpu" id="news-acvpu1" data-points="0" checked>
+                        <label for="news-acvpu1">wach, ansprechbar UND orientiert</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="news-acvpu" id="news-acvpu2" data-points="3">
+                        <label for="news-acvpu2">nicht wach, ansprechbar UND orientiert</label>
+                    </div>
+                </div>
+                <div class="score-category">
+                    <span class="score-category-title">Körpertemperatur</span>
+                    <div class="score-radio">
+                        <input type="radio" name="news-temp" id="news-temp1" data-points="3">
+                        <label for="news-temp1">≤ 35,0 °C</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="news-temp" id="news-temp2" data-points="1">
+                        <label for="news-temp2">35,1 - 36,0 °C</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="news-temp" id="news-temp3" data-points="0" checked>
+                        <label for="news-temp3">36,1 - 38,0 °C</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="news-temp" id="news-temp4" data-points="1">
+                        <label for="news-temp4">38,1 - 39,0 °C</label>
+                    </div>
+                    <div class="score-radio">
+                        <input type="radio" name="news-temp" id="news-temp5" data-points="2">
+                        <label for="news-temp5">≥ 39,1 °C</label>
+                    </div>
+                </div>
+                <div class="score-result">
+                    <span class="score-result-title">Ergebnis</span>
+                    <div>
+                        <span class="score-result-points">0</span> Punkte.<br>
+                        <span class="score-result-interpretation" data-required-points="0-0">NEWS unauffällig. Empfohlenes Monitoring: min. alle 12 Stunden</span>
+                        <span class="score-result-interpretation hide" data-required-points="1-4">Patient*in überwachen. Empfohlenes Monitoring: min. alle 4 - 6 Stunden</span>
+                        <span class="score-result-interpretation hide" data-required-points="5-6">Schwellenwert für dringliche Reaktion. Empfohlenes Monitoring: min. jede Stunde</span>
+                        <span class="score-result-interpretation hide" data-required-points="7-20">Schwellenwert für Notfallreaktion. Empfohlenes Monitoring: kontinuierlich. Ärzte informieren & Verlegung auf Intensivstation prüfen.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -213,5 +213,65 @@ const search_index_diagnostic = [
         title: "Schmerzskalen",
         synonyms: ["NRS", "VAS", "BPS", "CPOT", "Numerische Rating-Skala", "Visuelle Analogskala", "Behavior Pain Scale", "Critical Care Pain Observation Tool"],
         destination: "diagnostik.schmerzskala"
+    },
+    {
+        title: "Numerische Rating-Skala (Schmerzen)",
+        synonyms: ["NRS", "Schmerzen"],
+        destination: "diagnostik.schmerzskala.nrs"
+    },
+    {
+        title: "Visuelle Analogskala (Schmerzen)",
+        synonyms: ["VAS", "Schmerzen"],
+        destination: "diagnostik.schmerzskala.vas"
+    },
+    {
+        title: "Behavior Pain Scale (Schmerzen)",
+        synonyms: ["BPS", "Schmerzen"],
+        destination: "diagnostik.schmerzskala.bps"
+    },
+    {
+        title: "Critical Care Pain Observation Tool (Schmerzen)",
+        synonyms: ["CPOT", "Schmerzen"],
+        destination: "diagnostik.schmerzskala.cpot"
+    },
+    {
+        title: "Verbrennungen",
+        synonyms: ["Verbrennung", "Körperoberfläche", "KOF", "ABSI"],
+        destination: "diagnostik.verbrennungen"
+    },
+    {
+        title: "Verbrannte Körperoberfläche berechnen",
+        synonyms: ["Verbrennung", "Körperoberfläche", "KOF"],
+        destination: "diagnostik.verbrennungen.kof"
+    },
+    {
+        title: "ABSI-Score (Mortalitätsrisiko bei Verbrennungen)",
+        synonyms: ["ABSI", "ABSI-Score", "Mortalität", "Mortalitätsrisiko", "Verbrennungen"],
+        destination: "diagnostik.verbrennungen.absi"
+    },
+    {
+        title: "Sepsis Scores",
+        synonyms: ["Sepsis", "Blutvergiftung"],
+        destination: "diagnostik.sepsis.qsofa"
+    },
+    {
+        title: "quick Sequential Organ Failure Assessment (qSOFA)",
+        synonyms: ["qSOFA", "Sepsis"],
+        destination: "diagnostik.sepsis.qsofa"
+    },
+    {
+        title: "Sequential Organ Failure Assessment (SOFA)",
+        synonyms: ["SOFA", "Sepsis"],
+        destination: "diagnostik.sepsis.sofa"
+    },
+    {
+        title: "National Early Warning Score 2 (NEWS2)",
+        synonyms: ["NEWS", "NEWS2", "Sepsis"],
+        destination: "diagnostik.sepsis.news"
+    },
+    {
+        title: "Modified Early Warning Score (MEWS)",
+        synonyms: ["MEWS", "Sepsis"],
+        destination: "diagnostik.sepsis.mews"
     }
 ]

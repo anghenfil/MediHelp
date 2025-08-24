@@ -164,6 +164,11 @@ export function convert_to_unit(value: number, unit_from: string, unit_to: strin
         return  res.toLocaleString("de-DE", {
             maximumFractionDigits: 2,
         })
+    }else if(unit_from === "mmHg" && unit_to === "kPa"){
+        let res = value*0.1333223684;
+        return res.toLocaleString("de-DE", {
+            maximumFractionDigits: 2,
+        })
     }else{
         throw new Error("Unimplemented conversion!");
     }

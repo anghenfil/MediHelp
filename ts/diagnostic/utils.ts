@@ -14,7 +14,9 @@ function calculate_score(event: Event){
 
     let checked = score_div.querySelectorAll("input:checked");
     for(let checked_radio of checked){
-        score = score+parseInt(checked_radio.getAttribute("data-points"));
+        if(checked_radio.getAttribute("data-points")){
+            score = score+parseInt(checked_radio.getAttribute("data-points"));
+        }
     }
 
     let result_span = score_div.querySelectorAll(".score-result-points")[0] as HTMLElement;
@@ -34,10 +36,27 @@ function calculate_score(event: Event){
     }
 }
 
-export function add_subnavigation(html_element: HTMLElement){
+export function add_subnavigation(html_element: HTMLElement, active: string|null = null){
+    console.log("active: "+active);
     let children = html_element.querySelectorAll("div");
     for(let child of children){
         child.addEventListener("click", subnavigation_click_listener);
+    }
+    if(active){
+        for(let child of document.getElementsByClassName("subnavigation-target")){
+            if(child.id === active){
+                child.classList.remove("hide");
+            }else{
+                child.classList.add("hide");
+            }
+        }
+        for(let child of children){
+            if(child.getAttribute("data-show") === "#"+active){
+                child.classList.add("active");
+            }else{
+                child.classList.remove("active");
+            }
+        }
     }
 }
 

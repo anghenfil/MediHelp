@@ -69,7 +69,7 @@ export function show(dest: string){
         }else if (dest_parts[1] === "schmerzskala") {
             data.topbar.subtitle = "Schmerzskalen";
             main_container.innerHTML = Handlebars.templates["diagnostik/schmerzskala"](data);
-            Utils.add_subnavigation(document.getElementsByClassName("subnavigation")[0] as HTMLElement);
+            Utils.add_subnavigation(document.getElementsByClassName("subnavigation")[0] as HTMLElement, dest_parts[2]);
             document.getElementById("vas-auswertung-btn").addEventListener("click", function(){
                 let range_input = document.getElementById("vas-range-input") as HTMLInputElement;
                 let val = parseInt(range_input.value);
@@ -85,8 +85,25 @@ export function show(dest: string){
         }else if (dest_parts[1] === "verbrennungen"){
             data.topbar.subtitle = "Verbrennungen";
             main_container.innerHTML = Handlebars.templates["diagnostik/verbrennungen"](data);
-            Utils.add_subnavigation(document.getElementsByClassName("subnavigation")[0] as HTMLElement);
+            Utils.add_subnavigation(document.getElementsByClassName("subnavigation")[0] as HTMLElement, dest_parts[2]);
             Burns.init();
+        }else if(dest_parts[1] === "sepsis"){
+            data.topbar.subtitle = "Sepsis";
+            main_container.innerHTML = Handlebars.templates["diagnostik/sepsis"](data);
+            Utils.add_subnavigation(document.getElementsByClassName("subnavigation")[0] as HTMLElement, dest_parts[2]);
+            for(let score of document.getElementsByClassName("score")){
+                Utils.add_score(score as HTMLElement);
+            }
+            let news_spo2_scale_toggler = document.getElementById("news-spo2-scale2") as HTMLInputElement;
+            news_spo2_scale_toggler.addEventListener("change", function(){
+                if(news_spo2_scale_toggler.checked){
+                    document.getElementById("spo2-scale-1").classList.add("hide");
+                    document.getElementById("spo2-scale-2").classList.remove("hide");
+                }else{
+                    document.getElementById("spo2-scale-1").classList.remove("hide");
+                    document.getElementById("spo2-scale-2").classList.add("hide");
+                }
+            })
         }
     }
 
